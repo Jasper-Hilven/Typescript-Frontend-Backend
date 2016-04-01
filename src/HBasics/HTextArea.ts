@@ -4,10 +4,11 @@ import IHEl = HE.IHElement;
 export class HTextArea implements IHEl {
   element: HTMLTextAreaElement;
   public constructor() {
-    var label = document.createElement("textarea");
-    this.element = label;
+    var area = document.createElement("textarea");
+    this.element = area;
   }
   public GetElement(): HTMLTextAreaElement {
     return this.element;
   }
+
 }

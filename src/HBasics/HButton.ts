@@ -3,10 +3,11 @@ import IHEl = HE.IHElement;
 
 export class HButton implements IHEl {
   element: HTMLButtonElement;
-  public constructor(text: string) {
-
+  child: IHEl;
+  public constructor(child: IHEl) {
+    this.child = child;
     var button = document.createElement("button");
-    button.innerText = text;
+    button.appendChild(child.GetElement());
     this.element = button;
   }
 

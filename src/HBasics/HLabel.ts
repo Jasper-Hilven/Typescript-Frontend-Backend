@@ -3,12 +3,15 @@ import IHEl = HE.IHElement;
 
 export class HLabel implements IHEl {
   element: HTMLLabelElement;
-  public constructor(text: string) {
+  child: IHEl;
+
+  public constructor(child: IHEl) {
+    this.child = child;
     var label = document.createElement("label");
-    label.innerText = text;
+    label.appendChild(child.GetElement());
     this.element = label;
   }
-  public GetElement(): HTMLLabelElement {
+  public GetElement() {
     return this.element;
   }
 }

@@ -12,10 +12,9 @@ export class DivFactory {
     style.display = "flex";
     style.flexDirection = "row";
     style.flexWrap = "nowrap";
-    style.justifyContent = "space-between";
+    style.justifyContent = "center";
     parentDiv.AddElement(leftElem);
     parentDiv.AddElement(rightElem);
     return parentDiv;
   }
-
 }

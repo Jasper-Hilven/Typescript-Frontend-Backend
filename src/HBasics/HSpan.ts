@@ -1,11 +1,11 @@
 import HE = require("./IHElement");
 import IHEl = HE.IHElement;
 
-export class HDiv implements IHEl {
-  element: HTMLDivElement;
+export class HSpan implements IHEl {
+  element: HTMLSpanElement;
   children: IHEl[];
   public constructor() {
-    this.element = document.createElement("div");
+    this.element = document.createElement("span");
     this.children = [];
   }
 
