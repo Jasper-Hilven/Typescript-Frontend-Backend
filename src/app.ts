@@ -1,6 +1,13 @@
 import H = require("./HBasics/HFactory");
+import HFactory = H.HFactory;
+import D = require("./HComposed/DivFactory");
+import DivFactory = D.DivFactory;
+import FC = require("./HComposed/FormCreator");
+import FormCreator = FC.FormCreator;
+
 var mainContent = document.getElementById("maincontent");
-var factory = new H.HFactory();
-var form = factory.GetDiv();
-form.AddElement(factory.GetLabel("Jasper was hier"));
+var hFactory = new HFactory();
+var dFactory = new DivFactory(hFactory);
+var formCreator = new FormCreator(dFactory, hFactory);
+var form = formCreator.GetFirstForm();
 mainContent.appendChild(form.GetElement());
