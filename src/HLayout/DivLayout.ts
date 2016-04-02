@@ -16,7 +16,7 @@ export class DivLayout {
   CreateJumbotron(title, leadText) {
     var jumboDiv = this.hFactory.GetClassedDiv("jumbotron");
     jumboDiv.element.style.textAlign = "center"
-    jumboDiv.element.style.borderBottom = "1px solid #e5e5e5"
+    jumboDiv.element.style.borderBottom = "2px solid #e5e5e5"
     var titleTextElem = this.hFactory.GetText(title);
     var titleH1 = this.hFactory.GetH1(titleTextElem);
     jumboDiv.AddElement(titleH1);
