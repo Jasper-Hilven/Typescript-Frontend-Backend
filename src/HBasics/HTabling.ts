@@ -40,8 +40,11 @@ export interface HTableCell extends IHEl {
 
 export class HTableCellData implements HTableCell {
   element: HTMLTableDataCellElement;
-  public constructor() {
+  child: IHEl;
+  public constructor(child) {
     this.element = document.createElement("td");
+    this.child = child;
+    this.element.appendChild(child.element);
   }
   public GetElement() {
     return this.element;
@@ -49,8 +52,11 @@ export class HTableCellData implements HTableCell {
 }
 export class HTableCellHeader implements HTableCell {
   element: HTMLTableHeaderCellElement;
-  public constructor() {
+  child: IHEl;
+  public constructor(child) {
     this.element = document.createElement("th");
+    this.child = child;
+    this.element.appendChild(child.element);
 
   } public GetElement() {
     return this.element;

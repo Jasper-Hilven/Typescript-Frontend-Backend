@@ -7,20 +7,25 @@ import IHEl = IHELement.IHElement;
 export class FormCreator {
   divFactory: DVF;
   hFactory: HF;
-  public constructor(divFactory, hFactory) {
+
+  public constructor(divFactory: DVF, hFactory: HF) {
     this.divFactory = divFactory;
     this.hFactory = hFactory;
   }
+
   GetFirstForm() {
-    var mainDiv = this.hFactory.GetDiv();
-    mainDiv.AddElement(this.GetLabelTextPair("Name"));
-    mainDiv.AddElement(this.GetLabelTextPair("Age"));
-    return mainDiv;
+    var mainTable = this.hFactory.GetTable();
+    mainTable.AddRow(this.GetLabelTextRow("Name"));
+    mainTable.AddRow(this.GetLabelTextRow("Age"));
+    return mainTable;
   }
-  GetLabelTextPair(labelText: string) {
-    var left = this.hFactory.GetLabel(this.hFactory.GetText(labelText));
-    var right = this.hFactory.GetTextAreaDim(5, 60);
-    var retDiv = this.divFactory.GetLeftRightFlexDiv(left, right);
-    return retDiv;
+
+  GetLabelTextRow(labelText: string) {
+    var left = this.hFactory.GetTableElementData(this.hFactory.GetText(labelText));
+    var right = this.hFactory.GetTableElementData(this.hFactory.GetTextAreaDim(1, 30));
+    var retRow = this.hFactory.GetTableRow();
+    retRow.AddCell(left);
+    retRow.AddCell(right);
+    return retRow;
   }
 }
