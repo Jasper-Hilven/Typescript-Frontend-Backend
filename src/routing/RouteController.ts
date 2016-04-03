@@ -1,17 +1,22 @@
 export class RouteController {
+
   location: Location;
   listeners: RouteObserver[];
+
   constructor() {
     this.listeners = [];
     this.location = window.location;
     window.onhashchange = this.notify;
   }
+
   AddLocationChangedEventListener(observer: RouteObserver) {
     this.listeners.push(observer);
   }
+
   private splitToParts(url: string) {
     return url.substring(url.indexOf("#") + 1).split("/");
   }
+
   private notify(change: HashChangeEvent) {
     var newParts = this.splitToParts(change.newURL);
     var oldParts = this.splitToParts(change.oldURL);

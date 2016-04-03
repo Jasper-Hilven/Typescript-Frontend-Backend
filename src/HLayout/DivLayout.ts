@@ -13,6 +13,7 @@ export class DivLayout {
     containerDiv.element.style.maxWidth = "730px"
     return containerDiv;
   }
+
   CreateJumbotron(title, leadText) {
     var jumboDiv = this.hFactory.GetClassedDiv("jumbotron");
     jumboDiv.element.style.textAlign = "center"
