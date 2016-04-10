@@ -41,6 +41,9 @@ export class DivLayout {
     parentDiv.AddElement(leftElem);
     parentDiv.AddElement(rightElem);
     return parentDiv;
+
+
+
   }
   GetGoodButton(text: string, ref: string) {
     var ret = this.hFactory.GetARef(this.hFactory.GetText(text), ref);

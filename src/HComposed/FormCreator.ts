@@ -12,8 +12,6 @@ export interface TextItemController {
   SetTextArea(textArea: HTMLTextAreaElement);
 }
 
-
-
 export class FormCreator {
   divFactory: DivLayout.DivLayout;
   hFactory: HF;
@@ -22,17 +20,16 @@ export class FormCreator {
     this.divFactory = divFactory;
     this.hFactory = hFactory;
   }
-
-  GetFirstForm() {
-    var rows = [new HFormTextElement(this.hFactory, "Name", "Name", "Joe"), new HFormTextElement(this.hFactory, "Age", "Age", "Joe")];
-    var form = new HForm(this.hFactory, rows, new DummyCheckFunction(), undefined, undefined);
+  CreateForm(rows: HFormTextElement[], checkFunction: ICheckFunction) {
+    var form = new HForm(this.hFactory, rows, checkFunction, undefined, undefined);
     return form;
+  }
+  CreateTextElement(name: string, label: string, defaultValue: string): HFormTextElement {
+    return new HFormTextElement(this.hFactory, name, label, defaultValue);
   }
 }
 export enum HFormStatusType {
-  OK,
-  Warning,
-  Error
+  OK, Warning, Error
 }
 export class HFormStatus { constructor(public StatusType: HFormStatusType, public Message: string) { } }
 
@@ -92,6 +89,7 @@ export class DummyCheckFunction implements ICheckFunction {
     var ret: { [id: string]: HFormStatus; } = {};
     for (var nameInput in input) {
       ret[nameInput] = ok;
+
     }
     console.log("DummyCheck output");
     console.log(ret);
