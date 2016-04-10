@@ -3,10 +3,11 @@
 import H = require("./HBasics/HFactory"); import HFactory = H.HFactory;
 import DL = require("./HComposed/DivLayout"); import DivLayout = DL.DivLayout;
 import FC = require("./HComposed/FormCreator"); import FormCreator = FC.FormCreator;
-import R = require("./Routing/RouteController"); import RouteController = R.RouteController;
-import Nav = require("./Routing/Navigation"); import Navigator = Nav.Navigator; import NavigationElement = Nav.NavigationElement;
+import R = require("./Route/RouteController"); import RouteController = R.RouteController;
+import Nav = require("./Route/Navigation"); import Navigator = Nav.Navigator; import NavigationElement = Nav.NavigationElement;
 import App = require("./Application/PayTogether"); import PayTogether = App.PayTogether;
 //////StopImportModulesGen
+
 var hFactory = new HFactory();
 var divLayout = new DivLayout(hFactory);
 var formCreator = new FormCreator(divLayout, hFactory);
