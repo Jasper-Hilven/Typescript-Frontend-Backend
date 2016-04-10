@@ -28,16 +28,6 @@ export class Navigator implements IHEl {
     this.navDiv.AddElement(nav);
     this.navDiv.AddElement(hFactory.GetH3(hFactory.GetText(title)));
   }
-  /*<div class="header clearfix" >
-    <nav>
-    <ul class="nav nav-pills pull-right" >
-    <li role="presentation" class="active" > <a href="#" > Home < /a></li >
-    <li role="presentation" > <a href="#" > Contact < /a></li >
-    </ul>
-    < /nav>
-    < h3 class="text-muted" > PayTogether < /h3>
-    < /div>
-*/
   GetElement(): HTMLElement {
     return this.navDiv.element;
   }

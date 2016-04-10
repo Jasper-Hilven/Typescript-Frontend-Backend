@@ -20,7 +20,6 @@ export class Application implements RouteObserver {
   constructor(private routeController: RouteController, private mainPage: MainPage, private title: string) {
     this.mainContent = document.getElementById("maincontent");
     routeController.AddLocationChangedEventListener(this);
-
   }
   Initialize() {
     document.title = this.title;
