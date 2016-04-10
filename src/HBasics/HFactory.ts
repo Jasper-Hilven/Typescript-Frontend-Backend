@@ -38,8 +38,8 @@ export class HFactory {
     this.AddClasses(div, divClasses);
     return div;
   }
-  GetClassedParam(paramClasses: string[], child: IHEl) {
-    var param = this.GetParam(child);
+  GetClassedParag(paramClasses: string[], child: IHEl) {
+    var param = this.GetParag(child);
     this.AddClasses(param, paramClasses);
     return param
   }
@@ -72,7 +72,7 @@ export class HFactory {
   GetNav() {
     return new HNav.HNav();
   }
-  GetParam(child: IHEl) {
+  GetParag(child: IHEl) {
     return new HParag.HParag(child);
   }
 

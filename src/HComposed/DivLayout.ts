@@ -15,9 +15,7 @@ export class DivLayout {
     return containerDiv;
   }
 
-
-
-  CreateJumbotron(title, leadText) {
+  CreateJumbotron(title, leadText, thirdChild) {
     var jumboDiv = this.hFactory.GetClassedDiv(["jumbotron"]);
     jumboDiv.element.style.textAlign = "center"
     jumboDiv.element.style.borderBottom = "2px solid #e5e5e5"
@@ -25,8 +23,11 @@ export class DivLayout {
     var titleH1 = this.hFactory.GetH1(titleTextElem);
     jumboDiv.AddElement(titleH1);
     var leadTextElem = this.hFactory.GetText(leadText);
-    var leadParam = this.hFactory.GetClassedParam(["lead"], leadTextElem);
+    var leadParam = this.hFactory.GetClassedParag(["lead"], leadTextElem);
     jumboDiv.AddElement(leadParam);
+    if (thirdChild == undefined)
+      return;
+    jumboDiv.AddElement(thirdChild);
     return jumboDiv;
   }
 
@@ -41,5 +42,15 @@ export class DivLayout {
     parentDiv.AddElement(rightElem);
     return parentDiv;
   }
+  GetGoodButton(text: string, ref: string) {
+    var ret = this.hFactory.GetARef(this.hFactory.GetText(text), ref);
+    this.hFactory.SetRole(ret, "button");
+    this.hFactory.AddClasses(ret, ["btn", "btn-lg", "btn-success"]);
+    return ret;
+  }
+  GetFooter() {
+
+  }
+
 
 }
