@@ -41,18 +41,21 @@ export class DivLayout {
     parentDiv.AddElement(leftElem);
     parentDiv.AddElement(rightElem);
     return parentDiv;
-
-
-
   }
+
   GetGoodButton(text: string, ref: string) {
     var ret = this.hFactory.GetARef(this.hFactory.GetText(text), ref);
     this.hFactory.SetRole(ret, "button");
     this.hFactory.AddClasses(ret, ["btn", "btn-lg", "btn-success"]);
     return ret;
   }
-  GetFooter() {
-
+  GetFooter(text) {
+    var hFactory = this.hFactory;
+    var footer = hFactory.GetDivWithChild(hFactory.GetClassedFooter(["footer"], hFactory.GetParag(hFactory.GetText(text))));
+    var style = footer.GetElement().style;
+    style.marginTop = "42px";
+    style.marginLeft = "10px";
+    return footer;
   }
 
 

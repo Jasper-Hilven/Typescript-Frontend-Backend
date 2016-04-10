@@ -13,6 +13,7 @@ import HUl = require("./HUl");
 import IHEl = IHElement.IHElement;
 import IHElement = require("./IHElement");
 import HARefM = require("./HARef");
+import HFooter = require("./HFooter");
 export class HFactory {
   AddClass(elem: IHEl, eClass: string) {
     elem.GetElement().classList.add(eClass);
@@ -38,6 +39,12 @@ export class HFactory {
     this.AddClasses(div, divClasses);
     return div;
   }
+  GetClassedFooter(paramClasses: string[], child: IHEl) {
+    var footer = this.GetFooter(child);
+    this.AddClasses(footer, paramClasses);
+    return footer;
+  }
+
   GetClassedParag(paramClasses: string[], child: IHEl) {
     var param = this.GetParag(child);
     this.AddClasses(param, paramClasses);
@@ -52,7 +59,15 @@ export class HFactory {
   GetDiv() {
     return new HDiv.HDiv();
   }
+  GetDivWithChild(child: IHEl) {
+    var div = new HDiv.HDiv();
+    div.AddElement(child);
+    return div;
+  }
 
+  GetFooter(child: IHEl) {
+    return new HFooter.HFooter(child);
+  }
   GetH1(child: IHEl) {
     return new Hn.Hn(child, 1);
   }

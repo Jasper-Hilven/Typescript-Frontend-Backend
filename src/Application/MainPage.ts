@@ -14,12 +14,13 @@ import PayT = require("./../Application/PayTogether"); import PayTogether = PayT
 export class MainPage implements IHElement {
   container: HDiv;
 
-  constructor(private divLayout: DivLayout, private hFactory: HFactory, private navigator: Navigator, private myApp: PayTogether) {
+  constructor(private divLayout: DivLayout, private hFactory: HFactory, private navigator: Navigator, footer: IHElement, private myApp: PayTogether) {
     this.container = this.divLayout.CreateContainer();
     var createNewChipmentButton = this.hFactory.GetParag(this.divLayout.GetGoodButton(this.myApp.GetCreateChipment(), this.myApp.GetNewChipmentURL()));
     var jumbo = this.divLayout.CreateJumbotron(this.myApp.GetSlogan(), this.myApp.GetExplanation(), createNewChipmentButton);
     this.container.AddElement(navigator);
     this.container.AddElement(jumbo);
+    this.container.AddElement(footer);
   }
 
   GetElement() {

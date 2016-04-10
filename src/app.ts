@@ -20,7 +20,6 @@ var myAppInfo = new PayTogether();
 var title = myAppInfo.GetTitle();
 var createChipment = myAppInfo.GetCreateChipment();
 var createChipmentUrl = myAppInfo.GetNewChipmentURL();
-
 //////Navigation
 var navigationElements = [new NavigationElement("Home", ""), new NavigationElement("About", "#About"), new NavigationElement(createChipment, createChipmentUrl)];
 var createNavigator = function() { return new Navigator(hFactory, title, navigationElements); };
@@ -37,10 +36,9 @@ var rows = [
   formCreator.CreateTextElement("ChipinEmailRequired", "Contributor email adress required", "Yes if the email address of the contributors is required,otherwise no")];
 var checkFunction = new DummyCheckFunction();
 var form = formCreator.CreateForm(rows, checkFunction);
-//return form;
-
-var mainPage = new MainPage(divLayout, hFactory, createNavigator(), myAppInfo);
-var chipmentPage = new NewChipmentPage(divLayout, hFactory, createNavigator(), myAppInfo, form);
+var footerText = "copyright, 2016 PayTogether, Inc.";
+var mainPage = new MainPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), myAppInfo);
+var chipmentPage = new NewChipmentPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), myAppInfo, form);
 var application = new Application(routeController, mainPage, chipmentPage, title);
 console.log("Application constructed");
 console.log(application);

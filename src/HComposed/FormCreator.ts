@@ -122,10 +122,8 @@ export class HForm implements IHEl {
   NotifyChanges(key: string, value: string) {
     this.receivedValue[key] = value;
     var result = this.checkFunction.CheckValues(this.receivedValue);
-    for (var rI in result);
-    {
+    for (var rI in result)
       this.formElementKeyToValue[rI].SetStatus(result[rI]);
-    }
   }
 
 

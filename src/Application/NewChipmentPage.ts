@@ -8,18 +8,18 @@ import R = require("./../Route/RouteController"); import RouteController = R.Rou
 import Nav = require("./../Route/Navigation"); import Navigator = Nav.Navigator; import NavigationElement = Nav.NavigationElement;
 import PayT = require("./../Application/PayTogether"); import PayTogether = PayT.PayTogether;
 import FC = require("./../HComposed/FormCreator"); import FormCreator = FC.FormCreator; import HFormTextElement = FC.HFormTextElement; import DummyCheckFunction = FC.DummyCheckFunction;
-
 //////StopImportModulesGen
 
 
 export class NewChipmentPage implements IHElement {
   container: HDiv;
-  constructor(private divLayout: DivLayout, private hFactory: HFactory, private navigator: Navigator, private myApp: PayTogether, private formCreator: IHElement) {
+  constructor(private divLayout: DivLayout, private hFactory: HFactory, private navigator: Navigator, footer: IHElement, private myApp: PayTogether, private formCreator: IHElement) {
     this.container = this.divLayout.CreateContainer();
     var jumbo = this.divLayout.CreateJumbotron("You are making a new payment", "", hFactory.GetText(""));
     this.container.AddElement(navigator);
     this.container.AddElement(jumbo);
     this.container.AddElement(formCreator);
+    this.container.AddElement(footer);
   }
 
   GetElement() {
