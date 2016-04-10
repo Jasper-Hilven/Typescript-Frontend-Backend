@@ -8,6 +8,7 @@ import Nav = require("./Route/Navigation"); import Navigator = Nav.Navigator; im
 import PayTogetherM = require("./Application/PayTogether"); import PayTogether = PayTogetherM.PayTogether;
 import App = require("./Application/Application"); import Application = App.Application;
 import MainPageM = require("./Application/MainPage"); import MainPage = MainPageM.MainPage;
+import NewChipmentPageM = require("./Application/NewChipmentPage"); import NewChipmentPage = NewChipmentPageM.NewChipmentPage;
 
 //////Basic factories
 var hFactory = new HFactory();
@@ -22,12 +23,14 @@ var createChipmentUrl = myAppInfo.GetNewChipmentURL();
 
 //////Navigation
 var navigationElements = [new NavigationElement("Home", ""), new NavigationElement("About", "#About"), new NavigationElement(createChipment, createChipmentUrl)];
-var navigator = new Navigator(hFactory, title, navigationElements);
+var createNavigator = function() { return new Navigator(hFactory, title, navigationElements); };
+var navigator2 = new Navigator(hFactory, title, navigationElements);
 var routeController = new RouteController();
 
 //Build the content
-var mainPage = new MainPage(divLayout, hFactory, navigator, myAppInfo);
-var application = new Application(routeController, mainPage, title);
+var mainPage = new MainPage(divLayout, hFactory, createNavigator(), myAppInfo);
+var chipmentPage = new NewChipmentPage(divLayout, hFactory, createNavigator(), myAppInfo);
+var application = new Application(routeController, mainPage, chipmentPage, title);
 
 console.log("Application constructed");
 console.log(application);

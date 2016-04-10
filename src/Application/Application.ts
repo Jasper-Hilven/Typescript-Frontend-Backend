@@ -7,8 +7,6 @@ import FC = require("./../HComposed/FormCreator"); import FormCreator = FC.FormC
 import R = require("./../Route/RouteController"); import RouteController = R.RouteController; import RouteObserver = R.RouteObserver;
 import Nav = require("./../Route/Navigation"); import Navigator = Nav.Navigator; import NavigationElement = Nav.NavigationElement;
 import PayTogetherM = require("./PayTogether"); import PayTogether = PayTogetherM.PayTogether;
-import MainPageM = require("./MainPage"); import MainPage = MainPageM.MainPage;
-
 //////StopImportModulesGen
 /*export class PageDefinition {
   constructor(public PageId: string, public page: )
@@ -17,7 +15,7 @@ import MainPageM = require("./MainPage"); import MainPage = MainPageM.MainPage;
 export class Application implements RouteObserver {
   mainContent: HTMLElement;
 
-  constructor(private routeController: RouteController, private mainPage: MainPage, private title: string) {
+  constructor(private routeController: RouteController, private mainPage: IHElement, private newChipmentPage: IHElement, private title: string) {
     this.mainContent = document.getElementById("maincontent");
     routeController.AddLocationChangedEventListener(this);
   }
@@ -35,6 +33,10 @@ export class Application implements RouteObserver {
     console.log("Stay on main page anyway.");
     while (this.mainContent.children.length > 0)
       this.mainContent.removeChild(this.mainContent.children[0]);
+    if (path.length > 0 && path[0] == "newchipment") {
+      this.mainContent.appendChild(this.newChipmentPage.GetElement());
+      return;
+    }
     this.mainContent.appendChild(this.mainPage.GetElement());
 
   }
