@@ -53,8 +53,6 @@ export class HFormTextElement {
     labelTextSpan.GetElement().style.fontWeight = "bold";
     var left = this.hFactory.GetTableElementData(labelTextSpan);
     this.textBox = this.hFactory.GetTextAreaDim(1, 30);
-    console.log("Created textbox");
-    console.log(this.textBox);
     var right = this.hFactory.GetTableElementData(this.textBox);
     var retRow = this.hFactory.GetTableRow();
     retRow.AddCell(left);

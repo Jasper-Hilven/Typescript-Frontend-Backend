@@ -13,10 +13,20 @@ export class NavigationElement {
 
 export class Navigator implements IHEl {
   navDiv: HDiv;
-  constructor(hFactory: HF, navigationElements: NavigationElement[]) {
-    this.navDiv = hFactory.GetClassedDiv("header clearfix");
-    var elements = hFactory.GetClassedUl("nav nav-pills pull-right");
-    this.navDiv.AddElement(elements);
+  constructor(hFactory: HF, title: string, navigationElements: NavigationElement[]) {
+    this.navDiv = hFactory.GetClassedDiv(["header", "clearfix"]);
+    var nav = hFactory.GetNav();
+    var elementsList = hFactory.GetClassedUl(["nav", "nav-pills", "pull-right"]);
+    for (var i in navigationElements) {
+      var navElem = navigationElements[i];
+      console.log(navElem.text);
+      var direct = hFactory.GetLi(hFactory.GetARef(hFactory.GetText(navElem.text), navElem.url));
+      hFactory.SetRole(direct, "presentation");
+      elementsList.AddElement(direct);
+    }
+    nav.AddElement(elementsList);
+    this.navDiv.AddElement(nav);
+    this.navDiv.AddElement(hFactory.GetH3(hFactory.GetText(title)));
   }
   /*<div class="header clearfix" >
     <nav>

@@ -10,7 +10,7 @@ export class DivLayout {
   }
 
   CreateContainer() {
-    var containerDiv = this.hFactory.GetClassedDiv("container");
+    var containerDiv = this.hFactory.GetClassedDiv(["container"]);
     containerDiv.element.style.maxWidth = "1030px"
     return containerDiv;
   }
@@ -18,14 +18,14 @@ export class DivLayout {
 
 
   CreateJumbotron(title, leadText) {
-    var jumboDiv = this.hFactory.GetClassedDiv("jumbotron");
+    var jumboDiv = this.hFactory.GetClassedDiv(["jumbotron"]);
     jumboDiv.element.style.textAlign = "center"
     jumboDiv.element.style.borderBottom = "2px solid #e5e5e5"
     var titleTextElem = this.hFactory.GetText(title);
     var titleH1 = this.hFactory.GetH1(titleTextElem);
     jumboDiv.AddElement(titleH1);
     var leadTextElem = this.hFactory.GetText(leadText);
-    var leadParam = this.hFactory.GetClassedParam("lead", leadTextElem);
+    var leadParam = this.hFactory.GetClassedParam(["lead"], leadTextElem);
     jumboDiv.AddElement(leadParam);
     return jumboDiv;
   }

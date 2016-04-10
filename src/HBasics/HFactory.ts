@@ -3,6 +3,7 @@ import HDiv = require("./HDiv");
 import HLabel = require("./HLabel");
 import HLi = require("./HLi");
 import Hn = require("./Hn")
+import HNav = require("./HNav");
 import HParag = require("./HParag");
 import HSpan = require("./HSpan");
 import HTabling = require("./HTabling");
@@ -11,28 +12,41 @@ import HTextArea = require("./HTextArea");
 import HUl = require("./HUl");
 import IHEl = IHElement.IHElement;
 import IHElement = require("./IHElement");
-
+import HARefM = require("./HARef");
 export class HFactory {
   AddClass(elem: IHEl, eClass: string) {
     elem.GetElement().classList.add(eClass);
   }
+  AddClasses(elem: IHEl, eClass: string[]) {
+    for (var i in eClass) {
+      elem.GetElement().classList.add(eClass[i]);
+    }
+  }
+  SetRole(elem: IHEl, role: string) {
+    elem.GetElement().setAttribute("role", role);
+  }
+
+  GetARef(child: IHEl, ref: string) {
+    return new HARefM.HARef(child, ref);
+  }
+
   GetButton(child: IHEl) {
     return new HButton.HButton(child);
   }
-  GetClassedDiv(divClass: string) {
+  GetClassedDiv(divClasses: string[]) {
     var div = this.GetDiv();
-    this.AddClass(div, divClass);
+    this.AddClasses(div, divClasses);
     return div;
   }
-  GetClassedParam(paramClass: string, child: IHEl) {
+  GetClassedParam(paramClasses: string[], child: IHEl) {
     var param = this.GetParam(child);
-    this.AddClass(param, paramClass);
+    this.AddClasses(param, paramClasses);
     return param
   }
 
-  GetClassedUl(paramClass: string) {
+  GetClassedUl(paramClass: string[]) {
     var ul = this.GetUl();
-    this.AddClass(ul, paramClass);
+    this.AddClasses(ul, paramClass);
     return ul;
   }
   GetDiv() {
@@ -45,13 +59,19 @@ export class HFactory {
   GetH2(child: IHEl) {
     return new Hn.Hn(child, 2);
   }
+
+  GetH3(child: IHEl) {
+    return new Hn.Hn(child, 3);
+  }
   GetLi(child: IHEl) {
     return new HLi.HLi(child);
   }
   GetLabel(child: IHEl) {
     return new HLabel.HLabel(child);
   }
-
+  GetNav() {
+    return new HNav.HNav();
+  }
   GetParam(child: IHEl) {
     return new HParag.HParag(child);
   }
