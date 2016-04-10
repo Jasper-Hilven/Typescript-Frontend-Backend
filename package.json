@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "typings install",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "start": "nodemon ./dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +17,9 @@
     "typescript": "^1.9.0-dev.20160401",
     "typings": "^0.7.11",
     "webpack": "^1.12.14"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "static-server": "^2.0.2"
   }
 }

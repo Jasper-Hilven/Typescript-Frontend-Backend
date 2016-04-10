@@ -15,6 +15,8 @@ export class DivLayout {
     return containerDiv;
   }
 
+
+
   CreateJumbotron(title, leadText) {
     var jumboDiv = this.hFactory.GetClassedDiv("jumbotron");
     jumboDiv.element.style.textAlign = "center"

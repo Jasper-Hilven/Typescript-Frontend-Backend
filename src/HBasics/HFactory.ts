@@ -1,14 +1,16 @@
 import HButton = require("./HButton");
 import HDiv = require("./HDiv");
 import HLabel = require("./HLabel");
+import HLi = require("./HLi");
+import Hn = require("./Hn")
+import HParag = require("./HParag");
 import HSpan = require("./HSpan");
 import HTabling = require("./HTabling");
 import HText = require("./HText");
 import HTextArea = require("./HTextArea");
-import IHElement = require("./IHElement");
-import Hn = require("./Hn")
-import HParag = require("./HParag");
+import HUl = require("./HUl");
 import IHEl = IHElement.IHElement;
+import IHElement = require("./IHElement");
 
 export class HFactory {
   AddClass(elem: IHEl, eClass: string) {
@@ -28,6 +30,11 @@ export class HFactory {
     return param
   }
 
+  GetClassedUl(paramClass: string) {
+    var ul = this.GetUl();
+    this.AddClass(ul, paramClass);
+    return ul;
+  }
   GetDiv() {
     return new HDiv.HDiv();
   }
@@ -37,6 +44,9 @@ export class HFactory {
   }
   GetH2(child: IHEl) {
     return new Hn.Hn(child, 2);
+  }
+  GetLi(child: IHEl) {
+    return new HLi.HLi(child);
   }
   GetLabel(child: IHEl) {
     return new HLabel.HLabel(child);
@@ -75,4 +85,9 @@ export class HFactory {
     e.cols = cols;
     return textArea;
   }
+  GetUl(): HUl.HUl {
+    return new HUl.HUl();
+  }
+
+
 }

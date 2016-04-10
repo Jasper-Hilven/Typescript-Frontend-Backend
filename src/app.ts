@@ -6,7 +6,8 @@ import FC = require("./HComposed/FormCreator");
 import FormCreator = FC.FormCreator;
 import R = require("./routing/RouteController");
 import RouteController = R.RouteController;
-
+import Nav = require("./routing/Navigation");
+import Navigator = Nav.Navigator;
 //Create factories
 var hFactory = new HFactory();
 var divLayout = new DivLayout(hFactory);
@@ -25,6 +26,8 @@ var jumbo = divLayout.CreateJumbotron("Jumbotron heading", longText);
 var form = formCreator.GetFirstForm();
 var container = divLayout.CreateContainer();
 var listener = new RouteController();
+var navigator = new Navigator(hFactory, []);
+container.AddElement(navigator);
 container.AddElement(jumbo);
 container.AddElement(form);
 mainContent.appendChild(container.GetElement());

@@ -1,4 +1,4 @@
 node_modules
-dist
+dist/bundle.js
 src/**/*.js
 src/**/*.map
