@@ -1,7 +1,6 @@
-import DivFactory = require("./DivFactory");
-import DVF = DivFactory.DivFactory;
 import HFactory = require("./../HBasics/HFactory");
 import HF = HFactory.HFactory;
+import DivLayout = require("./DivLayout");
 import IHELement = require("../HBasics/IHElement");
 import IHEl = IHELement.IHElement;
 import HTb = require("../HBasics/HTabling");
@@ -16,10 +15,10 @@ export interface TextItemController {
 
 
 export class FormCreator {
-  divFactory: DVF;
+  divFactory: DivLayout.DivLayout;
   hFactory: HF;
 
-  public constructor(divFactory: DVF, hFactory: HF) {
+  public constructor(divFactory: DivLayout.DivLayout, hFactory: HF) {
     this.divFactory = divFactory;
     this.hFactory = hFactory;
   }

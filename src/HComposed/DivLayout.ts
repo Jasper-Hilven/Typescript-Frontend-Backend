@@ -6,11 +6,12 @@ export class DivLayout {
   hFactory: HF;
   constructor(hFactory: HF) {
     this.hFactory = hFactory;
+    var a = 0;
   }
 
   CreateContainer() {
     var containerDiv = this.hFactory.GetClassedDiv("container");
-    containerDiv.element.style.maxWidth = "730px"
+    containerDiv.element.style.maxWidth = "1030px"
     return containerDiv;
   }
 
@@ -26,4 +27,17 @@ export class DivLayout {
     jumboDiv.AddElement(leadParam);
     return jumboDiv;
   }
+
+  GetLeftRightFlexDiv(leftElem, rightElem) {
+    var parentDiv = this.hFactory.GetDiv();
+    var style = parentDiv.element.style;
+    style.display = "flex";
+    style.flexDirection = "row";
+    style.flexWrap = "nowrap";
+    style.justifyContent = "center";
+    parentDiv.AddElement(leftElem);
+    parentDiv.AddElement(rightElem);
+    return parentDiv;
+  }
+
 }

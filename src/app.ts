@@ -1,8 +1,6 @@
 import H = require("./HBasics/HFactory");
 import HFactory = H.HFactory;
-import D = require("./HComposed/DivFactory");
-import DivFactory = D.DivFactory;
-import DL = require("./HLayout/DivLayout");
+import DL = require("./HComposed/DivLayout");
 import DivLayout = DL.DivLayout;
 import FC = require("./HComposed/FormCreator");
 import FormCreator = FC.FormCreator;
@@ -11,9 +9,8 @@ import RouteController = R.RouteController;
 
 //Create factories
 var hFactory = new HFactory();
-var dFactory = new DivFactory(hFactory);
-var formCreator = new FormCreator(dFactory, hFactory);
 var divLayout = new DivLayout(hFactory);
+var formCreator = new FormCreator(divLayout, hFactory);
 
 //Build the content
 var shortText = "Some random text that is not that cool but rather long because of repitition. ";
