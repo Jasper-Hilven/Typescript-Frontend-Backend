@@ -9,19 +9,23 @@ import PayTogetherM = require("./Application/PayTogether"); import PayTogether =
 import App = require("./Application/Application"); import Application = App.Application;
 import MainPageM = require("./Application/MainPage"); import MainPage = MainPageM.MainPage;
 
-//////StopImportModulesGen
+//////Basic factories
 var hFactory = new HFactory();
 var divLayout = new DivLayout(hFactory);
 var formCreator = new FormCreator(divLayout, hFactory);
+
+//////App info
 var myAppInfo = new PayTogether();
 var title = myAppInfo.GetTitle();
 var createChipment = myAppInfo.GetCreateChipment();
 var createChipmentUrl = myAppInfo.GetNewChipmentURL();
+
+//////Navigation
 var navigationElements = [new NavigationElement("Home", ""), new NavigationElement("About", "#About"), new NavigationElement(createChipment, createChipmentUrl)];
 var navigator = new Navigator(hFactory, title, navigationElements);
+var routeController = new RouteController();
 
 //Build the content
-var routeController = new RouteController();
 var mainPage = new MainPage(divLayout, hFactory, navigator, myAppInfo);
 var application = new Application(routeController, mainPage, title);
 
