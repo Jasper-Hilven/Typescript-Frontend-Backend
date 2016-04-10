@@ -24,9 +24,11 @@ export class RouteController {
       this.listeners[nListener].LocationChanged(oldParts, newParts);
     }
   }
-
+  GetParts() {
+    return this.splitToParts(window.location.hash);
+  }
   Trigger() {
-    var parts = this.splitToParts(window.location.hash);
+    var parts = this.GetParts();
     for (var nListener in this.listeners)
       this.listeners[nListener].LocationChanged(parts, parts);
   }
