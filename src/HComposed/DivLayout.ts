@@ -11,7 +11,7 @@ export class DivLayout {
 
   CreateContainer() {
     var containerDiv = this.hFactory.GetClassedDiv(["container"]);
-    containerDiv.element.style.maxWidth = "1250px"
+    containerDiv.element.style.maxWidth = "1250px";
     return containerDiv;
   }
 
