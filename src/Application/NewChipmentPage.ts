@@ -7,7 +7,8 @@ import DL = require("./../HComposed/DivLayout"); import DivLayout = DL.DivLayout
 import R = require("./../Route/RouteController"); import RouteController = R.RouteController;
 import Nav = require("./../Route/Navigation"); import Navigator = Nav.Navigator; import NavigationElement = Nav.NavigationElement;
 import PayT = require("./../Application/PayTogether"); import PayTogether = PayT.PayTogether;
-import FC = require("./../HComposed/FormCreator"); import FormCreator = FC.FormCreator; import HFormTextElement = FC.HFormTextElement; import DummyCheckFunction = FC.DummyCheckFunction;
+import FC = require("../HComposed/Forms/FormCreator"); import FormCreator = FC.FormCreator;
+import DummyCheckFunctionModule = require("../HComposed/Forms/DummyCheckFunction"); import DummyCheckFunction = DummyCheckFunctionModule.DummyCheckFunction;
 //////StopImportModulesGen
 
 

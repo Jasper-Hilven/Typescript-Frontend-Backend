@@ -2,7 +2,7 @@
 //////StartImportModulesGen
 import H = require("./HBasics/HFactory"); import HFactory = H.HFactory;
 import DL = require("./HComposed/DivLayout"); import DivLayout = DL.DivLayout;
-import FC = require("./HComposed/FormCreator"); import FormCreator = FC.FormCreator; import HFormTextElement = FC.HFormTextElement; import DummyCheckFunction = FC.DummyCheckFunction;
+import FC = require("./HComposed/Forms/FormCreator"); import FormCreator = FC.FormCreator; //import HFormTextElement = FC.HFormTextElement; import DummyCheckFunction = FC.DummyCheckFunction;
 import R = require("./Route/RouteController"); import RouteController = R.RouteController;
 import Nav = require("./Route/Navigation"); import Navigator = Nav.Navigator; import NavigationElement = Nav.NavigationElement;
 import PayTogetherM = require("./Application/PayTogether"); import PayTogether = PayTogetherM.PayTogether;

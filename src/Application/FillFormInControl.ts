@@ -5,8 +5,7 @@ import ICheckFunctionModule = require("../HComposed/Forms/ICheckFunction"); impo
 import HFormStatusModule = require("../HComposed/Forms/HFormStatus"); import HFormStatus = HFormStatusModule.HFormStatus;
 import R = require("./../Route/RouteController"); import RouteController = R.RouteController; import RouteObserver = R.RouteObserver;
 import Nav = require("./../Route/Navigation"); import Navigator = Nav.Navigator; import NavigationElement = Nav.NavigationElement;
-
-export class FillFormInControl extends ICheckFunction {
+export class FillFormInControl implements ICheckFunction {
   CheckValues(input: { [id: string]: string; }): { [id: string]: HFormStatus; } {
     throw "NotYetImplemented";
   }
