@@ -1,11 +1,12 @@
 var fileSystem = require("fs");
+var pathModule = require('path');
+var gutil = require('gulp-util');
 
 var _getAllFilesFromFolder = function(dir) {
-  var filesystem = require("fs");
   var results = [];
-  filesystem.readdirSync(dir).forEach(function(file) {
+  fileSystem.readdirSync(dir).forEach(function(file) {
     file = dir + '/' + file;
-    var stat = filesystem.statSync(file);
+    var stat = fileSystem.statSync(file);
     if (stat && stat.isDirectory()) {
       results = results.concat(_getAllFilesFromFolder(file))
     } else results.push(file);
@@ -14,15 +15,18 @@ var _getAllFilesFromFolder = function(dir) {
 };
 
 var AddDependenciesToCollection = function(allDependencies, filePath, fileName, foundClasses) {
-  throw "NotYetImplemented";
+  allDependencies.push(foundClasses);
 }
-var ReadFileContent=function(file){throw "NotYetImplemented";};
-var ExtractName = function(file){throw "NotYetImplemented";};
+var ReadFileContent=function(file){return
+return fileSystem.ReadFileContent(file).split("\n");
+};
+var ExtractName = function(file){ return pathModule.basename(file);};
 var FindClasses = function(fileName, fileContent) {
   var exportClass = "export class ";
   var retClasses = [];
   for (var i in fileContent) {
     var line = fileContent[i];
+      gutil.log(line);
     if (!line.contains(exportClass))
       continue;
     var index = line.indexOf(exportClass) + exportClass.length;
@@ -41,6 +45,9 @@ var StoreDependencies = function(folderPath, dependencies) {
     var foundClasses = FindClasses(name, content);
     AddDependenciesToCollection(allDependencies,file,name,foundClasses);
   });
-
+  return allDependencies;
 };
 var FillInDependencies = function(filePath, dependencies) {};
+exports.LogAllThingies = function(filePath){
+  return StoreDependencies(filePath,[]);
+}

@@ -13,13 +13,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
-    "typescript": "^1.9.0-dev.20160401",
     "express": "^4.13.4",
-    "webpack": "^1.12.14",
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.7",
     "ts-loader": "^0.8.1",
-    "typings": "^0.7.11"
+    "typescript": "^1.9.0-dev.20160401",
+    "typings": "^0.7.11",
+    "webpack": "^1.12.14"
   }
 }
