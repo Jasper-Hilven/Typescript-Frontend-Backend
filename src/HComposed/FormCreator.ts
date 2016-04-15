@@ -7,10 +7,6 @@ import HTb = require("../HBasics/HTabling");
 import HTable = HTb.HTable;
 import HTe = require("../HBasics/HTextArea");
 import HTextArea = HTe.HTextArea;
-export interface TextItemController {
-  ValueChanges(ev: Event);
-  SetTextArea(textArea: HTMLTextAreaElement);
-}
 
 export class FormCreator {
   divFactory: DivLayout.DivLayout;
@@ -78,26 +74,6 @@ export class HFormTextElement {
 
 
 
-export interface ICheckFunction {
-  CheckValues(input: { [id: string]: string; }): { [id: string]: HFormStatus; };
-}
-export class DummyCheckFunction implements ICheckFunction {
-  CheckValues(input: { [id: string]: string; }): { [id: string]: HFormStatus; } {
-    console.log("DummyCheck input");
-    console.log(input);
-    var ok = new HFormStatus(HFormStatusType.OK, "");
-    var ret: { [id: string]: HFormStatus; } = {};
-    for (var nameInput in input) {
-      ret[nameInput] = ok;
-
-    }
-    console.log("DummyCheck output");
-    console.log(ret);
-
-    return ret;
-  }
-
-}
 export class HForm implements IHEl {
   table: HTable;
   receivedValue: any;

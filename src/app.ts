@@ -27,18 +27,9 @@ var routeController = new RouteController();
 
 //Build the content
 var formCreator = new FormCreator(divLayout, hFactory);
-var rows = [
-  formCreator.CreateTextElement("Description", "Description", "Enter description here"),
-  formCreator.CreateTextElement("Author", "Author", "Your name"),
-  formCreator.CreateTextElement("MinimumPayment", "Minimum Payment", "The minimum amount of contribution"),
-  formCreator.CreateTextElement("MaximumPayment", "Maximum Payment", "The maximum amount of contribution"),
-  formCreator.CreateTextElement("AuthorEmail", "Author Email", "Your Email adress"),
-  formCreator.CreateTextElement("ChipinEmailRequired", "Contributor email adress required", "Yes if the email address of the contributors is required,otherwise no")];
-var checkFunction = new DummyCheckFunction();
-var form = formCreator.CreateForm(rows, checkFunction);
 var footerText = "copyright, 2016 PayTogether, Inc.";
 var mainPage = new MainPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), myAppInfo);
-var chipmentPage = new NewChipmentPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), myAppInfo, form);
+var chipmentPage = new NewChipmentPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), formCreator);
 var application = new Application(routeController, mainPage, chipmentPage, title);
 console.log("Application constructed");
 console.log(application);

@@ -13,12 +13,12 @@ import FC = require("./../HComposed/FormCreator"); import FormCreator = FC.FormC
 
 export class NewChipmentPage implements IHElement {
   container: HDiv;
-  constructor(private divLayout: DivLayout, private hFactory: HFactory, private navigator: Navigator, footer: IHElement, private myApp: PayTogether, private formCreator: IHElement) {
+  constructor(private divLayout: DivLayout, private hFactory: HFactory, private navigator: Navigator, footer: IHElement, private formCreator: FormCreator) {
     this.container = this.divLayout.CreateContainer();
     var jumbo = this.divLayout.CreateJumbotron("You are making a new payment", "", hFactory.GetText(""));
     this.container.AddElement(navigator);
     this.container.AddElement(jumbo);
-    this.container.AddElement(formCreator);
+    this.container.AddElement(this.GetForm(formCreator));
     this.container.AddElement(footer);
   }
 
@@ -26,5 +26,16 @@ export class NewChipmentPage implements IHElement {
     return this.container.GetElement();
   }
 
-
+  GetForm(formCreator) {
+    var rows = [
+      formCreator.CreateTextElement("Description", "Description", "Enter description here"),
+      formCreator.CreateTextElement("Author", "Author", "Your name"),
+      formCreator.CreateTextElement("MinimumPayment", "Minimum Payment", "The minimum amount of contribution"),
+      formCreator.CreateTextElement("MaximumPayment", "Maximum Payment", "The maximum amount of contribution"),
+      formCreator.CreateTextElement("AuthorEmail", "Author Email", "Your Email adress"),
+      formCreator.CreateTextElement("ChipinEmailRequired", "Contributor email adress required", "Yes if the email address of the contributors is required,otherwise no")];
+    var checkFunction = new DummyCheckFunction();
+    var form = formCreator.CreateForm(rows, checkFunction);
+    return form;
+  }
 }
