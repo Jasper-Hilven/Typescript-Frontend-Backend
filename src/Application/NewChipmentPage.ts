@@ -9,6 +9,7 @@ import Nav = require("./../Route/Navigation"); import Navigator = Nav.Navigator;
 import PayT = require("./../Application/PayTogether"); import PayTogether = PayT.PayTogether;
 import FC = require("../HComposed/Forms/FormCreator"); import FormCreator = FC.FormCreator;
 import DummyCheckFunctionModule = require("../HComposed/Forms/DummyCheckFunction"); import DummyCheckFunction = DummyCheckFunctionModule.DummyCheckFunction;
+import FillInFormControlModule = require("./FillFormInControl"); import FillFormInControl = FillInFormControlModule.FillFormInControl;
 //////StopImportModulesGen
 
 
@@ -22,7 +23,7 @@ export class NewChipmentPage implements IHElement {
     this.container.AddElement(this.GetForm(formCreator));
     this.container.AddElement(footer);
   }
-
+  //FillFormInControl
   GetElement() {
     return this.container.GetElement();
   }
@@ -35,7 +36,7 @@ export class NewChipmentPage implements IHElement {
       formCreator.CreateTextElement("MaximumPayment", "Maximum Payment", "The maximum amount of contribution"),
       formCreator.CreateTextElement("AuthorEmail", "Author Email", "Your Email adress"),
       formCreator.CreateTextElement("ChipinEmailRequired", "Contributor email adress required", "Yes if the email address of the contributors is required,otherwise no")];
-    var checkFunction = new DummyCheckFunction();
+    var checkFunction = new FillFormInControl();
     var form = formCreator.CreateForm(rows, checkFunction);
     return form;
   }

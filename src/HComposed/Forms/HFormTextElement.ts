@@ -12,6 +12,7 @@ export class HFormTextElement {
   textBox: HTextArea;
   visualizationRow: HTb.HTableRow;
   form: IHForm;
+
   constructor(hFactory: HF, name: string, label: string, defaultValue: string) {
     this.hFactory = hFactory;
     this.name = name;
@@ -34,15 +35,19 @@ export class HFormTextElement {
     console.log("received status for: " + this.name + ":");
     console.log(status);
   };
+
   SetForm(form: IHForm) {
     this.form = form;
   };
+
   GetVisualizationRow() {
     return this.visualizationRow;
   }
+
   ValueChanges(ev: Event) {
     var value = this.textBox.GetElement().value;
     console.log("user entered new value for: " + this.name + ": " + value);
     this.form.NotifyChanges(this.name, value);
   }
+
 }
