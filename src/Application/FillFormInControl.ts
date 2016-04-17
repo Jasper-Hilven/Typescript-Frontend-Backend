@@ -7,6 +7,8 @@ import R = require("./../Route/RouteController"); import RouteController = R.Rou
 import Nav = require("./../Route/Navigation"); import Navigator = Nav.Navigator; import NavigationElement = Nav.NavigationElement;
 export class FillFormInControl implements ICheckFunction {
   CheckValues(input: { [id: string]: string; }): { [id: string]: HFormStatus; } {
+    console.log("entered checkValues");
+    console.log(input);
     var authorText = input["Author"];
 
     //public StatusType: HFormStatusType, public Message: string

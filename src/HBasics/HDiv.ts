@@ -16,4 +16,14 @@ export class HDiv implements IHEl {
   public GetElement() {
     return this.element;
   }
+
+  public ReplaceElement(index: number, newElement: IHEl) {
+    if (this.element.children.length <= index) {
+      console.log(this.element);
+      console.log(newElement);
+      throw "Index is too big, not a replacement";
+    }
+    this.element.replaceChild(newElement.GetElement(), this.children[index].GetElement());
+    this.children[index] = newElement;
+  }
 }

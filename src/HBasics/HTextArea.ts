@@ -10,5 +10,11 @@ export class HTextArea implements IHEl {
   public GetElement(): HTMLTextAreaElement {
     return this.element;
   }
+  public SetText(text: string) {
+    this.element.value = text;
+  }
+  public GetText(): string {
+    return this.element.value;
+  }
 
 }
