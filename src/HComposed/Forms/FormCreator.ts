@@ -16,11 +16,13 @@ export class FormCreator {
     this.divFactory = divFactory;
     this.hFactory = hFactory;
   }
-  CreateForm(rows: HFormTextElement[], checkFunction: ICheckFunction) {
+
+  CreateForm(rows: HFormTextElement[], checkFunction: ICheckFunction): HForm {
     var form = new HForm(this.hFactory, rows, checkFunction, undefined, undefined);
     return form;
   }
+
   CreateTextElement(name: string, label: string, defaultValue: string): HFormTextElement {
-    return new HFormTextElement(this.hFactory, name, label, defaultValue);
+    return new HFormTextElement(this.hFactory, this.divFactory, name, label, defaultValue);
   }
 }

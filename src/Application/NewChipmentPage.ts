@@ -21,6 +21,7 @@ export class NewChipmentPage implements IHElement {
     this.container.AddElement(navigator);
     this.container.AddElement(jumbo);
     var form = this.GetForm(formCreator);
+
     this.container.AddElement(form);
     this.container.AddElement(footer);
   }
@@ -30,15 +31,10 @@ export class NewChipmentPage implements IHElement {
   }
 
   GetForm(formCreator) {
-    var rows = [
-      formCreator.CreateTextElement("Description", "Description", "Enter description here"),
-      formCreator.CreateTextElement("Author", "Author", "Your name"),
-      formCreator.CreateTextElement("MinimumPayment", "Minimum Payment", "The minimum amount of contribution"),
-      formCreator.CreateTextElement("MaximumPayment", "Maximum Payment", "The maximum amount of contribution"),
-      formCreator.CreateTextElement("AuthorEmail", "Author Email", "Your Email adress"),
-      formCreator.CreateTextElement("ChipinEmailRequired", "Contributor email adress required", "Yes if the email address of the contributors is required,otherwise no")];
-    var checkFunction = new FillFormInControl();
-    var form = formCreator.CreateForm(rows, checkFunction);
+    var control = new FillFormInControl();
+
+    var form = control.GetForm(formCreator);
+    form.Update();
     return form;
   }
 }

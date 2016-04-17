@@ -38,8 +38,22 @@ export class DivLayout {
     style.flexDirection = "row";
     style.flexWrap = "nowrap";
     style.justifyContent = "center";
+    style.alignItems = "center"
     parentDiv.AddElement(leftElem);
     parentDiv.AddElement(rightElem);
+    return parentDiv;
+  }
+  GetUpDownFlexDiv(upElem, downElem) {
+    var parentDiv = this.hFactory.GetDiv();
+    var style = parentDiv.element.style;
+    style.display = "flex";
+    style.flexDirection = "column";
+    style.flexWrap = "nowrap";
+    style.justifyContent = "center";
+    style.alignItems = "center";
+    style.margin = "4";
+    parentDiv.AddElement(upElem);
+    parentDiv.AddElement(downElem);
     return parentDiv;
   }
 
