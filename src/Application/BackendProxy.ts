@@ -15,11 +15,14 @@ export class BackendProxy {
   }
 
   SendGetRequest(url) {
-    throw "Not yet implemented, find an http library.";
+    var jquery = $;
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url, true);
+    xhttp.send();
   }
 
-  SendPostRequest(url, nody) {
-    throw "Not yet implemented, find an http library.";
+  SendPostRequest(url, body) {
+
   }
 
   GetChipmentAsUser(userId, key) {

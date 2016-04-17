@@ -15,6 +15,7 @@ export class FillFormInControl implements ICheckFunction {
   static MaximumPayment = "MaximumPayment";
   static Currency = "Currency";
   static AuthorEmail = "AuthorEmail";
+
   GetForm(formCreator) {
     var rows = [
       formCreator.CreateTextElement(FillFormInControl.DescriptionKey, "Description", ""),
@@ -62,6 +63,7 @@ export class FillFormInControl implements ICheckFunction {
     else
       ret[FillFormInControl.DescriptionKey] = new HFormStatus(HFormStatusType.OK, "Description name is filled in");
   }
+
   HandleCurrency(currency: string, ret) {
     var trimmedLower = currency.trim().toLowerCase();
     var known = ["euro", "dollar"];
@@ -72,8 +74,8 @@ export class FillFormInControl implements ICheckFunction {
     ret[FillFormInControl.Currency] = new HFormStatus(HFormStatusType.OK, "We have euros or dollars");
 
   }
-  HandlePayments(minimumPayment: string, maximumPayment: string, ret) {
 
+  HandlePayments(minimumPayment: string, maximumPayment: string, ret) {
     var minPayNumb = Number(minimumPayment);
     var maxPayNumb = Number(maximumPayment);
     var valid = new HFormStatus(HFormStatusType.OK, "This is a valid amount.");
