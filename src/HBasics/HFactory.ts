@@ -14,6 +14,7 @@ import IHEl = IHElement.IHElement;
 import IHElement = require("./IHElement");
 import HARefM = require("./HARef");
 import HFooter = require("./HFooter");
+import HRadioButtonModule = require("./HRadioButton");
 export class HFactory {
   AddClass(elem: IHEl, eClass: string) {
     elem.GetElement().classList.add(eClass);
@@ -90,7 +91,9 @@ export class HFactory {
   GetParag(child: IHEl) {
     return new HParag.HParag(child);
   }
-
+  GetRadioButton() {
+    return new HRadioButtonModule.HRadioButton();
+  }
   GetTable() {
     return new HTabling.HTable();
   }

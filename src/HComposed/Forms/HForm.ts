@@ -14,6 +14,7 @@ export class HForm implements IHEl {
 
   constructor(hFactory: HF, rows: HFormTextElement[], checkFunction: ICheckFunction, triggerFunction, cancelFunction) {
     this.elements = hFactory.GetDiv();
+    this.StyleForm(this.elements);
     this.receivedValue = {};
     this.formElementKeyToValue = {};
     this.checkFunction = checkFunction;
@@ -37,6 +38,8 @@ export class HForm implements IHEl {
     var result = this.checkFunction.CheckValues(this.receivedValue);
     for (var rI in result)
       this.formElementKeyToValue[rI].SetStatus(result[rI]);
+  }
+  private StyleForm(form: HDiv) {
   }
 
 }

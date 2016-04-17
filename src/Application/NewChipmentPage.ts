@@ -20,7 +20,8 @@ export class NewChipmentPage implements IHElement {
     var jumbo = this.divLayout.CreateJumbotron("You are making a new payment", "", hFactory.GetText(""));
     this.container.AddElement(navigator);
     this.container.AddElement(jumbo);
-    this.container.AddElement(this.GetForm(formCreator));
+    var form = this.GetForm(formCreator);
+    this.container.AddElement(form);
     this.container.AddElement(footer);
   }
   //FillFormInControl
