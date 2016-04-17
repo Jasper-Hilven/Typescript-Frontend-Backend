@@ -17,7 +17,7 @@ export class NewChipmentPage implements IHElement {
   container: HDiv;
   constructor(private divLayout: DivLayout, private hFactory: HFactory, private navigator: Navigator, footer: IHElement, private formCreator: FormCreator) {
     this.container = this.divLayout.CreateContainer();
-    var jumbo = this.divLayout.CreateJumbotron("Create a new chipment", "", hFactory.GetText(""));
+    var jumbo = this.divLayout.CreateJumbotron("Create a new chipment", "Fill in this form to create a new chipment.", hFactory.GetText(""));
     this.container.AddElement(navigator);
     this.container.AddElement(jumbo);
     var form = this.GetForm(formCreator);
