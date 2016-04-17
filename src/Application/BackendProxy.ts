@@ -13,16 +13,12 @@ export class BackendProxy {
     this.chipmentRefUser = this.chipmentRef + "user/";
     this.chipmentRefAuthor = this.chipmentRef + "author/";
   }
-
   SendGetRequest(url) {
-    var jquery = $;
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", url, true);
-    xhttp.send();
+    return $.get(url);
   }
 
   SendPostRequest(url, body) {
-
+    return $.post(url, body);
   }
 
   GetChipmentAsUser(userId, key) {

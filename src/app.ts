@@ -1,3 +1,4 @@
+import {BackendProxy} from "./Application/BackendProxy";
 //////ImportModules HFactory DivLayout FormCreate RouteController Navigation
 //////StartImportModulesGen
 import H = require("./HBasics/HFactory"); import HFactory = H.HFactory;
@@ -25,11 +26,14 @@ var navigationElements = [new NavigationElement("Home", ""), new NavigationEleme
 var createNavigator = function() { return new Navigator(hFactory, title, navigationElements); };
 var routeController = new RouteController();
 
+////Backend
+var backendProxy = new BackendProxy("localhost:3000");
+
 //Build the content
 var formCreator = new FormCreator(divLayout, hFactory);
 var footerText = "copyright, 2016 PayTogether, Inc.";
 var mainPage = new MainPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), myAppInfo);
-var chipmentPage = new NewChipmentPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), formCreator);
+var chipmentPage = new NewChipmentPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), formCreator, backendProxy);
 var application = new Application(routeController, mainPage, chipmentPage, title);
 console.log("Application constructed");
 console.log(application);

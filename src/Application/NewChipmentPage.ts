@@ -1,3 +1,4 @@
+import {BackendProxy} from "./BackendProxy";
 //////ImportModules HFactory DivLayout FormCreate RouteController Navigation
 //////StartImportModulesGen
 import H = require("./../HBasics/HFactory"); import HFactory = H.HFactory;
@@ -15,7 +16,7 @@ import FillInFormControlModule = require("./FillFormInControl"); import FillForm
 
 export class NewChipmentPage implements IHElement {
   container: HDiv;
-  constructor(private divLayout: DivLayout, private hFactory: HFactory, private navigator: Navigator, footer: IHElement, private formCreator: FormCreator) {
+  constructor(private divLayout: DivLayout, private hFactory: HFactory, private navigator: Navigator, footer: IHElement, private formCreator: FormCreator, private backendProxy: BackendProxy) {
     this.container = this.divLayout.CreateContainer();
     var jumbo = this.divLayout.CreateJumbotron("Create a new chipment", "Fill in this form to create a new chipment.", hFactory.GetText(""));
     this.container.AddElement(navigator);
