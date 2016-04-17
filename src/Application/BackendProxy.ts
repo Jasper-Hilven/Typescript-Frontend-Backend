@@ -13,17 +13,29 @@ export class BackendProxy {
     this.chipmentRefUser = this.chipmentRef + "user/";
     this.chipmentRefAuthor = this.chipmentRef + "author/";
   }
-  SendGetRequest(url) {
-    return $.get(url);
+  SendGetRequest(url, succesCallBack, failCallBack) {
+    return $.ajax({
+      type: 'GET', url: url,
+      contentType: "application/json",
+      async: false,
+      dataType: 'jsonp', headers: { "Access-Control-Allow-Origin": 'http://*' },
+      jsonpCallback: 'jsonCallback',
+      success: function(jsonp) {
+        //succesCallBack(JSON.stringify(jsonp, null, 2));
+      }
+      , error: function(jsonp) {
+        //$("#jsonp-response").html(JSON.stringify(jsonp, null, 2));
+      }
+    });
   }
 
   SendPostRequest(url, body) {
     return $.post(url, body);
   }
 
-  GetChipmentAsUser(userId, key) {
+  GetChipmentAsUser(userId, key, success, fail) {
     var requestUrl = this.chipmentRefUser + "id/" + userId + "/key/" + key;
-    return this.SendGetRequest(requestUrl);
+    return this.SendGetRequest(requestUrl, success, fail);
   }
 
   CreateChipment(createId, key, chipment: Chipment) {
@@ -31,18 +43,18 @@ export class BackendProxy {
     return this.SendPostRequest(requestUrl, chipment.ToJSon());
   }
 
-  GetChipmentAsAuthor(id, key) {
+  GetChipmentAsAuthor(id, key, success, fail) {
     var requestUrl = this.chipmentRefAuthor + "id/" + id + "/key/" + key;
-    return this.SendGetRequest(requestUrl);
+    return this.SendGetRequest(requestUrl, success, fail);
   }
   SetChipmentAsAuthor(id, key, chipment: Chipment) {
     var requestUrl = this.chipmentRefAuthor + "change/id/" + id + "/key/" + key;
     return this.SendPostRequest(requestUrl, chipment.ToJSon());
   }
 
-  RemoveChipmentAsAuthor(id, key) {
+  RemoveChipmentAsAuthor(id, key, success, fail) {
     var requestUrl = this.chipmentRefAuthor + "delete/id/" + id + "/key/" + key;
-    return this.SendGetRequest(requestUrl);
+    return this.SendGetRequest(requestUrl, success, fail);
   }
 
   AddChipin(id, key, chipinInfo) {
@@ -55,8 +67,8 @@ export class BackendProxy {
     return this.SendPostRequest(requestUrl, chipinInfo.ToJSon());
   }
 
-  RemoveChipin(id, key, chipinId) {
+  RemoveChipin(id, key, chipinId, success, fail) {
     var requestUrl = this.chipmentRefUser + "id/" + id + "/key/" + key + "/chipin/removeIdd/" + chipinId;
-    return this.SendGetRequest(requestUrl);
+    return this.SendGetRequest(requestUrl, success, fail);
   }
 }

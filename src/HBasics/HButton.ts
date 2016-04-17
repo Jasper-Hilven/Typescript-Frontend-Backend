@@ -14,4 +14,7 @@ export class HButton implements IHEl {
   public GetElement() {
     return this.element;
   }
+  public SetAction(action) {
+    this.element.onclick = function() { action(); };
+  }
 }

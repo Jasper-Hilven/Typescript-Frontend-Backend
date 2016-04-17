@@ -27,12 +27,12 @@ var createNavigator = function() { return new Navigator(hFactory, title, navigat
 var routeController = new RouteController();
 
 ////Backend
-var backendProxy = new BackendProxy("localhost:3000");
+var backendProxy = new BackendProxy("http://localhost:3000");
 
 //Build the content
 var formCreator = new FormCreator(divLayout, hFactory);
 var footerText = "copyright, 2016 PayTogether, Inc.";
-var mainPage = new MainPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), myAppInfo);
+var mainPage = new MainPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), myAppInfo, backendProxy);
 var chipmentPage = new NewChipmentPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), formCreator, backendProxy);
 var application = new Application(routeController, mainPage, chipmentPage, title);
 console.log("Application constructed");
