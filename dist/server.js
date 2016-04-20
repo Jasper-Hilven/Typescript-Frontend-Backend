@@ -1,7 +1,3 @@
-var express = require('express');
-
-
-
 var express = require('express'),
 http = require('http'),
     path = require('path'),
@@ -28,11 +24,6 @@ app.use('/api',function(req, res, next) {
 
 app.use('/api', restapi);
 app.use(express.static('dist'));
-
-
-
-
-
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
 });
