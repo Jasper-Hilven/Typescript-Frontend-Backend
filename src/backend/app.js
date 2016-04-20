@@ -1,15 +1,11 @@
-var express = require('express');
-
-
-
 var express = require('express'),
 http = require('http'),
     path = require('path'),
-    keyValidatorModule = require('./../src/backend/chipinkeyvalidator.js'),
-    modelModule = require('./../src/backend/chipinmodel.js'),
-    providerModule = require('./../src/backend/chipinprovider.js'),
-    coreApiModule = require('./../src/backend/coreapi.js'),
-    restapiModule = require('./../src/backend/restapi.js');
+    keyValidatorModule = require('./chipinkeyvalidator.js'),
+    modelModule = require('./chipinmodel.js'),
+    providerModule = require('./chipinprovider.js'),
+    coreApiModule = require('./coreapi.js'),
+    restapiModule = require('./restapi.js');
 
 var chipinModel = modelModule();
 var keyValidator = keyValidatorModule();
@@ -27,12 +23,6 @@ app.use('/api',function(req, res, next) {
 });
 
 app.use('/api', restapi);
-app.use(express.static('dist'));
-
-
-
-
-
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
 });
