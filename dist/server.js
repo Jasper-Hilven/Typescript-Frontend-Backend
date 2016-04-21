@@ -24,6 +24,7 @@ app.use('/api', function(req, res, next) {
 
 app.use('/api', restapi);
 app.use(express.static('dist'));
+app.use(express.static('dist'));
 http.createServer(app).listen(app.get('port'), function() {
   console.log("Express server listening on port " + app.get('port'));
 });

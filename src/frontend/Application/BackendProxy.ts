@@ -18,13 +18,12 @@ export class BackendProxy {
       type: 'GET', url: url,
       contentType: "application/json",
       async: false,
-      dataType: 'jsonp', headers: { "Access-Control-Allow-Origin": 'http://*' },
-      jsonpCallback: 'jsonCallback',
-      success: function(jsonp) {
-        //succesCallBack(JSON.stringify(jsonp, null, 2));
+      dataType: 'json',
+      success: function(json) {
+        succesCallBack(json);
       }
-      , error: function(jsonp) {
-        //$("#jsonp-response").html(JSON.stringify(jsonp, null, 2));
+      , error: function(json) {
+        failCallBack(json);
       }
     });
   }
@@ -34,6 +33,7 @@ export class BackendProxy {
   }
 
   GetChipmentAsUser(userId, key, success, fail) {
+    console.log("Getting chipment as user");
     var requestUrl = this.chipmentRefUser + "id/" + userId + "/key/" + key;
     return this.SendGetRequest(requestUrl, success, fail);
   }

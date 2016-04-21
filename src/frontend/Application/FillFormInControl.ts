@@ -1,3 +1,4 @@
+import {FormCreator} from "../HComposed/Forms/FormCreator";
 import H = require("./../HBasics/HFactory"); import HFactory = H.HFactory;
 import HI = require("../HBasics/IHElement"); import IHElement = HI.IHElement;
 import DL = require("./../HComposed/DivLayout"); import DivLayout = DL.DivLayout;
@@ -9,6 +10,11 @@ import Nav = require("./../Route/Navigation"); import Navigator = Nav.Navigator;
 
 export class FillFormInControl implements ICheckFunction {
 
+
+
+  constructor(navigation: Navigator) {
+
+  }
   static DescriptionKey = "Description";
   static AuthorKey = "Author";
   static MinimumPayment = "MinimumPayment";
@@ -16,7 +22,7 @@ export class FillFormInControl implements ICheckFunction {
   static Currency = "Currency";
   static AuthorEmail = "AuthorEmail";
 
-  GetForm(formCreator) {
+  GetForm(formCreator: FormCreator) {
     var rows = [
       formCreator.CreateTextElement(FillFormInControl.DescriptionKey, "Description", ""),
       formCreator.CreateTextElement(FillFormInControl.AuthorKey, "Author", ""),
@@ -27,10 +33,18 @@ export class FillFormInControl implements ICheckFunction {
       //formCreator.CreateTextElement("ChipinEmailRequired", "Contributor email adress", "")
     ];
 
-    var form = formCreator.CreateForm(rows, this);
+
+    var form = formCreator.CreateForm(rows, this, this.CreateNewChipment, this.CancelCreateNewChipment);
 
     return form;
   }
+  CreateNewChipment() {
+    console.log("creation of chipment is triggered in fillformincontrol");
+  }
+  CancelCreateNewChipment() {
+    console.log("Creation of new chipment is canceled in FillFormInControl")
+  }
+
 
   CheckValues(input: { [id: string]: string; }): { [id: string]: HFormStatus; } {
     console.log("entered checkValues");

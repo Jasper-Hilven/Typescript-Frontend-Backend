@@ -27,7 +27,7 @@ var createNavigator = function() { return new Navigator(hFactory, title, navigat
 var routeController = new RouteController();
 
 ////Backend
-var backendProxy = new BackendProxy("http://localhost:3000");
+var backendProxy = new BackendProxy("");
 
 //Build the content
 var formCreator = new FormCreator(divLayout, hFactory);
