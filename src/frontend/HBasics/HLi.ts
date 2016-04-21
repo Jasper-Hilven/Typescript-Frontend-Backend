@@ -4,7 +4,7 @@ import IHEl = HE.IHElement;
 export class HLi implements IHEl {
   element: HTMLLIElement;
   child: IHEl;
-  //children: IHEl[];
+  // Children: IHEl[];
   public constructor(child: IHEl) {
     this.element = document.createElement("li");
     this.element.appendChild(child.GetElement());

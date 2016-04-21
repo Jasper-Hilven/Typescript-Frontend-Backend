@@ -55,8 +55,9 @@ export class HFormTextElement {
     this.warningDiv.ReplaceElement(0, this.GetNotificationForText(status));
   }
   private GetNotificationForText(status: HFormStatus) {
-    if (status.StatusType == HFormStatusType.OK)
+    if (status.StatusType == HFormStatusType.OK) {
       return this.hFactory.GetText(""); // DO NOT SHOW ANYTHING IF EVERYTHING IS ALLRIGHT.
+    }
     var text = this.hFactory.GetText(status.Message);
     var warningClasses = (status.StatusType == HFormStatusType.Warning ? "alert-warning" : "alert-danger");
     this.hFactory.AddClasses(text, ["alert", warningClasses]);

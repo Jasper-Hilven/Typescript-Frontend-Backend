@@ -17,7 +17,7 @@ export class DivLayout {
 
   CreateJumbotron(title, leadText, thirdChild) {
     var jumboDiv = this.hFactory.GetClassedDiv(["jumbotron"]);
-    //jumboDiv.element.style.textAlign = "center"
+    // JumboDiv.element.style.textAlign = "center"
     jumboDiv.element.style.borderBottom = "2px solid #e5e5e5"
     var titleTextElem = this.hFactory.GetText(title);
     var titleH1 = this.hFactory.GetH1(titleTextElem);
@@ -26,7 +26,7 @@ export class DivLayout {
     var leadParam = this.hFactory.GetClassedParag(["lead"], leadTextElem);
     jumboDiv.AddElement(leadParam);
     if (thirdChild == undefined)
-      return;
+    { return; }
     jumboDiv.AddElement(thirdChild);
     return jumboDiv;
   }

@@ -4,7 +4,7 @@ import IHEl = HE.IHElement;
 export class HFooter implements IHEl {
   element: HTMLElement;
   child: IHEl;
-  //children: IHEl[];
+  // Children: IHEl[];
   public constructor(child: IHEl) {
     this.element = document.createElement("footer");
     this.element.appendChild(child.GetElement());

@@ -26,7 +26,7 @@ export class NewChipmentPage implements IHElement {
     this.container.AddElement(form);
     this.container.AddElement(footer);
   }
-  //FillFormInControl
+  // FillFormInControl
   GetElement() {
     return this.container.GetElement();
   }

@@ -31,8 +31,9 @@ export class Application implements RouteObserver {
     console.log("Detected path:");
     console.log(path);
     console.log("Stay on main page anyway.");
-    while (this.mainContent.children.length > 0)
+    while (this.mainContent.children.length > 0) {
       this.mainContent.removeChild(this.mainContent.children[0]);
+    }
     if (path.length > 0 && path[0] == "newchipment") {
       this.mainContent.appendChild(this.newChipmentPage.GetElement());
       return;

@@ -33,8 +33,9 @@ export class RouteController {
   }
   Trigger() {
     var parts = this.GetParts();
-    for (var nListener in this.listeners)
+    for (var nListener in this.listeners) {
       this.listeners[nListener].LocationChanged(parts, parts);
+    }
   }
 }
 export interface RouteObserver {

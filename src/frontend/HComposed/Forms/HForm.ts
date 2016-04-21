@@ -36,8 +36,9 @@ export class HForm implements IHEl {
 
   Update() {
     var result = this.checkFunction.CheckValues(this.receivedValue);
-    for (var rI in result)
+    for (var rI in result) {
       this.formElementKeyToValue[rI].SetStatus(result[rI]);
+    }
   }
   private StyleForm(form: HDiv) {
   }
