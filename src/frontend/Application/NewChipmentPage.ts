@@ -32,7 +32,7 @@ export class NewChipmentPage implements IHElement {
   }
 
   GetForm(formCreator) {
-    var control = new FillFormInControl(navigator);
+    var control = new FillFormInControl(this.navigator);
 
     var form = control.GetForm(formCreator);
     form.Update();
