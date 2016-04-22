@@ -1,87 +1,98 @@
-var express = require('express');
-var router = express.Router();
-module.exports = function(chipinprovider, chipinkeyvalidator) {
-
-  var chipincore = {};
-
-  chipincore.getChipmentUser = function(key, id) {
-    console.log("getting chipment for a user");
-    if (!chipinkeyvalidator.isValidChipinUser(id, key))
-      return undefined;
-    var chipin = chipinprovider.getChipment(id);
-    if (!chipin)
-      return undefined;
-    return chipin;
-  };
-
-  chipincore.getChipmentAuthor = function(key, id) {
-    if (!chipinkeyvalidator.isValidChipinAuthor(id, key))
-      return undefined;
-    var chipment = chipinprovider.getChipment(id);
-    if (!chipment)
-      return undefined;
-    chipment.userKey = chipinkeyvalidator.getUserKeyViaAuthor(id, key);
-    return chipment;
-  };
-
-  chipincore.createChipment = function(key, creatorId, info) {
-    if (!chipinkeyvalidator.isValidCreateKey(creatorId, key))
-      return undefined;
-    var chipmentId = chipinkeyvalidator.createIdViaCreateId(creatorId);
-    var chipment = chipinprovider.getChipment(chipmentId);
-    if (chipment)
-      return {error: "chipment with id already exists"}; //Already exists
-      var newChipment = chipinprovider.createChipment(chipmentId, info);
-      if(!newChipment)
-        return undefined
-    return {userKey: chipinkeyvalidator.createUserKey(chipmentId),
-            chipmentId: newChipment,
-            authorKey: chipinkeyvalidator.createAuthorKey(chipmentId)};
-  };
-
-  chipincore.setChipment = function(key, id, info) {
-    if (!chipinkeyvalidator.isValidChipinAuthor(id, key))
-      return undefined;
-    var chipin = chipinprovider.getChipment(id);
-    if (!chipin)
-      return undefined;
-    chipinprovider.setChipment(id, info);
-  };
-
-  chipincore.removeChipment = function(key, id) {
-    if (!chipinkeyvalidator.isValidChipinAuthor(id, key))
-      return undefined;
-    var chipin = chipinprovider.getChipment(id);
-    if (!chipin)
-      return undefined;
-    return chipinprovider.deleteChipment(id);
-  };
-
-  chipincore.createChipin = function(key, id, info) {
-    if (!chipinkeyvalidator.isValidChipinUser(id, key))
-      return undefined;
-    var chipin = chipinprovider.getChipment(id);
-    if (!chipin)
-      return undefined;
-    return chipinprovider.createChipin(id, info);
-  };
-  chipincore.changeChipin = function(key, id, chipinid, info) {
-    if (!chipinkeyvalidator.isValidChipinUser(id, key))
-      return undefined;
-    var chipin = chipinprovider.getChipment(id);
-    if (!chipin)
-      return undefined;
-    return chipinprovider.setChipinOfChipment(id, chipinid, info);
-
-
-  };
-  chipincore.deleteChipin = function(key, id, chipinid){
-  if (!chipinkeyvalidator.isValidChipinUser(id, key))
-    {return undefined;}
-  var chipin = chipinprovider.getChipment(id);
-  if (!chipin)
-    {return undefined;}
-    return chipinprovider.deleteChipinOfChipment(id, chipinid);
-  };
-  return chipincore;
-}
+"use strict";
+var chipinModelModule = require("./ChipinModel");
+var CoreApi = (function () {
+    function CoreApi(keyValidator, chipinProvider, expressRouter) {
+        this.keyValidator = keyValidator;
+        this.chipinProvider = chipinProvider;
+        this.expressRouter = expressRouter;
+    }
+    CoreApi.prototype.GetChipmentUser = function (key, id) {
+        console.log("getting chipment for a user");
+        if (!this.keyValidator.IsValidChipinUser(id, key))
+            return undefined;
+        var chipin = this.chipinProvider.GetChipment(id);
+        if (!chipin)
+            return undefined;
+        return chipin;
+    };
+    ;
+    CoreApi.prototype.GetChipmentAuthor = function (key, id) {
+        if (!this.keyValidator.IsValidChipinAuthor(id, key))
+            return undefined;
+        var chipment = this.chipinProvider.GetChipment(id);
+        if (!chipment)
+            return null;
+        var userKey = this.keyValidator.GetUserKeyViaAuthor(id, key);
+        return new chipinModelModule.ChipmentForAuthor(chipment, userKey, key, id);
+    };
+    ;
+    CoreApi.prototype.CreateChipment = function (key, creatorId, info) {
+        if (!this.keyValidator.IsValidCreateKey(creatorId, key))
+            return null;
+        var chipmentId = this.keyValidator.CreateIdViaCreateId(creatorId);
+        var userKey = this.keyValidator.CreateUserKey(chipmentId);
+        var authorKey = this.keyValidator.CreateAuthorKey(chipmentId);
+        var chipment = this.chipinProvider.GetChipment(chipmentId);
+        if (chipment)
+            return null;
+        var newChipment = this.chipinProvider.CreateChipment(chipmentId, info);
+        if (!newChipment)
+            return null;
+        return new chipinModelModule.ChipmentForAuthor(chipment, userKey, authorKey, chipmentId);
+    };
+    ;
+    CoreApi.prototype.SetChipment = function (key, id, info) {
+        if (!this.keyValidator.IsValidChipinAuthor(id, key))
+            return undefined;
+        var chipin = this.chipinProvider.GetChipment(id);
+        if (!chipin)
+            return undefined;
+        this.chipinProvider.SetChipment(id, info);
+    };
+    ;
+    CoreApi.prototype.RemoveChipment = function (key, id) {
+        if (!this.keyValidator.IsValidChipinAuthor(id, key))
+            return undefined;
+        var chipin = this.chipinProvider.GetChipment(id);
+        if (!chipin)
+            return undefined;
+        return this.chipinProvider.DeleteChipment(id);
+    };
+    ;
+    CoreApi.prototype.CreateChipin = function (key, id, info) {
+        if (!this.keyValidator.IsValidChipinUser(id, key))
+            return undefined;
+        var chipment = this.chipinProvider.GetChipment(id);
+        if (!chipment)
+            return undefined;
+        var chipin = this.chipinProvider.CreateAndAddChipin(id, info);
+        if (!chipin)
+            return chipin;
+        chipment.chipins.push(chipin);
+        return chipment.chipins.length;
+    };
+    ;
+    CoreApi.prototype.ChangeChipin = function (key, id, chipinid, info) {
+        if (!this.keyValidator.IsValidChipinUser(id, key))
+            return undefined;
+        var chipment = this.chipinProvider.GetChipment(id);
+        if (!chipment)
+            return undefined;
+        return this.chipinProvider.SetChipinOfChipment(id, chipinid, info);
+    };
+    ;
+    CoreApi.prototype.DeleteChipin = function (key, id, chipinid) {
+        if (!this.keyValidator.IsValidChipinUser(id, key)) {
+            return undefined;
+        }
+        var chipin = this.chipinProvider.GetChipment(id);
+        if (!chipin) {
+            return undefined;
+        }
+        return this.chipinProvider.DeleteChipinOfChipment(id, chipinid);
+    };
+    ;
+    return CoreApi;
+}());
+exports.CoreApi = CoreApi;
+//# sourceMappingURL=CoreApi.js.map
