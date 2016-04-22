@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "typings install",
-    "start": "webpack && node ./dist/server.js",
+    "start": "webpack && grunt ts && node ./dist/server.js ",
     "startDev": "nodemon ./dist/server.js",
     "watchDev": "webpack --watch",
+    "backendDev": "grunt ts",
     "runLint": "grunt tslint",
     "compileOnce": "webpack"
   },

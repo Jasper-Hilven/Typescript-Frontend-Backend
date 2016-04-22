@@ -8,8 +8,15 @@ module.exports = function(grunt) {
               files: {
                   src: 'src/**/*.ts'
               }
-          }
+          },
+          ts: {
+            default : {
+                 src: ["src/backend/**/*.ts"]
+               }
+             }
+
       });
+      grunt.loadNpmTasks("grunt-ts");
       grunt.loadNpmTasks("grunt-tslint");
 
 };
