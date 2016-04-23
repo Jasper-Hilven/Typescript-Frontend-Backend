@@ -15,22 +15,23 @@ export class FillFormInControl implements ICheckFunction {
   constructor(navigation: Navigator) {
 
   }
+  static NameKey = "Name";
   static DescriptionKey = "Description";
-  static AuthorKey = "Author";
   static MinimumPayment = "MinimumPayment";
   static MaximumPayment = "MaximumPayment";
   static Currency = "Currency";
+  static AuthorKey = "Author";
   static AuthorEmail = "AuthorEmail";
-
   GetForm(formCreator: FormCreator) {
     var rows = [
+      formCreator.CreateTextElement(FillFormInControl.NameKey, "Name", ""),
       formCreator.CreateTextElement(FillFormInControl.DescriptionKey, "Description", ""),
-      formCreator.CreateTextElement(FillFormInControl.AuthorKey, "Author", ""),
       formCreator.CreateTextElement(FillFormInControl.Currency, "Currency", "Euro"),
       formCreator.CreateTextElement(FillFormInControl.MinimumPayment, "Minimum Payment", ""),
       formCreator.CreateTextElement(FillFormInControl.MaximumPayment, "Maximum Payment", ""),
-      formCreator.CreateTextElement("AuthorEmail", "Author Email", "")
       // FormCreator.CreateTextElement("ChipinEmailRequired", "Contributor email adress", "")
+      formCreator.CreateTextElement(FillFormInControl.AuthorKey, "Author", ""),
+      formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "Author Email", "")
     ];
 
 
@@ -54,28 +55,45 @@ export class FillFormInControl implements ICheckFunction {
     var currency = input[FillFormInControl.Currency];
     var minimumPayment = input[FillFormInControl.MinimumPayment];
     var maximumPayment = input[FillFormInControl.MaximumPayment];
+    var name = input[FillFormInControl.NameKey];
+    var email = input[FillFormInControl.AuthorEmail];
     // Public StatusType: HFormStatusType, public Message: string
     var ret: { [id: string]: HFormStatus; } = {};
     this.HandleAuthorInput(authorText, ret);
+    this.HandleAuthorEmail(email, ret);
     this.HandleDescriptionInput(descriptionText, ret);
     this.HandleCurrency(currency, ret);
     this.HandlePayments(minimumPayment, maximumPayment, ret);
-
+    this.HandleNameInput(name, ret);
     return ret;
   }
 
   HandleAuthorInput(authorText, ret) {
     if (authorText.length == 0)
-    { ret[FillFormInControl.AuthorKey] = new HFormStatus(HFormStatusType.Error, "Author name is  not allowed to be empty"); }
+    { ret[FillFormInControl.AuthorKey] = new HFormStatus(HFormStatusType.Error, "Author name is not allowed to be empty"); }
     else
     { ret[FillFormInControl.AuthorKey] = new HFormStatus(HFormStatusType.OK, "Author name is filled in"); }
+  }
+
+  HandleAuthorEmail(authorText, ret) {
+    if (authorText.length == 0)
+    { ret[FillFormInControl.AuthorEmail] = new HFormStatus(HFormStatusType.Error, "Author email is not allowed to be empty"); }
+    else
+    { ret[FillFormInControl.AuthorEmail] = new HFormStatus(HFormStatusType.OK, "Author email is filled in"); }
   }
 
   HandleDescriptionInput(text, ret) {
     if (text.length == 0)
     { ret[FillFormInControl.DescriptionKey] = new HFormStatus(HFormStatusType.Warning, "Discription should not be empty"); }
     else
-    { ret[FillFormInControl.DescriptionKey] = new HFormStatus(HFormStatusType.OK, "Description name is filled in"); }
+    { ret[FillFormInControl.DescriptionKey] = new HFormStatus(HFormStatusType.OK, "Description is filled in"); }
+  }
+
+  HandleNameInput(text, ret) {
+    if (text.length == 0)
+    { ret[FillFormInControl.NameKey] = new HFormStatus(HFormStatusType.Error, "Name is not allowed to be empty"); }
+    else
+    { ret[FillFormInControl.NameKey] = new HFormStatus(HFormStatusType.OK, "Name is filled in"); }
   }
 
   HandleCurrency(currency: string, ret) {
@@ -113,7 +131,7 @@ export class FillFormInControl implements ICheckFunction {
     var trimmedMinPayment = minimumPayment.trim();
     var trimmedMaxPayment = maximumPayment.trim();
     if (trimmedMinPayment.length == 0) {
-    ret[FillFormInControl.MinimumPayment] = invalidEmpty;
+      ret[FillFormInControl.MinimumPayment] = invalidEmpty;
     }
     if (trimmedMaxPayment.length == 0)
     { ret[FillFormInControl.MaximumPayment] = invalidEmpty; }
