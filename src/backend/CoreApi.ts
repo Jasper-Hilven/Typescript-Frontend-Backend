@@ -67,11 +67,7 @@ export class CoreApi {
     var chipment = this.chipinProvider.GetChipment(id);
     if (!chipment)
       return undefined;
-    var chipin = this.chipinProvider.CreateAndAddChipin(id, info);
-    if (!chipin)
-      return chipin;
-    chipment.chipins.push(chipin);
-    return chipment.chipins.length;
+    return this.chipinProvider.CreateAndAddChipin(id, info);
   };
   ChangeChipin(key: string, id: string, chipinid: number, info): boolean {
     if (!this.keyValidator.IsValidChipinUser(id, key))

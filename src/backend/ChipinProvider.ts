@@ -105,7 +105,7 @@ export class ChipinProvider {
   GetDemoChipment(): Chipment {
     var chipins: [Chipin] = <[Chipin]>[];
     return new Chipment(
-      new User(),
+      new User("Organizer", "OrganizerMail"),
       "Pete party",
       1.23,
       4.56,

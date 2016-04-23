@@ -96,7 +96,7 @@ var ChipinProvider = (function () {
     ;
     ChipinProvider.prototype.GetDemoChipment = function () {
         var chipins = [];
-        return new Chipment(new User(), "Pete party", 1.23, 4.56, "Euro", "bigParty", chipins);
+        return new Chipment(new User("Organizer", "OrganizerMail"), "Pete party", 1.23, 4.56, "Euro", "bigParty", chipins);
     };
     return ChipinProvider;
 }());
