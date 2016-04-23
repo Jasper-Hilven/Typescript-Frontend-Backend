@@ -74,7 +74,7 @@ export class ChipinProvider {
     return this.chipments[id].chipins.length;
   }
 
-  SetChipinOfChipment(id: string, chipinid: number, info) {
+  SetChipinOfChipment(id: string, chipinid: number, info): boolean {
     if (!this.chipinModelChecker.IsChipin(info)) {
       console.log("chipin has invalid info")
       console.log(info);
@@ -86,17 +86,18 @@ export class ChipinProvider {
       return false;
     }
     var chipin: Chipin = this.chipinModelChecker.BuildChipin(info);
-
     this.chipments[id].chipins[chipinid] = chipin;
+    return true;
   };
 
-  DeleteChipinOfChipment(id: string, chipinid: number) {
+  DeleteChipinOfChipment(id: string, chipinid: number): boolean {
     if (!this.chipments[id]) {
-      console.log("chipment does not yet exist while deleting chipin")
+      console.log("chipment does not yet exist while deleting chipin");
       console.log(id);
-      return undefined;
+      return false;
     }
     this.chipments[id].chipins.splice(chipinid, 1);
+    return true;
   };
 
 

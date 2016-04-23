@@ -1,17 +1,18 @@
 var express = require('express'),
   http = require('http'),
   path = require('path'),
-  keyValidatorModule = require('./../src/backend/chipinkeyvalidator.js'),
-  modelModule = require('./../src/backend/chipinmodel.js'),
-  providerModule = require('./../src/backend/chipinprovider.js'),
-  coreApiModule = require('./../src/backend/coreapi.js'),
-  restapiModule = require('./../src/backend/restapi.js');
+  keyValidatorModule = require('./../src/backend/KeyValidator.js'),
+  modelModule = require('./../src/backend/ChipinModel.js'),
+  providerModule = require('./../src/backend/ChipinProvider.js'),
+  coreApiModule = require('./../src/backend/CoreApi.js'),
+  restapiModule = require('./../src/backend/RestApi.js');
 
-var chipinModel = modelModule();
-var keyValidator = keyValidatorModule();
-var provider = providerModule(chipinModel);
-var coreapi = coreApiModule(provider, keyValidator);
-var restapi = restapiModule(coreapi);
+var chipinModelChecker = new modelModule.ChipinModelChecker();
+var keyValidator = new keyValidatorModule.KeyValidator(require('simplecrypt'),require('crypto'));
+var provider = new providerModule.ChipinProvider(chipinModelChecker);
+var coreapi = new coreApiModule.CoreApi( keyValidator, provider);
+var restApiRouter = express();
+var restapi = new restapiModule.RestApi(restApiRouter,coreapi);
 
 var app = express();
 app.set('port', process.env.PORT || 3000);
@@ -22,7 +23,7 @@ app.use('/api', function(req, res, next) {
   next();
 });
 
-app.use('/api', restapi);
+app.use('/api', restApiRouter);
 app.use(express.static('dist'));
 app.use(express.static('dist'));
 http.createServer(app).listen(app.get('port'), function() {

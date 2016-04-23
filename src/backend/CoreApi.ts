@@ -5,8 +5,7 @@ export class CoreApi {
 
   constructor(
     private keyValidator: KeyValidator,
-    private chipinProvider: ChipinProvider,
-    private expressRouter: any) {
+    private chipinProvider: ChipinProvider) {
   }
 
   GetChipmentUser(key, id) {
@@ -46,19 +45,19 @@ export class CoreApi {
 
   SetChipment(key, id, info) {
     if (!this.keyValidator.IsValidChipinAuthor(id, key))
-      return undefined;
+      return false;
     var chipin = this.chipinProvider.GetChipment(id);
     if (!chipin)
-      return undefined;
-    this.chipinProvider.SetChipment(id, info);
+      return false;
+    return this.chipinProvider.SetChipment(id, info);
   };
 
-  RemoveChipment(key: string, id: string) {
+  RemoveChipment(key: string, id: string): boolean {
     if (!this.keyValidator.IsValidChipinAuthor(id, key))
-      return undefined;
+      return false;
     var chipin = this.chipinProvider.GetChipment(id);
     if (!chipin)
-      return undefined;
+      return false;
     return this.chipinProvider.DeleteChipment(id);
   };
 
@@ -74,20 +73,20 @@ export class CoreApi {
     chipment.chipins.push(chipin);
     return chipment.chipins.length;
   };
-  ChangeChipin(key: string, id: string, chipinid: number, info) {
+  ChangeChipin(key: string, id: string, chipinid: number, info): boolean {
     if (!this.keyValidator.IsValidChipinUser(id, key))
-      return undefined;
+      return false;
     var chipment = this.chipinProvider.GetChipment(id);
     if (!chipment)
-      return undefined;
+      return false;
     return this.chipinProvider.SetChipinOfChipment(id, chipinid, info);
   };
-  DeleteChipin(key: string, id: string, chipinid) {
+  DeleteChipin(key: string, id: string, chipinid): boolean {
     if (!this.keyValidator.IsValidChipinUser(id, key))
-    { return undefined; }
+    { return false; }
     var chipin = this.chipinProvider.GetChipment(id);
     if (!chipin)
-    { return undefined; }
+    { return false; }
     return this.chipinProvider.DeleteChipinOfChipment(id, chipinid);
   };
 }

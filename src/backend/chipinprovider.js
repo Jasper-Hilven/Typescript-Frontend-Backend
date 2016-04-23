@@ -81,15 +81,17 @@ var ChipinProvider = (function () {
         }
         var chipin = this.chipinModelChecker.BuildChipin(info);
         this.chipments[id].chipins[chipinid] = chipin;
+        return true;
     };
     ;
     ChipinProvider.prototype.DeleteChipinOfChipment = function (id, chipinid) {
         if (!this.chipments[id]) {
             console.log("chipment does not yet exist while deleting chipin");
             console.log(id);
-            return undefined;
+            return false;
         }
         this.chipments[id].chipins.splice(chipinid, 1);
+        return true;
     };
     ;
     ChipinProvider.prototype.GetDemoChipment = function () {
