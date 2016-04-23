@@ -12,6 +12,9 @@ export class Chipment {
     public description: string,
     public chipins: [Chipin]) {
   }
+  ToJSon(){
+throw "implement me";
+  }
 }
 export class ChipmentForAuthor {
   constructor(public chipment: Chipment,

@@ -9,7 +9,7 @@ export class HDiv implements IHEl {
     this.children = [];
   }
 
-  public AddElement(hElement) {
+  public AddElement(hElement:IHEl) {
     this.children.push(hElement);
     this.element.appendChild(hElement.GetElement());
   }

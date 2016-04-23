@@ -1,5 +1,4 @@
-import ChipmentModule = require("./Chipment"); import Chipment = ChipmentModule.Chipment;
-import ChipinModule = require("./Chipin"); import Chipin = ChipinModule.Chipin;
+import {Chipment,Chipin, User} from "../../backend/ChipinModel";
 
 export class BackendProxy {
 
@@ -70,5 +69,9 @@ export class BackendProxy {
   RemoveChipin(id, key, chipinId, success, fail) {
     var requestUrl = this.chipmentRefUser + "id/" + id + "/key/" + key + "/chipin/removeIdd/" + chipinId;
     return this.SendGetRequest(requestUrl, success, fail);
+  }
+  GetRanddomId(){
+    return ""+Math.random()+Math.random();
+
   }
 }

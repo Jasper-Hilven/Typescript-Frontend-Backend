@@ -15,4 +15,8 @@ export class PayTogether {
   GetNewChipmentURL() {
     return "#newchipment";
   }
+  GetHomeURL() {
+    return "#newchipment";
+  }
+
 }

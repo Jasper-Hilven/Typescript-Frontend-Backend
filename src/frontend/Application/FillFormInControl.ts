@@ -1,3 +1,6 @@
+import {Chipment, User} from "../../backend/ChipinModel";
+import {HForm} from "../HComposed/Forms/HForm";
+import {BackendProxy} from "./BackendProxy";
 import {FormCreator} from "../HComposed/Forms/FormCreator";
 import H = require("./../HBasics/HFactory"); import HFactory = H.HFactory;
 import HI = require("../HBasics/IHElement"); import IHElement = HI.IHElement;
@@ -10,9 +13,9 @@ import Nav = require("./../Route/Navigation"); import Navigator = Nav.Navigator;
 
 export class FillFormInControl implements ICheckFunction {
 
+  private form:HForm;
 
-
-  constructor(navigation: Navigator) {
+  constructor(private navigation: Navigator,private backendProxy: BackendProxy) {
 
   }
   static NameKey = "Name";
@@ -31,19 +34,23 @@ export class FillFormInControl implements ICheckFunction {
       formCreator.CreateTextElement(FillFormInControl.MaximumPayment, "Maximum Payment", ""),
       // FormCreator.CreateTextElement("ChipinEmailRequired", "Contributor email adress", "")
       formCreator.CreateTextElement(FillFormInControl.AuthorKey, "Author", ""),
-      formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "Author Email", "")
-    ];
-
+      formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "Author Email", "")];
 
     var form = formCreator.CreateForm(rows, this, this.CreateNewChipment, this.CancelCreateNewChipment);
-
+    this.form = form;
     return form;
   }
   CreateNewChipment() {
+    var chipmentData = this.form.GetLatestValues();
+    var author = new User(chipmentData[FillFormInControl.AuthorKey],chipmentData[FillFormInControl.AuthorEmail]);
+var name = chipmentData[FillFormInControl.NameKey];
+var minPayment = Number(chipmentData[FillFormInControl.MinimumPayment]);
+    var chipment = new Chipment(author,name,minPayment,Number(chipmentData[FillFormInControl.MaximumPayment],chipmentData[FillFormInControl.Currency],chipmentData[FillFormInControl.DescriptionKey],<any>[]));
+    this.backendProxy.CreateChipment(this.backendProxy.GetRanddomId(),"superkey",chipment);
     console.log("creation of chipment is triggered in fillformincontrol");
   }
   CancelCreateNewChipment() {
-    console.log("Creation of new chipment is canceled in FillFormInControl")
+    window.location.href="";
   }
 
 

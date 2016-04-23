@@ -18,7 +18,7 @@ export class FormCreator {
   }
 
   CreateForm(rows: HFormTextElement[], checkFunction: ICheckFunction, triggerFunction, cancelFunction): HForm {
-    var form = new HForm(this.hFactory, rows, checkFunction, triggerFunction, cancelFunction);
+    var form = new HForm(this.hFactory,this.divFactory, rows, checkFunction, triggerFunction, cancelFunction);
     return form;
   }
 

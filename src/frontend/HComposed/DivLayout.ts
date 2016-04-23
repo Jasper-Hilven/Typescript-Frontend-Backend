@@ -31,7 +31,7 @@ export class DivLayout {
     return jumboDiv;
   }
 
-  GetLeftRightFlexDiv(leftElem, rightElem) {
+  GetLeftRightFlexDiv(leftElem: IHEl, rightElem: IHEl) {
     var parentDiv = this.hFactory.GetDiv();
     var style = parentDiv.element.style;
     style.display = "flex";
