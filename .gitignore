@@ -1,5 +1,7 @@
 node_modules
 dist/bundle.js
 src/frontend/**/*.js
+src/backend/**/*.js
+
 src/**/*.map
 .tscache
