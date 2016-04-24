@@ -1,3 +1,4 @@
+import {LoggerFactory,LogLevel} from "../backend/logging/LoggerFactory";
 import {BackendProxy} from "./Application/BackendProxy";
 // ImportModules HFactory DivLayout FormCreate RouteController Navigation
 // StartImportModulesGen
@@ -10,6 +11,10 @@ import PayTogetherM = require("./Application/PayTogether"); import PayTogether =
 import App = require("./Application/Application"); import Application = App.Application;
 import MainPageM = require("./Application/MainPage"); import MainPage = MainPageM.MainPage;
 import NewChipmentPageM = require("./Application/NewChipmentPage"); import NewChipmentPage = NewChipmentPageM.NewChipmentPage;
+var loggerFactory = new LoggerFactory(console);
+var appLogger = loggerFactory.GetLogger("APP");
+//development
+
 
 // Basic factories
 var hFactory = new HFactory();
@@ -35,8 +40,9 @@ var footerText = "copyright, 2016 PayTogether, Inc.";
 var mainPage = new MainPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), myAppInfo, backendProxy);
 var chipmentPage = new NewChipmentPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), formCreator, backendProxy);
 var application = new Application(routeController, mainPage, chipmentPage, title);
-console.log("Application constructed");
-console.log(application);
-console.log("Initializing application");
+appLogger.SetLevel(LogLevel.Info);
+appLogger.Info("Application constructed");
+appLogger.Info(application);
+appLogger.Info("Initializing application");
 application.Initialize();
-console.log("Application Initialized");
+appLogger.Info("Application Initialized");
