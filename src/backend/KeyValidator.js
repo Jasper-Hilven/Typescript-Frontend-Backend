@@ -1,8 +1,9 @@
 "use strict";
 var KeyValidator = (function () {
-    function KeyValidator(simpleCrypt, crypto) {
+    function KeyValidator(simpleCrypt, crypto, logger) {
         this.simpleCrypt = simpleCrypt;
         this.crypto = crypto;
+        this.logger = logger;
         this.sc = this.simpleCrypt({
             salt: "1234567890",
             password: "someStupidPasswordthatnobodycanwritebecauseitiswayto0longandstupid"
@@ -11,6 +12,8 @@ var KeyValidator = (function () {
         this.authorHash = this.HashThis(this.sc.encrypt("super duper author"));
         this.creatorHash = this.HashThis(this.sc.encrypt("super duper creator."));
         this.creatorId = { value: 0 };
+        logger.Info("userHash is");
+        logger.Info(this.userHash);
     }
     ;
     KeyValidator.prototype.GetCreatorId = function () {

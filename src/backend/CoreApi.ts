@@ -1,3 +1,4 @@
+import {Logger} from "./logging/LoggerFactory";
 import keyValidatorModule = require("./KeyValidator"); import KeyValidator = keyValidatorModule.KeyValidator;
 import chipinProviderModule = require("./ChipinProvider"); import ChipinProvider = chipinProviderModule.ChipinProvider;
 import chipinModelModule = require("./ChipinModel");
@@ -5,11 +6,12 @@ export class CoreApi {
 
   constructor(
     private keyValidator: KeyValidator,
-    private chipinProvider: ChipinProvider) {
+    private chipinProvider: ChipinProvider,
+  private logger: Logger) {
   }
 
   GetChipmentUser(key, id) {
-    console.log("getting chipment for a user");
+    this.logger.Info("getting chipment for a user");
     if (!this.keyValidator.IsValidChipinUser(id, key))
       return undefined;
     var chipin = this.chipinProvider.GetChipment(id);
@@ -30,16 +32,25 @@ export class CoreApi {
 
   CreateChipment(key, creatorId, info): chipinModelModule.ChipmentForAuthor {
     if (!this.keyValidator.IsValidCreateKey(creatorId, key))
-      return null;
+      {
+        this.logger.Warn("Chipment creation aborted: invalid key");
+        return null;
+      }
     var chipmentId = this.keyValidator.CreateIdViaCreateId(creatorId);
     var userKey = this.keyValidator.CreateUserKey(chipmentId);
     var authorKey = this.keyValidator.CreateAuthorKey(chipmentId);
     var chipment = this.chipinProvider.GetChipment(chipmentId);
     if (chipment)
-      return null; //Already exists
+    {
+      this.logger.Warn("Chipment creation aborted: Already exists");
+      return null;
+    }
     var newChipment = this.chipinProvider.CreateChipment(chipmentId, info);
     if (!newChipment)
+    {
+      this.logger.Warn("Chipment creation aborted: Provider could not create");
       return null;
+    }
     return new chipinModelModule.ChipmentForAuthor(chipment, userKey, authorKey, chipmentId);
   };
 

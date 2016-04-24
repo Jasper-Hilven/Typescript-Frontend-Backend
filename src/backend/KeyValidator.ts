@@ -1,3 +1,4 @@
+import {Logger} from "./logging/LoggerFactory";
 export class KeyValidator {
   private creatorId: { value: number; };
   private creatorHash: any;
@@ -5,7 +6,8 @@ export class KeyValidator {
   private userHash: any;
   private sc: any;
 
-  constructor(private simpleCrypt: any, private crypto: any) {
+  constructor(private simpleCrypt: any, private crypto: any,
+private logger: Logger) {
     this.sc = this.simpleCrypt({
       salt: "1234567890",
       password: "someStupidPasswordthatnobodycanwritebecauseitiswayto0longandstupid"
@@ -16,6 +18,9 @@ export class KeyValidator {
     this.authorHash = this.HashThis(this.sc.encrypt("super duper author"));
     this.creatorHash = this.HashThis(this.sc.encrypt("super duper creator."));
     this.creatorId = { value: 0 };
+   logger.Info("userHash is");
+   logger.Info(this.userHash);
+
   };
 
   GetCreatorId() {

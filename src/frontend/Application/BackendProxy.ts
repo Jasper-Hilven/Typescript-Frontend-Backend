@@ -27,8 +27,22 @@ export class BackendProxy {
     });
   }
 
-  SendPostRequest(url, body) {
-    return $.post(url, body);
+  SendPostRequest(url, body,succesCallBack,failCallBack) {
+    console.log(body);
+    return $.ajax({
+        type: "POST",
+        url: url,
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(body),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(json) {
+          succesCallBack(json);
+        }
+        , error: function(json) {
+          failCallBack(json);
+        }}
+    );
   }
 
   GetChipmentAsUser(userId, key, success, fail) {
@@ -37,18 +51,18 @@ export class BackendProxy {
     return this.SendGetRequest(requestUrl, success, fail);
   }
 
-  CreateChipment(createId, key, chipment: Chipment) {
+  CreateChipment(createId, key, chipment: Chipment, success, fail) {
     var requestUrl = this.chipmentRefUser + "createId/" + createId + "/key/" + key;
-    return this.SendPostRequest(requestUrl, {info: chipment.ToJSon()});
+    return this.SendPostRequest(requestUrl, {'info': chipment.ToJSon()}, success, fail);
   }
 
   GetChipmentAsAuthor(id, key, success, fail) {
     var requestUrl = this.chipmentRefAuthor + "id/" + id + "/key/" + key;
     return this.SendGetRequest(requestUrl, success, fail);
   }
-  SetChipmentAsAuthor(id, key, chipment: Chipment) {
+  SetChipmentAsAuthor(id, key, chipment: Chipment, success, fail) {
     var requestUrl = this.chipmentRefAuthor + "change/id/" + id + "/key/" + key;
-    return this.SendPostRequest(requestUrl, chipment.ToJSon());
+    return this.SendPostRequest(requestUrl, chipment.ToJSon(), success, fail);
   }
 
   RemoveChipmentAsAuthor(id, key, success, fail) {
@@ -56,14 +70,14 @@ export class BackendProxy {
     return this.SendGetRequest(requestUrl, success, fail);
   }
 
-  AddChipin(id, key, chipinInfo:Chipin) {
+  AddChipin(id, key, chipinInfo:Chipin, success, fail) {
     var requestUrl = this.chipmentRefUser + "id/" + id + "/key/" + key + "/createchipin/";
-    return this.SendPostRequest(requestUrl, chipinInfo.ToJSon());
+    return this.SendPostRequest(requestUrl, chipinInfo.ToJSon(), success, fail);
   }
 
-  ChangeChipin(id, key, chipinId, chipinInfo: Chipin) {
+  ChangeChipin(id, key, chipinId, chipinInfo: Chipin, success, fail) {
     var requestUrl = this.chipmentRefUser + "id/" + id + "/key/" + key + "/chipin/changeId/" + chipinId;
-    return this.SendPostRequest(requestUrl, chipinInfo.ToJSon());
+    return this.SendPostRequest(requestUrl, chipinInfo.ToJSon(), success, fail);
   }
 
   RemoveChipin(id, key, chipinId, success, fail) {

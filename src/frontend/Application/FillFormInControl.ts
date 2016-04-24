@@ -55,7 +55,7 @@ export class FillFormInControl implements ICheckFunction {
         var currency: string = chipmentData[FillFormInControl.Currency];
         var description: string = chipmentData[FillFormInControl.DescriptionKey];
         var chipment = new Chipment(author, name, minPayment, maxPayment, currency, description, <any>[]);
-        this.backendProxy.CreateChipment(this.backendProxy.GetRanddomId(), "superkey", chipment);
+        this.backendProxy.CreateChipment(this.backendProxy.GetRanddomId(), "superkey", chipment,()=>{console.log("Goood")},()=>{console.log("Baaaad")});
         console.log("creation of chipment is triggered in fillformincontrol");
     }
     CancelCreateNewChipment() {

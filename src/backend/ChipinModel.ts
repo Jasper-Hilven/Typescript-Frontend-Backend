@@ -1,3 +1,4 @@
+import {Logger,LogLevel} from "./logging/LoggerFactory";
 export class User {
   constructor(public name: string, public email: string) {
   }
@@ -31,21 +32,34 @@ throw "implement me";
   }
 }
 export class ChipinModelChecker {
-  constructor(){}
+  constructor(private logger:Logger){
+    logger.SetLevel(LogLevel.Debug);
+
+  }
   private IsString(myVar) {
     return (typeof myVar === 'string' || myVar instanceof String)
+  }
+  private IsStringNonEmpty(myVar) {
+    return this.IsString(myVar) && myVar.length > 0;
   }
   private IsNumber(myVar) {
     return !isNaN(Number(myVar));
   }
+  private IsNumberPositive(myVar) {
+    return !isNaN(Number(myVar)) && myVar > 0;
+  }
+
   IsChipment(data: any) {
+    this.logger.Info("Checking for chipment");
     if (!data) {return false;}
     var hasAuthor = this.IsUser(data.author);
-    var hasName = this.IsString(data.name);
-    var currency = this.IsString(data.currency);
+    var hasName = this.IsStringNonEmpty(data.name);
+    var currency = this.IsStringNonEmpty(data.currency);
     var description = this.IsString(data.description);
-    var minContribution = this.IsNumber(data.maxContribution);
-    var maxContribution = this.IsNumber(data.minContribution);
+    var minContribution = this.IsNumberPositive(data.maxContribution);
+    var maxContribution = this.IsNumberPositive(data.minContribution);
+    this.logger.Debug("Checking for chipment" + " hasAuthor: " + hasAuthor + ",hasName: " + hasName + ", hascurrency: " + currency);
+    this.logger.Debug("Checking for chipment" + " desc: " + description + ",minContr: " + minContribution + ", maxContribution: " + maxContribution);
     return hasAuthor && hasName && currency &&
       description && minContribution && maxContribution;
   }
@@ -60,7 +74,7 @@ export class ChipinModelChecker {
   }
   BuildChipment(data: any): Chipment {
     var author = this.BuildUser(data.author);
-    var chipins = this.BuildChipins(data.chipin);
+    var chipins = this.BuildChipins(data.chipins);
     return new Chipment(author, data.name,
       data.minContribution, data.maxContribution,
       data.currency, data.description, chipins);

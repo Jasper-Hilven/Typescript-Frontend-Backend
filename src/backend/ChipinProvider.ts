@@ -1,3 +1,4 @@
+import {Logger} from "./logging/LoggerFactory";
 import chipinModelModule = require("./ChipinModel");
 import Chipment = chipinModelModule.Chipment;
 import Chipin = chipinModelModule.Chipin;
@@ -5,7 +6,7 @@ import ChipinModelChecker = chipinModelModule.ChipinModelChecker;
 import User = chipinModelModule.User;
 export class ChipinProvider {
   private chipments: { [id: string]: Chipment; };
-  constructor(private chipinModelChecker: ChipinModelChecker) {
+  constructor(private chipinModelChecker: ChipinModelChecker,private logger: Logger) {
     this.chipments = {};
   }
   GetChipment(id: string): Chipment {
@@ -21,8 +22,8 @@ export class ChipinProvider {
 
   CreateChipment(id: string, info) {
     if (!(this.chipinModelChecker.IsChipment(info))) {
-      console.log("Tried to add invalid chipment");
-      console.log(info);
+      this.logger.Warn("Tried to add invalid chipment");
+      this.logger.Warn(info);
       return undefined;
     }
     if (this.chipments[id]) {

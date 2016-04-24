@@ -1,4 +1,4 @@
-import {LoggerFactory,Logger} from "./logging/LoggerFactory";
+import {LoggerFactory,Logger,LogLevel} from "./logging/LoggerFactory";
 import ChipinCoreModule = require("./CoreApi"); import CoreApi = ChipinCoreModule.CoreApi;
 
 
@@ -7,6 +7,7 @@ export class RestApi {
   constructor(private router: any,
     private chipincore: CoreApi,lF : LoggerFactory) {
       var log = lF.GetLogger("RestApi");
+      log.SetLevel(LogLevel.Debug);
 
     ////////GETUSER//////////
     router.get('/chipment/user/id/:id/key/:key', function(req, res) {
@@ -24,9 +25,15 @@ export class RestApi {
       log.Info("Create chipment");
       var key = req.params.key;
       var id = req.params.createId;
+      console.dir(req.body);
+      log.Debug("request");
+      log.Debug(req);
       log.Debug("request body");
       log.Debug(req.body);
-      var info = req.body.info;
+      var info = req.body["info"];
+      log.Debug("request body info");
+      log.Debug(req.body.info);
+      console.log(Object.keys(req.body));
       res.json(chipincore.CreateChipment(key, id, info));
     });
 

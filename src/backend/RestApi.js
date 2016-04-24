@@ -1,9 +1,11 @@
 "use strict";
+var LoggerFactory_1 = require("./logging/LoggerFactory");
 var RestApi = (function () {
     function RestApi(router, chipincore, lF) {
         this.router = router;
         this.chipincore = chipincore;
         var log = lF.GetLogger("RestApi");
+        log.SetLevel(LoggerFactory_1.LogLevel.Debug);
         router.get('/chipment/user/id/:id/key/:key', function (req, res) {
             log.Info("Get Chipment for user");
             var key = req.params.key;
@@ -17,9 +19,15 @@ var RestApi = (function () {
             log.Info("Create chipment");
             var key = req.params.key;
             var id = req.params.createId;
+            console.dir(req.body);
+            log.Debug("request");
+            log.Debug(req);
             log.Debug("request body");
             log.Debug(req.body);
-            var info = req.body.info;
+            var info = req.body["info"];
+            log.Debug("request body info");
+            log.Debug(req.body.info);
+            console.log(Object.keys(req.body));
             res.json(chipincore.CreateChipment(key, id, info));
         });
         router.get('/chipment/author/id/:id/key/:key', function (req, res) {
