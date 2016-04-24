@@ -1,8 +1,7 @@
 export enum LogLevel { Passive, Error, Warning, Info, Debug };
 export class LoggerFactory {
     logs: { string: Logger } // TODO StringToLogger
-    consoleToLog: Console;
-    constructor(consoleToLog: Console) {
+    constructor(private consoleToLog: Console) {
         this.logs = <{ string: Logger }>{};
     }
 
@@ -21,31 +20,31 @@ export class LoggerFactory {
         return logger;
     }
 
-    Warn(warning,name) {
+    Warn(warning, name) {
         this.consoleToLog.warn(warning);
     }
 
-    Info(info,name) {
+    Info(info, name) {
         this.consoleToLog.info(info);
     }
 
-    Debug(debugInfo,name) {
+    Debug(debugInfo, name) {
         this.consoleToLog.debug(debugInfo);
     }
 
-    Error(errorInfo,name) {
+    Error(errorInfo, name) {
         this.consoleToLog.error(errorInfo);
     }
 }
 
 export class Logger {
-  debug: boolean;
-    info: boolean;
-    warning: boolean;
-    error: boolean;
+    private debug: boolean;
+    private info: boolean;
+    private warning: boolean;
+    private error: boolean;
 
     constructor(public name: string, private factory: LoggerFactory, private level: LogLevel) {
-      this.SetLevel(level);
+        this.SetLevel(level);
     }
 
     SetLevel(level: LogLevel) {
@@ -60,27 +59,27 @@ export class Logger {
         if (!this.warning) {
             return;
         }
-        this.factory.Warn(info,name);
+        this.factory.Warn(info, this.name);
     }
 
     Info(info) {
         if (!this.info) {
             return;
         }
-        this.factory.Info(info,name);
+        this.factory.Info(info, this.name);
     }
 
     Debug(info) {
         if (!this.debug) {
             return;
         }
-        this.factory.Debug(info,name);
+        this.factory.Debug(info, this.name);
     }
 
     Error(info) {
         if (!this.Error) {
             return;
         }
-        this.factory.Error(info,name);
+        this.factory.Error(info, this.name);
     }
 }

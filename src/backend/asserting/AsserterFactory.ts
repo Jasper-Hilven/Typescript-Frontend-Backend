@@ -73,7 +73,7 @@ export class Asserter {
         }
         if(this.RunAssertion(warnFunc))
           return;
-        this.factory.Warn(message, name);
+        this.factory.Warn(message, this.name);
     }
 
     Info(message, infoFunc: () => boolean) {
@@ -82,7 +82,7 @@ export class Asserter {
         }
         if(this.RunAssertion(infoFunc))
           return;
-        this.factory.Info(message, name);
+        this.factory.Info(message, this.name);
     }
 
     Debug(message, debugFunc: () => boolean) {
@@ -91,7 +91,7 @@ export class Asserter {
         }
         if(this.RunAssertion(debugFunc))
             return;
-        this.factory.Debug(message, name);
+        this.factory.Debug(message, this.name);
     }
 
     Error(message, errorFunc: () => boolean) {
@@ -100,7 +100,7 @@ export class Asserter {
         }
         if(this.RunAssertion(errorFunc))
             return;
-        this.factory.Error(message, name);
+        this.factory.Error(message, this.name);
     }
 
 

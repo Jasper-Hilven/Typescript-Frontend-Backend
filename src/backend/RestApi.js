@@ -1,9 +1,11 @@
 "use strict";
 var RestApi = (function () {
-    function RestApi(router, chipincore) {
+    function RestApi(router, chipincore, lF) {
         this.router = router;
         this.chipincore = chipincore;
+        var log = lF.GetLogger("RestApi");
         router.get('/chipment/user/id/:id/key/:key', function (req, res) {
+            log.Info("Get Chipment for user");
             var key = req.params.key;
             var id = req.params.id;
             res.json(chipincore.GetChipmentUser(key, id));
@@ -12,10 +14,11 @@ var RestApi = (function () {
             res.json({ ok: "ok" });
         });
         router.post('/chipment/user/createId/:createId/key/:key', function (req, res) {
+            log.Info("Create chipment");
             var key = req.params.key;
             var id = req.params.createId;
-            console.log("Creating a new chipment");
-            console.log(req.body);
+            log.Debug("request body");
+            log.Debug(req.body);
             var info = req.body.info;
             res.json(chipincore.CreateChipment(key, id, info));
         });
