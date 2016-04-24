@@ -1,4 +1,3 @@
-import {Chipment} from "./Chipment";
 import {BackendProxy} from "./BackendProxy";
 //////ImportModules HFactory DivLayout FormCreate RouteController Navigation
 //////StartImportModulesGen

@@ -5,8 +5,8 @@ var express = require('express'),
   modelModule = require('./../src/backend/ChipinModel.js'),
   providerModule = require('./../src/backend/ChipinProvider.js'),
   coreApiModule = require('./../src/backend/CoreApi.js'),
-  restapiModule = require('./../src/backend/RestApi.js');
-
+  restapiModule = require('./../src/backend/RestApi.js'),
+  bodyParser = require('body-parser');
 var chipinModelChecker = new modelModule.ChipinModelChecker();
 var keyValidator = new keyValidatorModule.KeyValidator(require('simplecrypt'),require('crypto'));
 var provider = new providerModule.ChipinProvider(chipinModelChecker);
@@ -17,12 +17,7 @@ var restapi = new restapiModule.RestApi(restApiRouter,coreapi);
 var app = express();
 app.set('port', process.env.PORT || 3000);
 
-app.use('/api', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
+app.use( bodyParser.json());
 app.use('/api', restApiRouter);
 app.use(express.static('dist'));
 app.use(express.static('dist'));

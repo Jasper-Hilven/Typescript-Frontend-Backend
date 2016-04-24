@@ -19,6 +19,7 @@
     "tslint": "^3.7.4"
   },
   "dependencies": {
+    "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "grunt": "~0.4.1",
     "grunt-concurrent": "^2.3.0",

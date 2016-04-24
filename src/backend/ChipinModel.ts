@@ -13,7 +13,7 @@ export class Chipment {
     public chipins: [Chipin]) {
   }
   ToJSon(){
-throw "implement me";
+    return this;
   }
 }
 export class ChipmentForAuthor {
@@ -26,8 +26,12 @@ export class Chipin {
   constructor(public user: User, public amount: number) {
 
   }
+  ToJSon(){
+throw "implement me";
+  }
 }
 export class ChipinModelChecker {
+  constructor(){}
   private IsString(myVar) {
     return (typeof myVar === 'string' || myVar instanceof String)
   }
@@ -35,7 +39,7 @@ export class ChipinModelChecker {
     return !isNaN(Number(myVar));
   }
   IsChipment(data: any) {
-    if (!data) return false;
+    if (!data) {return false;}
     var hasAuthor = this.IsUser(data.author);
     var hasName = this.IsString(data.name);
     var currency = this.IsString(data.currency);

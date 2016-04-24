@@ -14,6 +14,8 @@ var RestApi = (function () {
         router.post('/chipment/user/createId/:createId/key/:key', function (req, res) {
             var key = req.params.key;
             var id = req.params.createId;
+            console.log("Creating a new chipment");
+            console.log(req.body);
             var info = req.body.info;
             res.json(chipincore.CreateChipment(key, id, info));
         });

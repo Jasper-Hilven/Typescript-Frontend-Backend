@@ -39,7 +39,7 @@ export class BackendProxy {
 
   CreateChipment(createId, key, chipment: Chipment) {
     var requestUrl = this.chipmentRefUser + "createId/" + createId + "/key/" + key;
-    return this.SendPostRequest(requestUrl, chipment.ToJSon());
+    return this.SendPostRequest(requestUrl, {info: chipment.ToJSon()});
   }
 
   GetChipmentAsAuthor(id, key, success, fail) {
@@ -56,7 +56,7 @@ export class BackendProxy {
     return this.SendGetRequest(requestUrl, success, fail);
   }
 
-  AddChipin(id, key, chipinInfo) {
+  AddChipin(id, key, chipinInfo:Chipin) {
     var requestUrl = this.chipmentRefUser + "id/" + id + "/key/" + key + "/createchipin/";
     return this.SendPostRequest(requestUrl, chipinInfo.ToJSon());
   }
