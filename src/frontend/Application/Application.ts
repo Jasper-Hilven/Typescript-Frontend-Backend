@@ -1,3 +1,4 @@
+import {ExistingChipmentPage} from "./ExistingChipmentPage";
 //////ImportModules HFactory DivLayout FormCreate RouteController Navigation
 //////StartImportModulesGen
 import H = require("./../HBasics/HFactory"); import HFactory = H.HFactory;
@@ -15,7 +16,12 @@ import PayTogetherM = require("./PayTogether"); import PayTogether = PayTogether
 export class Application implements RouteObserver {
   mainContent: HTMLElement;
 
-  constructor(private routeController: RouteController, private mainPage: IHElement, private newChipmentPage: IHElement, private title: string) {
+  constructor(
+    private routeController: RouteController,
+     private mainPage: IHElement,
+     private existingChipmentPage: ExistingChipmentPage,
+     private newChipmentPage: IHElement,
+     private title: string) {
     this.mainContent = document.getElementById("maincontent");
     routeController.AddLocationChangedEventListener(this);
   }
@@ -36,6 +42,17 @@ export class Application implements RouteObserver {
     }
     if (path.length > 0 && path[0] == "newchipment") {
       this.mainContent.appendChild(this.newChipmentPage.GetElement());
+      return;
+    }
+    if (path.length > 0 && path[0] == "chipment") {
+      var id = path[1];
+      var key = path[2];
+      var activatePage=  ()=>{
+        console.log("This should be Application");
+        console.log(this);
+        this.mainContent.appendChild(this.existingChipmentPage.GetElement());};
+      this.existingChipmentPage.SetActive(id,key,activatePage);
+
       return;
     }
     this.mainContent.appendChild(this.mainPage.GetElement());

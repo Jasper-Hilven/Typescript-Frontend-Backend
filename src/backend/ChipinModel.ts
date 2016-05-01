@@ -60,8 +60,10 @@ export class ChipinModelChecker {
     var maxContribution = this.IsNumberPositive(data.minContribution);
     this.logger.Debug("Checking for chipment" + " hasAuthor: " + hasAuthor + ",hasName: " + hasName + ", hascurrency: " + currency);
     this.logger.Debug("Checking for chipment" + " desc: " + description + ",minContr: " + minContribution + ", maxContribution: " + maxContribution);
-    return hasAuthor && hasName && currency &&
+    var result = hasAuthor && hasName && currency &&
       description && minContribution && maxContribution;
+   this.logger.Info("Result is: " + result);
+   return result;
   }
   IsChipin(data: any) {
     return data && this.IsNumber(data.amount) && this.IsUser(data.user);

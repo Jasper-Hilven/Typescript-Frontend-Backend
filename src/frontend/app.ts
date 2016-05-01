@@ -1,3 +1,4 @@
+import {ExistingChipmentPage} from "./Application/ExistingChipmentPage";
 import {LoggerFactory,LogLevel} from "../backend/logging/LoggerFactory";
 import {BackendProxy} from "./Application/BackendProxy";
 // ImportModules HFactory DivLayout FormCreate RouteController Navigation
@@ -38,8 +39,9 @@ var backendProxy = new BackendProxy("");
 var formCreator = new FormCreator(divLayout, hFactory);
 var footerText = "copyright, 2016 PayTogether, Inc.";
 var mainPage = new MainPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), myAppInfo, backendProxy);
-var chipmentPage = new NewChipmentPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), formCreator, backendProxy);
-var application = new Application(routeController, mainPage, chipmentPage, title);
+var newChipmentPage = new NewChipmentPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), formCreator, backendProxy);
+var existingChipmentPage=  new ExistingChipmentPage(divLayout, hFactory, createNavigator(), divLayout.GetFooter(footerText), backendProxy);
+var application = new Application(routeController, mainPage,existingChipmentPage, newChipmentPage, title);
 appLogger.SetLevel(LogLevel.Info);
 appLogger.Info("Application constructed");
 appLogger.Info(application);
