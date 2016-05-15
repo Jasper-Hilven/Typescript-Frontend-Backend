@@ -5,7 +5,7 @@
   "scripts": {
     "format": "grunt format",
     "dev": "grunt dev",
-    "devLight":"grunt devLight",
+    "devLight": "grunt devLight",
     "start": "grunt prod && node dist/prod/server.js"
   },
   "keywords": [],
@@ -23,6 +23,7 @@
     "grunt-contrib-uglify": "^1.0.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-karma": "^0.12.2",
+    "grunt-mkdir": "^1.0.0",
     "grunt-nodemon": "^0.4.2",
     "grunt-tslint": "^3.1.0",
     "grunt-typescript": "^0.8.0",
