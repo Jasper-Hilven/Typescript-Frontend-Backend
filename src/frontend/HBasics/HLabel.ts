@@ -1,17 +1,17 @@
-import HE = require("./IHElement");
-import IHEl = HE.IHElement;
+/* tslint:disable */module frontend {
 
-export class HLabel implements IHEl {
-  element: HTMLLabelElement;
-  child: IHEl;
+  export class HLabel implements IHElement {
+    element: HTMLLabelElement;
+    child: IHElement;
 
-  public constructor(child: IHEl) {
-    this.child = child;
-    var label = document.createElement("label");
-    label.appendChild(child.GetElement());
-    this.element = label;
-  }
-  public GetElement() {
-    return this.element;
+    public constructor(child: IHElement) {
+      this.child = child;
+      let label = document.createElement("label");
+      label.appendChild(child.GetElement());
+      this.element = label;
+    }
+    public GetElement() {
+      return this.element;
+    }
   }
 }

@@ -1,17 +1,16 @@
-import HE = require("./IHElement");
-import IHEl = HE.IHElement;
+module frontend {
+  export class HParag implements IHElement {
+    private element: HTMLParagraphElement;
+    private child: IHElement;
 
-export class HParag implements IHEl {
-  element: HTMLParagraphElement;
-  child: IHEl;
-
-  public constructor(child: IHEl) {
-    this.child = child;
-    var d = document.createElement("p");
-    d.appendChild(child.GetElement());
-    this.element = d;
-  }
-  public GetElement() {
-    return this.element;
+    public constructor(child: IHElement) {
+      this.child = child;
+      let d = document.createElement("p");
+      d.appendChild(child.GetElement());
+      this.element = d;
+    }
+    public GetElement() {
+      return this.element;
+    }
   }
 }

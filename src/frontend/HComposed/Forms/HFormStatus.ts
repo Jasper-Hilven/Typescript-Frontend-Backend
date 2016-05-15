@@ -1,4 +1,3 @@
-export enum HFormStatusType {
-  OK, Warning, Error
+/* tslint:disable */module frontend {
+  export class HFormStatus { constructor(public StatusType: HFormStatusType, public Message: string) { } }
 }
-export class HFormStatus { constructor(public StatusType: HFormStatusType, public Message: string) { } }

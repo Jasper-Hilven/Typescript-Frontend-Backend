@@ -1,17 +1,17 @@
-import HE = require("./IHElement");
-import IHEl = HE.IHElement;
+/* tslint:disable */module frontend {
 
-export class HLi implements IHEl {
-  element: HTMLLIElement;
-  child: IHEl;
-  // Children: IHEl[];
-  public constructor(child: IHEl) {
-    this.element = document.createElement("li");
-    this.element.appendChild(child.GetElement());
-    this.child = child;
-  }
+  export class HLi implements IHElement {
+    element: HTMLLIElement;
+    child: IHElement;
+    // Children: IHEl[];
+    public constructor(child: IHElement) {
+      this.element = document.createElement("li");
+      this.element.appendChild(child.GetElement());
+      this.child = child;
+    }
 
-  public GetElement() {
-    return this.element;
+    public GetElement() {
+      return this.element;
+    }
   }
 }

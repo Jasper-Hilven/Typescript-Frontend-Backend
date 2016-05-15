@@ -1,76 +1,78 @@
-import HFactory = require("./../HBasics/HFactory");
-import HF = HFactory.HFactory;
-import IHELement = require("../HBasics/IHElement");
-import IHEl = IHELement.IHElement;
-export class DivLayout {
-  hFactory: HF;
-  constructor(hFactory: HF) {
-    this.hFactory = hFactory;
-    var a = 0;
-  }
+/* tslint:disable */module frontend {
+  export class DivLayout {
+    hFactory: HFactory;
+    constructor(hFactory: HFactory) {
+      this.hFactory = hFactory;
+      let a = 0;
+    }
 
-  CreateContainer() {
-    var containerDiv = this.hFactory.GetClassedDiv(["container"]);
-    containerDiv.element.style.maxWidth = "1250px";
-    return containerDiv;
-  }
+    CreateContainer() {
+      let containerDiv = this.hFactory.GetClassedDiv(["container"]);
+      containerDiv.element.style.maxWidth = "1250px";
+      return containerDiv;
+    }
 
-  CreateJumbotron(title, leadText, thirdChild) {
-    var jumboDiv = this.hFactory.GetClassedDiv(["jumbotron"]);
-    // JumboDiv.element.style.textAlign = "center"
-    jumboDiv.element.style.borderBottom = "2px solid #e5e5e5"
-    var titleTextElem = this.hFactory.GetText(title);
-    var titleH1 = this.hFactory.GetH1(titleTextElem);
-    jumboDiv.AddElement(titleH1);
-    var leadTextElem = this.hFactory.GetText(leadText);
-    var leadParam = this.hFactory.GetClassedParag(["lead"], leadTextElem);
-    jumboDiv.AddElement(leadParam);
-    if (thirdChild == undefined)
-    { return; }
-    jumboDiv.AddElement(thirdChild);
-    return jumboDiv;
-  }
+    CreateJumbotron(title, leadText, thirdChild) {
+      let jumboDiv = this.hFactory.GetClassedDiv(["jumbotron"]);
+      // JumboDiv.element.style.textAlign = "center"
+      jumboDiv.element.style.borderBottom = "2px solid #e5e5e5"
+      let titleTextElem = this.hFactory.GetText(title);
+      let titleH1 = this.hFactory.GetH1(titleTextElem);
+      jumboDiv.AddElement(titleH1);
+      let leadTextElem = this.hFactory.GetText(leadText);
+      let leadParam = this.hFactory.GetClassedParag(["lead"], leadTextElem);
+      jumboDiv.AddElement(leadParam);
+      if (!thirdChild)
+      { return; }
+      jumboDiv.AddElement(thirdChild);
+      return jumboDiv;
+    }
 
-  GetLeftRightFlexDiv(leftElem: IHEl, rightElem: IHEl) {
-    var parentDiv = this.hFactory.GetDiv();
-    var style = parentDiv.element.style;
-    style.display = "flex";
-    style.flexDirection = "row";
-    style.flexWrap = "nowrap";
-    style.justifyContent = "center";
-    style.alignItems = "center"
-    parentDiv.AddElement(leftElem);
-    parentDiv.AddElement(rightElem);
-    return parentDiv;
-  }
-  GetUpDownFlexDiv(upElem, downElem) {
-    var parentDiv = this.hFactory.GetDiv();
-    var style = parentDiv.element.style;
-    style.display = "flex";
-    style.flexDirection = "column";
-    style.flexWrap = "nowrap";
-    style.justifyContent = "center";
-    style.alignItems = "center";
-    style.margin = "4";
-    parentDiv.AddElement(upElem);
-    parentDiv.AddElement(downElem);
-    return parentDiv;
-  }
+    GetLeftRightFlexDiv(leftElem: IHElement, rightElem: IHElement) {
+      let parentDiv = this.hFactory.GetDiv();
+      let style = parentDiv.element.style;
+      style.display = "flex";
+      style.flexDirection = "row";
+      style.flexWrap = "nowrap";
+      style.justifyContent = "center";
+      style.alignItems = "center"
+      parentDiv.AddElement(leftElem);
+      parentDiv.AddElement(rightElem);
+      return parentDiv;
+    }
+    GetUpDownFlexDiv(upElem, downElem) {
+      let parentDiv = this.hFactory.GetDiv();
+      let style = parentDiv.element.style;
+      style.display = "flex";
+      style.flexDirection = "column";
+      style.flexWrap = "nowrap";
+      style.justifyContent = "center";
+      style.alignItems = "center";
+      style.margin = "4";
+      parentDiv.AddElement(upElem);
+      parentDiv.AddElement(downElem);
+      return parentDiv;
+    }
 
-  GetGoodButton(text: string, ref: string) {
-    var ret = this.hFactory.GetARef(this.hFactory.GetText(text), ref);
-    this.hFactory.SetRole(ret, "button");
-    this.hFactory.AddClasses(ret, ["btn", "btn-lg", "btn-success"]);
-    return ret;
-  }
-  GetFooter(text) {
-    var hFactory = this.hFactory;
-    var footer = hFactory.GetDivWithChild(hFactory.GetClassedFooter(["footer"], hFactory.GetParag(hFactory.GetText(text))));
-    var style = footer.GetElement().style;
-    style.marginTop = "42px";
-    style.marginLeft = "10px";
-    return footer;
-  }
+    GetButton(text:string,action:any,btnstyle:string){
+     let ret = this.hFactory.GetButton(this.hFactory.GetText(text));
+     this.hFactory.AddClasses(ret,["btn","btn-"+btnstyle]);
+     this.hFactory.SetType(ret,"button");
+     ret.SetAction(action);
+     let style = ret.GetElement().style;
+     style.margin = "10px";
+     return ret;
+    }
+
+    GetFooter(text) {
+      let hFactory = this.hFactory;
+      let footer = hFactory.GetDivWithChild(hFactory.GetClassedFooter(["footer"], hFactory.GetParag(hFactory.GetText(text))));
+      let style = footer.GetElement().style;
+      style.marginTop = "42px";
+      style.marginLeft = "10px";
+      return footer;
+    }
 
 
+  }
 }

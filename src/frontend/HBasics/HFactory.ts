@@ -1,131 +1,122 @@
-import HButton = require("./HButton");
-import HDiv = require("./HDiv");
-import HLabel = require("./HLabel");
-import HLi = require("./HLi");
-import Hn = require("./Hn")
-import HNav = require("./HNav");
-import HParag = require("./HParag");
-import HSpan = require("./HSpan");
-import HTabling = require("./HTabling");
-import HText = require("./HText");
-import HTextArea = require("./HTextArea");
-import HUl = require("./HUl");
-import IHEl = IHElement.IHElement;
-import IHElement = require("./IHElement");
-import HARefM = require("./HARef");
-import HFooter = require("./HFooter");
-import HRadioButtonModule = require("./HRadioButton");
-export class HFactory {
-  AddClass(elem: IHEl, eClass: string) {
-    elem.GetElement().classList.add(eClass);
-  }
-  AddClasses(elem: IHEl, eClass: string[]) {
-    for (var i in eClass) {
-      elem.GetElement().classList.add(eClass[i]);
+/* tslint:disable *//// <reference path="index.ts" />
+
+module frontend {
+
+  export class HFactory {
+    AddClass(elem: IHElement, eClass: string) {
+      elem.GetElement().classList.add(eClass);
     }
-  }
-  SetRole(elem: IHEl, role: string) {
-    elem.GetElement().setAttribute("role", role);
-  }
+    AddClasses(elem: IHElement, eClass: string[]) {
+      for (let i in eClass) {
+        elem.GetElement().classList.add(eClass[i]);
+      }
+    }
+    SetRole(elem: IHElement, role: string) {
+      elem.GetElement().setAttribute("role", role);
+    }
+    SetType(elem: IHElement, type: string) {
+      elem.GetElement().setAttribute("type", type);
+    }
 
-  GetARef(child: IHEl, ref: string) {
-    return new HARefM.HARef(child, ref);
-  }
+    GetARef(child: IHElement, ref: string) {
+      return new HARef(child, ref);
+    }
 
-  GetButton(child: IHEl) {
-    return new HButton.HButton(child);
-  }
-  GetClassedDiv(divClasses: string[]) {
-    var div = this.GetDiv();
-    this.AddClasses(div, divClasses);
-    return div;
-  }
-  GetClassedFooter(paramClasses: string[], child: IHEl) {
-    var footer = this.GetFooter(child);
-    this.AddClasses(footer, paramClasses);
-    return footer;
-  }
+    GetButton(child: IHElement) {
+      return new HButton(child);
+    }
+    GetClassedDiv(divClasses: string[]) {
+      let div = this.GetDiv();
+      this.AddClasses(div, divClasses);
+      return div;
+    }
+    GetClassedFooter(paramClasses: string[], child: IHElement) {
+      let footer = this.GetFooter(child);
+      this.AddClasses(footer, paramClasses);
+      return footer;
+    }
 
-  GetClassedParag(paramClasses: string[], child: IHEl) {
-    var param = this.GetParag(child);
-    this.AddClasses(param, paramClasses);
-    return param
-  }
+    GetClassedParag(paramClasses: string[], child: IHElement) {
+      let param = this.GetParag(child);
+      this.AddClasses(param, paramClasses);
+      return param
+    }
 
-  GetClassedUl(paramClass: string[]) {
-    var ul = this.GetUl();
-    this.AddClasses(ul, paramClass);
-    return ul;
-  }
-  GetDiv() {
-    return new HDiv.HDiv();
-  }
-  GetDivWithChild(child: IHEl) {
-    var div = new HDiv.HDiv();
-    div.AddElement(child);
-    return div;
-  }
+    GetClassedUl(paramClass: string[]) {
+      let ul = this.GetUl();
+      this.AddClasses(ul, paramClass);
+      return ul;
+    }
+    GetDiv() {
+      return new HDiv();
+    }
+    GetDivWithChild(child: IHElement) {
+      let div = new HDiv();
+      div.AddElement(child);
+      return div;
+    }
 
-  GetFooter(child: IHEl) {
-    return new HFooter.HFooter(child);
-  }
-  GetH1(child: IHEl) {
-    return new Hn.Hn(child, 1);
-  }
-  GetH2(child: IHEl) {
-    return new Hn.Hn(child, 2);
-  }
+    GetFooter(child: IHElement) {
+      return new HFooter(child);
+    }
+    GetH1(child: IHElement) {
+      return new Hn(child, 1);
+    }
+    GetH2(child: IHElement) {
+      return new Hn(child, 2);
+    }
 
-  GetH3(child: IHEl) {
-    return new Hn.Hn(child, 3);
-  }
-  GetLi(child: IHEl) {
-    return new HLi.HLi(child);
-  }
-  GetLabel(child: IHEl) {
-    return new HLabel.HLabel(child);
-  }
-  GetNav() {
-    return new HNav.HNav();
-  }
-  GetParag(child: IHEl) {
-    return new HParag.HParag(child);
-  }
-  GetRadioButton() {
-    return new HRadioButtonModule.HRadioButton();
-  }
-  GetTable() {
-    return new HTabling.HTable();
-  }
+    GetH3(child: IHElement) {
+      return new Hn(child, 3);
+    }
+    GetLi(child: IHElement) {
+      return new HLi(child);
+    }
+    GetLabel(child: IHElement) {
+      return new HLabel(child);
+    }
+    GetNav() {
+      return new HNav();
+    }
+    GetParag(child: IHElement) {
+      return new HParag(child);
+    }
+    GetRadioButton() {
+      return new HRadioButton();
+    }
+    GetTable() {
+      return new HTable();
+    }
 
-  GetTableRow() {
-    return new HTabling.HTableRow();
-  }
+    GetTableRow() {
+      return new HTableRow();
+    }
 
-  GetTableElementHead(child: IHEl) {
-    return new HTabling.HTableCellHeader(child);
-  }
+    GetTableElementHead(child: IHElement) {
+      return new HTableCellHeader(child);
+    }
 
-  GetTableElementData(child: IHEl) {
-    return new HTabling.HTableCellData(child);
-  }
+    GetTableElementData(child: IHElement) {
+      return new HTableCellData(child);
+    }
 
-  GetText(text: string) {
-    return new HText.HTextSpan(text);
-  }
-  GetTextArea() {
-    return new HTextArea.HTextArea();
-  }
-  GetTextAreaDim(rows, cols) {
-    var textArea = this.GetTextArea();
-    var e = textArea.element;
-    e.rows = rows;
-    e.cols = cols;
-    return textArea;
-  }
-  GetUl(): HUl.HUl {
-    return new HUl.HUl();
-  }
+    GetText(text: string) {
+      return new HTextSpan(text);
+    }
+    GetTextArea() {
+      return new HTextArea();
+    }
+    GetTextAreaDim(rows, cols) {
+      let textArea = this.GetTextArea();
+      let e = textArea.GetElement();
+      e.rows = rows;
+      e.cols = cols;
+      return textArea;
+    }
+    GetUl(): HUl {
+      return new HUl();
+    }
 
 
+  }
 }

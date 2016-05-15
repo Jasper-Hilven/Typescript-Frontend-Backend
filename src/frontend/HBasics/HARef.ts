@@ -1,22 +1,23 @@
-import HE = require("./IHElement");
-import IHEl = HE.IHElement;
+/* tslint:disable */
+module frontend {
 
-export class HARef implements IHEl {
-  element: HTMLAnchorElement;
-  child: IHEl;
-  hRef: string;
-  public constructor(child: IHEl, hRef: string) {
-    this.element = document.createElement("a");
-    this.child = child;
-    this.hRef = hRef;
-    this.element.appendChild(child.GetElement());
-    this.element.setAttribute("href", hRef);
-  }
-  public GetElement() {
-    return this.element;
+  export class HARef implements IHElement {
+    element: HTMLAnchorElement;
+    child: IHElement;
+    hRef: string;
+    public constructor(child: IHElement, hRef: string) {
+      this.element = document.createElement("a");
+      this.child = child;
+      this.hRef = hRef;
+      this.element.appendChild(child.GetElement());
+      this.element.setAttribute("href", hRef);
+    }
+    public GetElement() {
+      return this.element;
 
 
 
-    
+
+    }
   }
 }
