@@ -1,6 +1,6 @@
 // --- Module --
 /// <reference path="../index.ts" />
-/// <reference path="./PageControllers/index.ts" />
+/// <reference path="./Pages/index.ts" />
 
 ////SUBINDICES-START
 /// <reference path="./PageSelector.ts"/>

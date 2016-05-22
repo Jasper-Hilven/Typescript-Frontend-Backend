@@ -1,11 +1,13 @@
 /// <reference path="./index.ts"/>
 module generate {
     export class CheckerGenerator {
-        Generate() {
-            let modelDescription = new ChipmentModelDescription();
-            let model = modelDescription.GetChipmentModel();
-            let generated = this.GenerateComposedChecker(model);
-            return generated;
+        constructor(private commons:GeneratorCommons){}
+        Generate(allTypes:Composed[]){
+            let methods = allTypes.map((t)=> this.GenerateComposedChecker(t));
+            let generatedClass = new generate.TSClass("generated","Checker",methods);
+
+
+            return generatedClass;
         }
 
         GetComposedCheckerName(composed: Composed) {
@@ -41,19 +43,16 @@ module generate {
         GenerateComposedChecker(composed: Composed) {
             let methodName = this.GetComposedCheckerName(composed);
             let paramName = composed.typeName.toLowerCase();
-            let params = [paramName + ": " + composed.typeName];
-            let content = ["let valid = true;"];
+            let params = new TSParameter(paramName , composed.typeName);
+            let content = ["let valid = "+paramName+";"];
             var bindings = composed.subProperties;
             for (let i = 0; i < bindings.length; i++) {
                 content = content.concat(["valid = valid && " + this.GenerateCheckerCall(bindings[i],paramName) + ";"]);
             }
             content = content.concat("return valid;");
-            return this.GenerateMethod(methodName, params, content);
+            return new TSMethod(methodName, [params], content);
         }
 
-        GenerateMethod(name, params, content) {
-            return ["public " + name + "("+params.reduce((a, b) => a +", "+ b)+"){"].concat(content).concat(["}"]);
-        }
+
     }
-
 }

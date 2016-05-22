@@ -2,11 +2,17 @@
 module generate {
   export class MainGen {
     public GenerateCode() {
-      let checkerGenerator = new CheckerGenerator();
-      let generated = checkerGenerator.Generate();
+     let modelDescription = new ChipmentModelDescription();
+     let commons = new GeneratorCommons();
+     let checkerGenerator = new CheckerGenerator(commons);
+     let definitionGenerator = new ModelDefinitionGenerator(commons);
+     let allTypes = modelDescription.GetChipmentModel().GetAllSubTypes();
+     let generatedCheckers = checkerGenerator.Generate(allTypes).Print(commons);
+     let generatedDefinitions = commons.FlattenCodeLines(allTypes.map(t => definitionGenerator.GetClassDescription(t)));
+     console.log(generatedDefinitions);
+     console.log(generatedCheckers);
 
-      console.log(generated);
-    }
+     }
   }
 }
 var main = new generate.MainGen();

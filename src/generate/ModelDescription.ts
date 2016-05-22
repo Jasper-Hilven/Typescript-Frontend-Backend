@@ -4,30 +4,36 @@ module generate {
   export interface IGenerate {
     GetType: ()=>string;
     GetAllSubTypes: ()=>Composed[];
+    GetTypescriptType:()=>string;
   }
   export class Binding {
     public constructor(public name: string, public property: IGenerate, public securityLevels: [SecurityLevel]) {
     }
   }
   export class Composed implements IGenerate {
+
+   public constructor(
+     public typeName: string,
+     public isGlobal: boolean,
+     public subProperties: Binding[]) {
+   }
     GetAllSubTypes():Composed[]{
        let subs = this.subProperties.map((c:Binding)=>(c.property.GetAllSubTypes())).reduce((a,b)=>(a.concat(b)));
-       let uniques = <Composed[]> this.GetUniques(subs);
-       return ([<Composed>this]).concat(uniques);
+       let uniques = <Composed[]> this.GetUniques(([<Composed>this]).concat(subs));
+       return uniques;
     }
     static GetSType(){
      return "composed";
     }
-    GetUniques(arr:any[]):any[]{
+    public GetTypescriptType(){
+       return this.typeName;
+    }
+    GetUniques(arr:Composed[]):Composed[]{
+    let names = arr.map(c => c.typeName);
     let check = function(item, pos, self):boolean {
-        return self.indexOf(item) == pos;
+        return names.indexOf(item.typeName) == pos;
     };
      return arr.filter(check);
-    }
-    public constructor(
-      public typeName: string,
-      public isGlobal: boolean,
-      public subProperties: Binding[]) {
     }
 
     public GetType(){
@@ -45,8 +51,14 @@ module generate {
   }
   export enum PropertyType {
     PString, PNumber, PBoolean
+
   }
   export class SimpleProperty implements IGenerate {
+   public GetTypescriptType(){
+      return this.propertyType == PropertyType.PString? "string":
+        (this.propertyType == PropertyType.PBoolean? "boolean":"Number");
+   }
+
    GetAllSubTypes():[Composed]{
      return <[Composed]> [];
    }
@@ -64,8 +76,15 @@ module generate {
 
   }
   export class ListProperty implements IGenerate {
+
     public constructor(public elements: IGenerate) {
     }
+
+    public GetTypescriptType(){
+       return this.elements.GetTypescriptType() + "[]";
+    }
+
+
     GetAllSubTypes():Composed[]{
       return this.elements.GetAllSubTypes();
     }
