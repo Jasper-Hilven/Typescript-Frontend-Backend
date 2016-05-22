@@ -1,7 +1,11 @@
 {
   "name": "genFrontend",
   "version": "1.0.0",
-  "description": "",
+"repository": {
+  "type": "git"
+},
+
+  "description": "  ",
   "scripts": {
     "format": "grunt format",
     "dev": "grunt dev",
@@ -36,10 +40,12 @@
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-qunit": "^0.1.9",
     "load-grunt-tasks": "^3.5.0",
+    "mongodb": "^2.1.19",
     "morgan": "^1.7.0",
     "nodemon": "^1.9.2",
     "phantomjs-prebuilt": "^2.1.7",
     "qunitjs": "^1.23.1",
+    "restler": "^3.4.0",
     "simplecrypt": "^0.1.0",
     "tslint": "^3.8.1",
     "typescript": "^1.8.10",
