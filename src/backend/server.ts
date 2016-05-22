@@ -28,8 +28,9 @@ module backend {
             this.serverLog = loggerFactory.GetLogger("Server");
             let modelChecker = new commonend.ChipinModelChecker(loggerFactory.GetLogger("modelChecker"));
             let provider:IChipinProvider = new ChipinProvider(modelChecker, loggerFactory.GetLogger("provider"));
+            let checkedProvider = new SafeCheckChipinProvider(provider,modelChecker,loggerFactory.GetLogger("providerChecker"));
             let keyValidator = new KeyValidator(nodeSimpleCrypt, nodeCrypto, loggerFactory.GetLogger("keyValidator"));
-            let CoreApi = new backend.CoreApi(keyValidator, provider, loggerFactory.GetLogger("CoreApi"));
+            let CoreApi = new backend.CoreApi(keyValidator, checkedProvider, loggerFactory.GetLogger("CoreApi"));
             let RestApi = new backend.RestApi(restApiRouter, CoreApi, loggerFactory);
             this.mailProvider = new MailinProvider();
             let app = express();
@@ -54,7 +55,7 @@ module backend {
                 "html": "This is the <h1>HTML</h1>"
             }
 
-            
+
 
             let me = this;
             http.createServer(this.app).listen(this.app.get('port'), () =>

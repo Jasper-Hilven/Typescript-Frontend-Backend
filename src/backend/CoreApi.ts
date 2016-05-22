@@ -60,6 +60,7 @@ module backend {
                 return P.resolve(false);
             return this.chipinProvider.GetChipment(id)
             .then(chipment=>{return chipment?this.chipinProvider.SetChipment(id,info):P.resolve(false)});
+
         };
 
         RemoveChipment(key: string, id: string): P.Promise<boolean> {
@@ -72,6 +73,8 @@ module backend {
         CreateChipin(key: string, id: string, info): P.Promise<number> {
             if (!this.keyValidator.IsValidChipinUser(id, key))
                 return P.resolve(-1);
+
+
             return this.chipinProvider.GetChipment(id)
             .then(chipment => chipment? this.chipinProvider.CreateAndAddChipin(id, info) : P.resolve(-1));
         };
