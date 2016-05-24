@@ -63,7 +63,14 @@ module frontend {
             if (this.enteringNewChipin) {
                 var fact = new ExistingChipmentFormFactory(this.hFactory, this.divLayout, this.formCreator);
                 let trigger = () => { console.log("triggered new chipin") };
-                var form: HForm = fact.GetExistingChipmentForm(this.currentChipment.minContribution, this.currentChipment.maxContribution, AddChipinAction, disableEnterAction);
+
+                var form: HForm = fact.GetExistingChipmentForm(
+                 this.currentChipment.minContribution,
+                 this.currentChipment.maxContribution,
+                 this.currentChipment.author.name ,
+                 AddChipinAction,
+                 disableEnterAction);
+
                 this.enteringNewChipinForm = form;
                 this.container.AddElement(form);
             }

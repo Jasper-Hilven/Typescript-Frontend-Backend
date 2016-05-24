@@ -10,9 +10,10 @@ module frontend {
 
       this.container = this.divLayout.CreateContainer();
       this.container.AddElement(navigator);
-      let jumbo = this.divLayout.CreateJumbotron(
-       "What is this about?",
-       "In here we describe what this is all about", this.hFactory.GetText("Some explanations here would be rather appropriate") );
+      let longText = this.hFactory.GetText("Create a new gift here and provide some basic information about the gift." + "Each person chipping in can indicate that they paid, you just need to confirm that they did." + "For the ones that didn’t pay yet, we will take care of sending the reminders. " + "Simple as that!");
+      let easyEveryone = "PayTogether has the goal to make gift-giving with a group easier for everyone:";
+      let forwho = "- For the person coordinating the gift \r\n For the person chipping in";
+      let jumbo = this.divLayout.CreateJumbotron(longText, easyEveryone, longText);
       this.container.AddElement(jumbo);
       this.container.AddElement(footer);
     }

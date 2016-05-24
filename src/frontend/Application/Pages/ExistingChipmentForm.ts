@@ -8,16 +8,16 @@ module frontend{
   public static FormIdName = "name";
   public static FormIdEmail = "email";
   public static FormIdAmount = "amount";
-  public GetExistingChipmentForm(minValue:number, maxValue:number, triggerFunction: any,cancelFunction: any): HForm{
-  let elements = this.GetElements();
+  public GetExistingChipmentForm(minValue:number, maxValue:number,authorName: string, triggerFunction: any,cancelFunction: any): HForm{
+  let elements = this.GetElements(authorName);
   let checkFunction = new ExistingChipmentFormCheckFunction(minValue,maxValue);
    return this.formCreator.CreateForm(elements, checkFunction, triggerFunction, cancelFunction);
 
   }
-  private GetElements():HFormTextElement[]{
-    return [new HFormTextElement(this.hFactory,this.divLayout,ExistingChipmentFormFactory.FormIdName,"Name",""),
-    new HFormTextElement(this.hFactory,this.divLayout,ExistingChipmentFormFactory.FormIdEmail,"EmailAddress",""),
-  new HFormTextElement(this.hFactory,this.divLayout,ExistingChipmentFormFactory.FormIdAmount,"Amount","")];
+  private GetElements(authorName: string):HFormTextElement[]{
+    return [new HFormTextElement(this.hFactory,this.divLayout,ExistingChipmentFormFactory.FormIdName,"What is your name?",""),
+    new HFormTextElement(this.hFactory,this.divLayout,ExistingChipmentFormFactory.FormIdEmail,"On which e-mail address can " + authorName + " reach you?",""),
+  new HFormTextElement(this.hFactory,this.divLayout,ExistingChipmentFormFactory.FormIdAmount,"How much do you want to chip in?","")];
   }
  }
  export class ExistingChipmentFormCheckFunction implements frontend.ICheckFunction{

@@ -18,16 +18,19 @@ module frontend {
     static Currency = "Currency";
     static AuthorKey = "Author";
     static AuthorEmail = "AuthorEmail";
-    
+    static Deadline = "Deadline";
+
     GetForm(formCreator: FormCreator,successAction,failAction ) {
       let rows = [
-        formCreator.CreateTextElement(FillFormInControl.NameKey, "Name", ""),
-        formCreator.CreateTextElement(FillFormInControl.DescriptionKey, "Description", ""),
-        formCreator.CreateTextElement(FillFormInControl.Currency, "Currency", "Euro"),
-        formCreator.CreateTextElement(FillFormInControl.MinimumPayment, "Minimum Payment", ""),
-        formCreator.CreateTextElement(FillFormInControl.MaximumPayment, "Maximum Payment", ""),
-        formCreator.CreateTextElement(FillFormInControl.AuthorKey, "Author", ""),
-        formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "Author Email", "")];
+        formCreator.CreateTextElement(FillFormInControl.NameKey, "What is the name of the chipment?", ""),
+        formCreator.CreateTextElement(FillFormInControl.DescriptionKey, "Why are you creating this chipment?", ""),
+        formCreator.CreateTextElement(FillFormInControl.Currency, "Which currency are you using?", "Euro"),
+        formCreator.CreateTextElement(FillFormInControl.MinimumPayment, "What is the minimum contribution?", ""),
+        formCreator.CreateTextElement(FillFormInControl.MaximumPayment, "What is the maximum contribution?", ""),
+        formCreator.CreateTextElement(FillFormInControl.AuthorKey, "What is your name?", ""),
+        formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "What is your e-mail address", ""),
+        formCreator.CreateTextElement(FillFormInControl.Deadline, "What is the deadline for the participants if they want to chip in?", "")];
+       //formCreator.CreateTextElement(FillFormInControl.ReminderFrequency, "How often do you want to send reminders?", "")];
 
       let form = formCreator.CreateForm(
        rows,
