@@ -14,10 +14,15 @@
         "rewriteTsconfig": true
     },
     "files": [
-        "src/backend/ChipinProvider.ts",
+        "src/backend/chipinprovider/DBChipinProvider.ts",
+        "src/backend/chipinprovider/IChipinProvider.ts",
+        "src/backend/chipinprovider/index.ts",
+        "src/backend/chipinprovider/MemoryChipinProvider.ts",
+        "src/backend/chipinprovider/SafeCheckChipinProvider.ts",
         "src/backend/CoreApi.ts",
         "src/backend/devServer.ts",
         "src/backend/KeyValidator.ts",
+        "src/backend/mailin.ts",
         "src/backend/prodServer.ts",
         "src/backend/RestApi.ts",
         "src/backend/server.ts",
@@ -88,6 +93,8 @@
         "src/generate/ModelDefinitionGenerator.ts",
         "src/generate/ModelDescription.ts",
         "src/generate/TSModel/index.ts",
-        "src/generate/TSModel/TSClass.ts"
+        "src/generate/TSModel/TSClass.ts",
+        "src/generate/TSModel/TSMethod.ts",
+        "src/generate/TSModel/TSParameter.ts"
     ]
 }

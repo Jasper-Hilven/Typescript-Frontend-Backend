@@ -1,6 +1,6 @@
 /* tslint:disable */
 /// <reference path="../commonend/index.ts"/>
-/// <reference path="./ChipinProvider.ts"/>
+/// <reference path="./chipinProvider/index.ts"/>
 /// <reference path="./CoreApi.ts"/>
 /// <reference path="./RestApi.ts"/>
 /// <reference path="./KeyValidator.ts"/>
