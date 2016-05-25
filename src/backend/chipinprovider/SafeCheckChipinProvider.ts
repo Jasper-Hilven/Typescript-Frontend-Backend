@@ -49,8 +49,5 @@ module backend {
         SetChipinOfChipment(id: string, chipinid: number, info) {
             return this.deco.SetChipinOfChipment(id, chipinid, info);
         }
-
-
-
     }
 }

@@ -21,6 +21,7 @@
         "src/backend/chipinprovider/SafeCheckChipinProvider.ts",
         "src/backend/CoreApi.ts",
         "src/backend/devServer.ts",
+        "src/backend/index.ts",
         "src/backend/KeyValidator.ts",
         "src/backend/mailin.ts",
         "src/backend/prodServer.ts",

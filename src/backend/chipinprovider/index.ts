@@ -1,2 +1,5 @@
-/// <reference path="./ChipinProvider.ts"/>
-/// <reference path="./../server.ts"/>
+/// <reference path="./IChipinProvider.ts"/>
+/// <reference path="./DBChipinProvider.ts"/>
+/// <reference path="./MemoryChipinProvider.ts"/>
+/// <reference path="./SafeCheckChipinProvider.ts"/>
+/// <reference path="./../index.ts"/>
