@@ -41,7 +41,6 @@ module frontend {
       let application = new PageSelector(routeController, pages, mainPage);
       appLogger.SetLevel(commonend.LogLevel.Info);
       appLogger.Info("Application constructed");
-      appLogger.Info(application);
       appLogger.Info("Initializing application");
       application.Initialize();
       appLogger.Info("Application Initialized");

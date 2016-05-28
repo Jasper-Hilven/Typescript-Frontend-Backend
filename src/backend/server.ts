@@ -16,7 +16,6 @@ module backend {
     export class Server {
         private app;
         private serverLog: commonend.Logger;
-        private mailProvider: MailinProvider;
         constructor(filesLocation) {
             let restApiRouter = express();
             let loggerFactory = new commonend.LoggerFactory(console);
@@ -25,12 +24,12 @@ module backend {
             let provider:IChipinProvider = new DBChipinProvider(loggerFactory.GetLogger("provider"));
             let checkedProvider = new SafeCheckChipinProvider(provider,modelChecker,loggerFactory.GetLogger("providerChecker"));
             let keyValidator = new KeyValidator(nodeSimpleCrypt, nodeCrypto, loggerFactory.GetLogger("keyValidator"));
-            let CoreApi = new backend.CoreApi(keyValidator, checkedProvider, loggerFactory.GetLogger("CoreApi"));
+            var mailin = (new MailinProvider()).GetMailin();
+            let mailClient = new mailin("https://api.sendinblue.com/v2.0", "hIBJ8KL1NYG7ydmA");
+            let CoreApi = new backend.CoreApi(keyValidator, checkedProvider,mailClient, loggerFactory.GetLogger("CoreApi"));
             let RestApi = new backend.RestApi(restApiRouter, CoreApi, loggerFactory);
-            this.mailProvider = new MailinProvider();
             let app = express();
             app.set('port', process.env.PORT || 3000);
-
 
             app.use(morgan('combined'));
             app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,18 +39,9 @@ module backend {
             this.app = app;
         }
 
+
+
         public Start(): void {
-            var mailin = this.mailProvider.GetMailin();
-            var client = new mailin("https://api.sendinblue.com/v2.0", "hIBJ8KL1NYG7ydmA");
-            let data = {
-                "to": { "jasperhilven@gmail.com": "jasperhilven@gmail.com" },
-                "from": ["jasperhilven@gmail.com", "Jasper Hilven"],
-                "subject": "You created a new chipin!",
-                "html": "This is the <h1>HTML</h1>"
-            }
-
-
-
             let me = this;
             http.createServer(this.app).listen(this.app.get('port'), () =>
                 me.serverLog.Info("Express server listening on port " + this.app.get('port'))

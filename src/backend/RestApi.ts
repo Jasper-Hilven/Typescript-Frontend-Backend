@@ -5,7 +5,6 @@ module backend {
     constructor(private router: any,
       private chipincore: CoreApi, lF: commonend.LoggerFactory) {
       let log = lF.GetLogger("RestApi");
-      log.SetLevel(commonend.LogLevel.Debug);
 
       ////////GETUSER//////////
       router.get('/chipment/user/id/:id/key/:key', function(req, res) {
@@ -23,10 +22,6 @@ module backend {
         log.Info("Create chipment");
         let key = req.params.key;
         let id = req.params.createId;
-        log.Debug("request");
-        log.Debug(req);
-        log.Debug("request body");
-        log.Debug(req.body);
         let info = req.body["info"];
         log.Debug("request body info");
         log.Debug(req.body.info);
@@ -36,6 +31,7 @@ module backend {
 
       ////////GETAUTHOR//////////
       router.get('/chipment/author/id/:id/key/:key', function(req, res) {
+       log.Info("GetChipment as author");
         let key = req.params.key;
         let id = req.params.id;
         chipincore.GetChipmentAuthor(key, id)
@@ -43,6 +39,7 @@ module backend {
       });
       ////////CHANGE AUTHOR//////////
       router.post('/chipment/author/change/id/:id/key/:key', function(req, res) {
+        log.Info("SetChipment as author");
         let key = req.params.key;
         let id = req.params.id;
         let info = req.body.info;
@@ -52,6 +49,7 @@ module backend {
 
       ////////REMOVE AUTHOR//////////
       router.get('/chipment/author/delete/id/:id/key/:key', function(req, res) {
+        log.Info("Delete Chipment as author");
         let key = req.params.key;
         let id = req.params.id;
         let result = chipincore.RemoveChipment(key, id)
@@ -60,6 +58,7 @@ module backend {
       ////////CHIPIN API//////////
       ////////ADDCHIPIN//////////
       router.post('/chipment/user/id/:id/key/:key/createchipin/', function(req, res) {
+       log.Info("AddChipin as user");
         let key = req.params.key;
         let id = req.params.id;
         let info = req.body;
@@ -67,6 +66,7 @@ module backend {
       });
       ////////CHANGECHIPIN//////////
       router.post('/chipment/user/id/:id/key/:key/chipin/changeId/:chipinid', function(req, res) {
+      log.Info("ChangeChipin as user");
         let key = req.params.key;
         let id = req.params.id;
         let chipinid = req.params.chipinid;
@@ -75,6 +75,7 @@ module backend {
       });
       ////////DELETECHIPIN//////////
       router.get('/chipment/user/id/:id/key/:key/chipin/removeId/:chipinid', function(req, res) {
+       log.Info("Delete chipin as user");
         let key = req.params.key;
         let id = req.params.id;
         let chipinid = req.params.chipinid;

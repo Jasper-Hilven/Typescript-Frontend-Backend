@@ -25,16 +25,17 @@ module backend {
         }
         GetChipment(id: string): P.Promise<commonend.Chipment> {
             let a: P.Deferred<commonend.Chipment> = P.defer<commonend.Chipment>();
-
+            var me = this;
             this.chipments.find({ id: id }).toArray(function(err, result) {
                 if (err) {
                     console.log(err);
                     a.resolve(null);
                 } else if (result.length) {
-                    console.log('Found:', result);
+                    me.logger.Info('Found:');
+                    me.logger.Info(result);
                     a.resolve(result[0].info);
                 } else {
-                    console.log('No document(s) found with defined "find" criteria!');
+                    me.logger.Info('No document(s) found with defined "find" criteria!');
                     a.resolve(null);
                 }
             });
@@ -42,7 +43,7 @@ module backend {
         }
         CreateChipment(id: string, info): P.Promise<string> {
             let a: P.Deferred<string> = P.defer<string>();
-            console.log("returning promise...");
+            this.logger.Info("returning promise...");
             let me = this;
             this.chipments.insert({ id: id, info: info }, function(iResult) { me.logger.Debug("creation result is..."); me.logger.Debug(iResult); a.resolve(id); });
             return a.promise();

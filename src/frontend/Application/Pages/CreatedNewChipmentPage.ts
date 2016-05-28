@@ -37,9 +37,9 @@ module frontend {
        this.container = this.divLayout.CreateContainer();
        this.container.AddElement(this.navigator);
        let createChipment = "You created a new chipment!";
-       let friendLink =  "http://localhost:8000/#"+ExistingChipmentPageController.GetPName()+"/" +id+ "/"+userKey;
-       let privateLink =  "http://localhost:8000/#"+ExistingChipmentPageControllerAuthor.GetPName()+"/" +id+ "/" + authorKey;
-       let sendFriends = "Send the following link to your friends so they can chipin: " + friendLink;
+       let friendLink = "https://chipmentfrontend.herokuapp.com//#" + "chipin_with" + "/" + id + "/" + userKey;
+       let privateLink = "https://chipmentfrontend.herokuapp.com//#" + "chipin_with" + "/" + id + "/" + authorKey;
+let sendFriends = "Send the following link to your friends so they can chipin: " + friendLink;
        let keepPrivate = "Keep the following link for yourself to edit the chipment later: "+ privateLink;
        let jumbo = this.divLayout.CreateJumbotron(createChipment,"", this.hFactory.GetText(sendFriends+"\r\n"+"\r\n"+ keepPrivate) );
        this.container.AddElement(jumbo);
