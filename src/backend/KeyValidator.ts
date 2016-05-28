@@ -11,7 +11,7 @@ module backend {
       private logger: commonend.Logger) {
       this.sc = this.simpleCrypt({
         salt: "1234567890",
-        password: "someStupidPasswordthatnobodycanwritebecauseitiswayto0longandstupid"
+        password: "someStupidPasswordthatNobodycanwriTebecauseitiswayto0longandstupid"
       });
       this.userHash = this.HashThis(this.sc.encrypt("super duper user"));
       this.authorHash = this.HashThis(this.sc.encrypt("super duper author"));

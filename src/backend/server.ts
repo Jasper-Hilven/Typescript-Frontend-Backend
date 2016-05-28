@@ -22,7 +22,7 @@ module backend {
             let loggerFactory = new commonend.LoggerFactory(console);
             this.serverLog = loggerFactory.GetLogger("Server");
             let modelChecker = new commonend.ChipinModelChecker(loggerFactory.GetLogger("modelChecker"));
-            let provider:IChipinProvider = new MemoryChipinProvider(modelChecker, loggerFactory.GetLogger("provider"));
+            let provider:IChipinProvider = new DBChipinProvider(loggerFactory.GetLogger("provider"));
             let checkedProvider = new SafeCheckChipinProvider(provider,modelChecker,loggerFactory.GetLogger("providerChecker"));
             let keyValidator = new KeyValidator(nodeSimpleCrypt, nodeCrypto, loggerFactory.GetLogger("keyValidator"));
             let CoreApi = new backend.CoreApi(keyValidator, checkedProvider, loggerFactory.GetLogger("CoreApi"));

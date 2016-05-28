@@ -4,23 +4,12 @@
 module backend {
 
     export class DBChipinProvider implements IChipinProvider {
-        /*SendGetRequestP(url): P.Promise<any> {
-          let a: P.Deferred<any> = P.defer<any>();
-          this.SendGetRequest(url,
-           (v:any)=>{
-           console.log("resolving promise");
-           a.resolve(v);
-          },
-          (e:any)=>{
-           console.log("rejecting promise", e);
-          a.reject(e);
-         });
-          console.log("returning promise...")
-          return a.promise();
-        }*/
 
         private chipments: any;
         constructor(private logger: commonend.Logger) {
+            console.log("DBProvider got logger");
+            console.log(logger);
+
             let MongoClient = require('mongodb').MongoClient
                 , assert = require('assert');
             var url = 'mongodb://nodercoder:nodercodervoter@ds013569.mlab.com:13569/jasperhilvenrestful';
@@ -35,24 +24,69 @@ module backend {
         }
 
         GetChipment(id: string): P.Promise<commonend.Chipment> {
-            throw "notImplemented";
+            let a: P.Deferred<commonend.Chipment> = P.defer<commonend.Chipment>();
+
+            this.chipments.find({ id: id }).toArray(function(err, result) {
+                if (err) {
+                    console.log(err);
+                    a.resolve(null);
+                } else if (result.length) {
+                    console.log('Found:', result);
+                    a.resolve(result[0].info);
+                } else {
+                    console.log('No document(s) found with defined "find" criteria!');
+                    a.resolve(null);
+                }
+            });
+            return a.promise();
         }
         CreateChipment(id: string, info): P.Promise<string> {
-         let a: P.Deferred<string> = P.defer<string>();
-         console.log("returning promise...")
-         this.chipments.insert({id: id, info: info},function(iResult){this.logger.Debug("creation result is...");this.logger.Debug(iResult); a.resolve(id);});
-         return a.promise();
+            let a: P.Deferred<string> = P.defer<string>();
+            console.log("returning promise...");
+            let me = this;
+            this.chipments.insert({ id: id, info: info }, function(iResult) { me.logger.Debug("creation result is..."); me.logger.Debug(iResult); a.resolve(id); });
+            return a.promise();
         }
         SetChipment(id, info): P.Promise<boolean> {
-            throw "notImplemented";
+            let a: P.Deferred<boolean> = P.defer<boolean>();
+            console.log("setting chipment..");
+            let me = this;
+            this.chipments.updateOne({ id: id }, { $set: { info: info } }, function(err, iResult) {
+                if (err) { me.logger.Error("error occured during setChipment"); console.log(err); a.resolve(false); return; }
+                me.logger.Debug("Setting chipment success"); me.logger.Debug(iResult); a.resolve(true);
+            });
+            return a.promise();
         }
 
         DeleteChipment(id: string): P.Promise<boolean> {
-            throw "notImplemented";
+            let a: P.Deferred<boolean> = P.defer<boolean>();
+            console.log("setting chipment..");
+            let me = this;
+            this.chipments.deleteOne({ id: id }, function(err, iResult) {
+                if (err) { me.logger.Error("error occured during deleteChipment"); console.log(err); a.resolve(false); return; }
+                me.logger.Debug("deleting chipment success"); me.logger.Debug(iResult); a.resolve(true);
+            });
+            return a.promise();
         }
 
         CreateAndAddChipin(id: string, info): P.Promise<number> {
-            throw "notImplemented";
+            let a: P.Deferred<number> = P.defer<number>();
+            this.GetChipment(id).then(c => {
+                if (!c) {
+                    console.log("Trying to create chipin for nonexisting chipment");
+                    a.resolve(-1); return;
+                }
+                let newIndex = c.chipins.length;
+                c.chipins.push(info);
+                this.SetChipment(id, c).then(success => {
+                    if (!success) {
+                        console.log("Could not set while createandaddchipin");
+                        a.resolve(-1); return;
+                    }
+                    a.resolve(newIndex);
+                });
+            });
+            return a.promise();
         }
 
         DeleteChipinOfChipment(id: string, chipinid: number): P.Promise<boolean> {
