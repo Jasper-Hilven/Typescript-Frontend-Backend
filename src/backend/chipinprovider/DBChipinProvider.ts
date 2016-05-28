@@ -7,22 +7,22 @@ module backend {
 
         private chipments: any;
         constructor(private logger: commonend.Logger) {
-            console.log("DBProvider got logger");
-            console.log(logger);
-
-            let MongoClient = require('mongodb').MongoClient
-                , assert = require('assert');
-            var url = 'mongodb://nodercoder:nodercodervoter@ds013569.mlab.com:13569/jasperhilvenrestful';
-            var me = this;
-            MongoClient.connect(url, function(err, db) {
-                console.log("err should be null");
-                console.log(err);
-                console.log("If so, connected correctly to server");
-                let collection = db.collection('documents');
-                me.chipments = collection;
-            });
+         this.ConnectToDatabase();
         }
-
+        ConnectToDatabase(){
+         let MongoClient = require('mongodb').MongoClient
+             , assert = require('assert');
+         var url = 'mongodb://nodercoder:nodercodervoter@ds013569.mlab.com:13569/jasperhilvenrestful';
+         var me = this;
+         MongoClient.connect(url, function(err, db) {
+             if (err) {
+                 me.logger.Error("Error occured during connection to mongoDB");
+                 me.logger.Error(err);
+             }
+             let collection = db.collection('documents');
+             me.chipments = collection;
+         });
+        }
         GetChipment(id: string): P.Promise<commonend.Chipment> {
             let a: P.Deferred<commonend.Chipment> = P.defer<commonend.Chipment>();
 
@@ -71,16 +71,17 @@ module backend {
 
         CreateAndAddChipin(id: string, info): P.Promise<number> {
             let a: P.Deferred<number> = P.defer<number>();
+            let me = this;
             this.GetChipment(id).then(c => {
                 if (!c) {
-                    console.log("Trying to create chipin for nonexisting chipment");
+                    me.logger.Error("Trying to create chipin for nonexisting chipment");
                     a.resolve(-1); return;
                 }
                 let newIndex = c.chipins.length;
                 c.chipins.push(info);
                 this.SetChipment(id, c).then(success => {
                     if (!success) {
-                        console.log("Could not set while createandaddchipin");
+                        me.logger.Error("Could not set while createandaddchipin");
                         a.resolve(-1); return;
                     }
                     a.resolve(newIndex);
