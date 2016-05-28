@@ -82,8 +82,8 @@ module backend {
                 "subject": "You created a new chipin: " + nameChipment + ". Keep this mail for yourself",
                 "html": "<h3>Via this link(" + privateLink + ") you can edit this chipin</h3>"
             }
-            //this.mailClient.send_email(friendMail);
-            this.mailClient.send_email(privateMail);
+            this.mailClient.send_email(friendMail);
+            //this.mailClient.send_email(privateMail);
         }
 
 
