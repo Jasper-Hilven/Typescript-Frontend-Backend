@@ -1,4 +1,6 @@
-/* tslint:disable */module frontend {
+/* tslint:disable */
+/// <reference path="./index.ts"/>
+module frontend {
   export class HForm implements IHElement {
     elements: HDiv;
     receivedValue: { [id: string]: string; };

@@ -1,4 +1,5 @@
 /* tslint:disable */
+/// <reference path="./index.ts"/>
 module frontend {
   export class DummyCheckFunction implements ICheckFunction {
     CheckValues(input: { [id: string]: string; }): { [id: string]: HFormStatus; } {

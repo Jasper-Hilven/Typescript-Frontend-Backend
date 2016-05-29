@@ -15,10 +15,11 @@ module frontend{
 
   }
   private GetElements(authorName: string):HFormTextElement[]{
-    return [new HFormTextElement(this.hFactory,this.divLayout,ExistingChipmentFormFactory.FormIdName,"What is your name?",""),
+    return [];
+    /*formCreator. new HFormTextElement(this.hFactory,this.divLayout,ExistingChipmentFormFactory.FormIdName,"What is your name?",""),
     new HFormTextElement(this.hFactory,this.divLayout,ExistingChipmentFormFactory.FormIdEmail,"On which e-mail address can " + authorName + " reach you?",""),
   new HFormTextElement(this.hFactory,this.divLayout,ExistingChipmentFormFactory.FormIdAmount,"How much do you want to chip in?","")];
-  }
+  */}
  }
  export class ExistingChipmentFormCheckFunction implements frontend.ICheckFunction{
     public constructor(private minValue:number,private maxValue:number){

@@ -1,3 +1,4 @@
+/// <reference path="./index.ts"/>
 /* tslint:disable */module frontend {
   export interface IHForm {
     GetElement(): HTMLElement;

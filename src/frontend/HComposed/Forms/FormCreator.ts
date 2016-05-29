@@ -1,5 +1,5 @@
 /* tslint:disable */
-/// <reference path="./HForm.ts"/>
+/// <reference path="./index.ts"/>
 
 module frontend {
   export class FormCreator {
@@ -17,7 +17,10 @@ module frontend {
     }
 
     CreateTextElement(name: string, label: string, defaultValue: string): IFormElement {
-      return new HFormTextElement(this.hFactory, this.divFactory, name, label, defaultValue);
+      let textElement = new HFormTextElement(this.hFactory, this.divFactory, name,  defaultValue);
+      let warnElement = new HFormWarningElement(textElement, this.hFactory,this.divFactory);
+      let titleElement = new HTitleElement(warnElement,this.hFactory, this.divFactory,label);
+      return titleElement;
     }
   }
 }
