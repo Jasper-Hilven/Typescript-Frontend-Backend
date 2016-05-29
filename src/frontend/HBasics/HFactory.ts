@@ -84,8 +84,8 @@ module frontend {
         GetRadioButton() {
             return new HRadioButton();
         }
-        GetRangeSlider(min: number, max: number, initMin: number, initMax: number, step: number) {
-         return new HRangeSlider(min, max, initMin, initMax , step);
+        GetRangeSlider(info: HRangeSliderInfo) {
+         return new HRangeSlider(info.min, info.max, info.initMin, info.initMax , info.step);
         }
         GetTable() {
             return new HTable();

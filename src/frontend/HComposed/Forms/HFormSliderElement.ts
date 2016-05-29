@@ -3,17 +3,15 @@ module frontend {
   export class HFormSliderElement implements IFormElement{
 
     private form: IHForm;
-    private textBox: HTextArea;
-    private visDiv: HDiv;
+    private slider: HRangeSlider;
     public constructor(
       private hFactory: HFactory,
       private hDivLayout: DivLayout,
       private name: string,
-      private defaultValue: string) {
-      let input = this.GetInputFromText(defaultValue);
-      this.visDiv = input;
+      private sliderInfo: HRangeSliderInfo) {
+      this.slider = hFactory.GetRangeSlider(sliderInfo);
       let me = this;
-      this.textBox.GetElement().oninput = function(ev: Event) { me.ValueChanges(ev); };
+      this.slider.AddListener(me);
     };
 
     public GetName() {
@@ -21,7 +19,7 @@ module frontend {
     }
 
     public GetDefaultValue() {
-      return this.defaultValue;
+      return this.slider.GetSliderValue();
     }
     public SetStatus(status: HFormStatus) {
     };
@@ -31,23 +29,12 @@ module frontend {
     };
 
     public GetVisualization() {
-      return this.visDiv;
+      return this.slider;
     }
 
-    public ValueChanges(ev: Event) {
-      let value = this.textBox.GetText();
-      console.log("user entered new value for: " + this.name + ": " + value);
-      this.form.NotifyChanges(this.name, value);
+    public Notify(change) {
+      console.log("user entered new value for: " + this.name + ": " + change);
+      this.form.NotifyChanges(this.name, change);
     }
-
-    private GetInputFromText(defaultValue: string) {
-      this.textBox = this.hFactory.GetTextArea();
-      this.textBox.GetElement().style.width = "600px";
-      this.textBox.SetText(defaultValue);
-      let styled = this.hFactory.GetDivWithChild(this.textBox);
-      this.textBox.GetElement().style.margin = "2px";
-      return styled;
-    }
-
   }
 }

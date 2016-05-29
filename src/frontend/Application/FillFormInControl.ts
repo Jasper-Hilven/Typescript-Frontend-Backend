@@ -27,6 +27,7 @@ module frontend {
         formCreator.CreateTextElement(FillFormInControl.Currency, "Which currency are you using?", "Euro"),
         formCreator.CreateTextElement(FillFormInControl.MinimumPayment, "What is the minimum contribution?", ""),
         formCreator.CreateTextElement(FillFormInControl.MaximumPayment, "What is the maximum contribution?", ""),
+        formCreator.CreateSliderElement("SliderPayment", "What is the contribution?", new HRangeSliderInfo(1,50,5,10,1)),
         formCreator.CreateTextElement(FillFormInControl.AuthorKey, "What is your name?", ""),
         formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "What is your e-mail address", ""),
         formCreator.CreateTextElement(FillFormInControl.Deadline, "What is the deadline for the participants if they want to chip in?", "")];

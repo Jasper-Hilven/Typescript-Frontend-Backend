@@ -22,5 +22,11 @@ module frontend {
       let titleElement = new HTitleElement(warnElement,this.hFactory, this.divFactory,label);
       return titleElement;
     }
+    CreateSliderElement(name: string, label: string, sliderInfo: HRangeSliderInfo): IFormElement {
+      let sliderElement = new HFormSliderElement(this.hFactory, this.divFactory, name, sliderInfo);
+      let warnElement = new HFormWarningElement(sliderElement, this.hFactory,this.divFactory);
+      let titleElement = new HTitleElement(warnElement,this.hFactory, this.divFactory,label);
+      return titleElement;
+    }
   }
 }
