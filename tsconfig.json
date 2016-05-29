@@ -58,6 +58,7 @@
         "src/frontend/HBasics/HNav.ts",
         "src/frontend/HBasics/HParag.ts",
         "src/frontend/HBasics/HRadioButton.ts",
+        "src/frontend/HBasics/HRangeSlider.ts",
         "src/frontend/HBasics/HSpan.ts",
         "src/frontend/HBasics/HTabling.ts",
         "src/frontend/HBasics/HText.ts",
