@@ -10,6 +10,7 @@
 /// <reference path="./HFormStatus.ts"/>
 /// <reference path="./HFormStatusType.ts"/>
 /// <reference path="./HFormTextElement.ts"/>
+/// <reference path="./IFormElement.ts"/>
 /// <reference path="./ICheckFunction.ts"/>
 /// <reference path="./IHForm.ts"/>
 ////SUBINDICES-END

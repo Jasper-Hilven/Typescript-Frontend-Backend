@@ -1,5 +1,5 @@
 module frontend {
-  export class HFormTextElement {
+  export class HFormTextElement implements IFormElement{
 
     private visDiv: HDiv;
     private form: IHForm;

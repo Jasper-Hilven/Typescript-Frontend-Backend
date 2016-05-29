@@ -76,6 +76,7 @@
         "src/frontend/HComposed/Forms/HFormStatusType.ts",
         "src/frontend/HComposed/Forms/HFormTextElement.ts",
         "src/frontend/HComposed/Forms/ICheckFunction.ts",
+        "src/frontend/HComposed/Forms/IFormElement.ts",
         "src/frontend/HComposed/Forms/IHForm.ts",
         "src/frontend/HComposed/Forms/index.ts",
         "src/frontend/HComposed/index.ts",
