@@ -50,6 +50,9 @@ module frontend {
         GetDiv() {
             return new HDiv();
         }
+        GetDatePicker(){
+         return new HDatePicker();
+        }
         GetDivWithChild(child: IHElement) {
             let div = new HDiv();
             div.AddElement(child);

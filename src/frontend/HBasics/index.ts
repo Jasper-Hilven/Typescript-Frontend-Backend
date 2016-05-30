@@ -4,6 +4,8 @@
 ////SUBINDICES-START
 /// <reference path="./HARef.ts"/>
 /// <reference path="./HButton.ts"/>
+/// <reference path="./HDatePicker.ts"/>
+
 /// <reference path="./HDiv.ts"/>
 /// <reference path="./HFooter.ts"/>
 /// <reference path="./HFactory.ts"/>
