@@ -9,6 +9,7 @@ module frontend {
     export class HDatePicker implements IHElement {
         private element: HTMLDivElement;
         private datePicker: any;
+        listeners: any[];
         constructor() {
             this.element = document.createElement("div");
             this.element.classList.add("input-group");
@@ -25,9 +26,20 @@ module frontend {
             spanElement.appendChild(iSpanElement);
             this.element.appendChild(spanElement);
             $(this.element).datepicker({});
+            var me =this;
+            this.listeners = [];
+            this.element.onchange = function(c){
+             me.Changed(c);
+            }
         }
         public GetElement() {
             return this.element;
+        }
+        AddListener(listener){
+         this.listeners.push(listener);
+        }
+        Changed(o){
+         this.listeners.map(listener=>listener.Notify(o));
         }
 
         public SetAction(action) {

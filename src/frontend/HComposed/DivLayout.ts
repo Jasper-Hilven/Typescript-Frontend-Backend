@@ -12,7 +12,7 @@
       return containerDiv;
     }
 
-    CreateJumbotron(title, leadText, thirdChild) {
+    CreateJumbotron(title:string, leadText:string, thirdChild:IHElement) {
       let jumboDiv = this.hFactory.GetClassedDiv(["jumbotron"]);
       // JumboDiv.element.style.textAlign = "center"
       jumboDiv.element.style.borderBottom = "2px solid #e5e5e5"
@@ -22,8 +22,7 @@
       let leadTextElem = this.hFactory.GetText(leadText);
       let leadParam = this.hFactory.GetClassedParag(["lead"], leadTextElem);
       jumboDiv.AddElement(leadParam);
-      if (!thirdChild)
-      { return; }
+      thirdChild = (thirdChild)? thirdChild : this.hFactory.GetText("");
       jumboDiv.AddElement(thirdChild);
       return jumboDiv;
     }

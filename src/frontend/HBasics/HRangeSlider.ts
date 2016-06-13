@@ -10,7 +10,6 @@ module frontend {
         jsSlider: any;
         listeners: any[];
         public constructor(min: number, max: number, initMin: number, initMax: number, step: number) {
-
             this.element = document.createElement("input");
             this.element.id = "ex2";
             this.element.setAttribute("data-slider-id", 'ex1Slider');

@@ -8,6 +8,7 @@
 /// <reference path="./HFormAction.ts"/>
 /// <reference path="./HFormOK.ts"/>
 /// <reference path="./HFormStatus.ts"/>
+/// <reference path="./HFormDatePickerElement.ts"/>
 /// <reference path="./HFormSliderElement.ts"/>
 /// <reference path="./HFormStatusType.ts"/>
 /// <reference path="./HFormTextElement.ts"/>

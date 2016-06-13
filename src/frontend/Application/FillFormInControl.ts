@@ -30,7 +30,8 @@ module frontend {
         formCreator.CreateSliderElement("SliderPayment", "What is the contribution?", new HRangeSliderInfo(1,50,5,10,1)),
         formCreator.CreateTextElement(FillFormInControl.AuthorKey, "What is your name?", ""),
         formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "What is your e-mail address", ""),
-        formCreator.CreateTextElement(FillFormInControl.Deadline, "What is the deadline for the participants if they want to chip in?", "")];
+        formCreator.CreateDatePickerElement(FillFormInControl.Deadline,"What is the deadline for the participants if they want to chip in?")];
+        
        //formCreator.CreateTextElement(FillFormInControl.ReminderFrequency, "How often do you want to send reminders?", "")];
 
       let form = formCreator.CreateForm(
