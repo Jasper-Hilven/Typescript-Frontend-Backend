@@ -1,4 +1,4 @@
-/// <reference path="./index.ts"/>
+/// <reference path="./index.gen.ts"/>
 module generate {
   export class MainGen {
     public GenerateCode() {
@@ -9,8 +9,8 @@ module generate {
      let allTypes = modelDescription.GetChipmentModel().GetAllSubTypes();
      let generatedCheckers = checkerGenerator.Generate(allTypes).Print(commons);
      let generatedDefinitions = commons.FlattenCodeLines(allTypes.map(t => definitionGenerator.GetClassDescription(t)));
-     console.log(generatedDefinitions);
-     console.log(generatedCheckers);
+     //console.log(generatedDefinitions);
+     //console.log(generatedCheckers);
 
      }
   }

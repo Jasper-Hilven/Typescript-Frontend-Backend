@@ -1,4 +1,4 @@
-/// <reference path="./index.ts" />
+/// <reference path="./index.gen.ts" />
 
 module frontend {
   export class PageSelector implements frontend.IRouteObserver {

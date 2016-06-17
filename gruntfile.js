@@ -5,9 +5,10 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        generateIndices: { base: { src: ['src/**/*index.gen.ts']}},
         typescript: {
             watchBackendDev: {
-                src: ['src/backend/devServer.ts'], dest: 'dist/dev/server.js',
+                src: ['src/backend/devServer.noindex.ts'], dest: 'dist/dev/devServer.js',
                 options: {
                     module: 'commonjs', target: 'es5', sourceMap: false, declaration: false,
                     watch: { path: ['src/backend/**/*.ts','src/commonend/**/*.ts'], atBegin: true
@@ -24,7 +25,7 @@ module.exports = function (grunt) {
                   sourceMap: false, declaration: false}
             },
             backendProd: {
-                src: ['src/backend/prodServer.ts'], dest: 'dist/prod/server.js',
+                src: ['src/backend/prodServer.noindex.ts'], dest: 'dist/prod/server.js',
                 options: { module: 'commonjs', target: 'es5',
                   sourceMap: false, declaration: false}
             },
@@ -43,14 +44,14 @@ module.exports = function (grunt) {
           devWatch: {
             tasks:['typescript:watchBackendDev', 'typescript:watchFrontendDev',
             'watch:copyFrontIndex','typescript:watchFrontendTest',
-            //'watch:lintWatch',
             'nodemon:dev','nodemon:generate',
+            'generateIndices',
             'watch:karmaWatch','typescript:watchGenerate'],
             options: {logConcurrentOutput: true}},
           devWatchLight: {
               tasks:['typescript:watchBackendDev', 'typescript:watchFrontendDev',
               'watch:copyFrontIndex',
-              //'watch:lintWatch',
+              'generateIndices',
               'nodemon:dev','nodemon:generate',
               'typescript:watchGenerate'],
               options: {logConcurrentOutput: true}}
@@ -79,7 +80,7 @@ module.exports = function (grunt) {
         mkdir:{prod:{options:{create:['dist/prod/public/']}}},
         nodemon: {
           dev: {
-            script: 'dist/dev/server.js',
+            script: 'dist/dev/devServer.js',
             options: {callback: function (nodemon) {nodemon.on('log', function (event) { console.log(event.colour); });},
                 env: {PORT: '8000'},watch: ['dist/dev/'],delay: 2000,legacyWatch: true
             }},
@@ -91,7 +92,9 @@ module.exports = function (grunt) {
           },
         'typescript-formatter': {all:{Path: 'src/frontend/main.ts'}}
       });
-      grunt.registerTask('format', ['typescript-formatter']);
+
+    grunt.loadTasks('gruntTasks');
+    grunt.registerTask('format', ['typescript-formatter']);
     grunt.registerTask('dev', ['concurrent:devWatch']);
     grunt.registerTask('devLight', ['concurrent:devWatchLight']);
     grunt.registerTask('prod', ['clean:prod','mkdir:prod', 'typescript:frontendProd','typescript:backendProd','uglify:prod','clean:prodMainPre','copy:index']);

@@ -1,4 +1,4 @@
-/// <reference path="./index.ts"/>
+/// <reference path="./index.gen.ts"/>
 module backend {
     export class ChipinProvider implements IChipinProvider {
         private demoChipment;

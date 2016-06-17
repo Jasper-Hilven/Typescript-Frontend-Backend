@@ -1,4 +1,4 @@
-/// <reference path="./index.ts"/>
+/// <reference path="./index.gen.ts"/>
 module frontend {
     export class HTitleElement implements IFormElement {
         private titleAndDecoDiv: HDiv;

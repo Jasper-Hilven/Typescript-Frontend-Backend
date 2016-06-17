@@ -1,3 +1,5 @@
+/// <reference path="./index.gen.ts"/>
+
 declare var id;
 declare var type;
 module backend{

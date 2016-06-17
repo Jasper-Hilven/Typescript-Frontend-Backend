@@ -1,4 +1,4 @@
-/// <reference path="./index.ts"/>
+/// <reference path="./index.gen.ts"/>
 /* tslint:disable */
 module frontend {
   export interface ICheckFunction {

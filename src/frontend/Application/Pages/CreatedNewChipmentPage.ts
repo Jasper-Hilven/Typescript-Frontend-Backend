@@ -1,5 +1,5 @@
 /* tslint:disable */
-/// <reference path="./index.ts" />
+/// <reference path="./index.gen.ts" />
 module frontend {
   export class CreatedNewChipmentPage implements IPageController {
 
@@ -12,8 +12,6 @@ module frontend {
       private navigator: Navigator,private footer: IHElement,
       private backendProxy: BackendProxy,
       private title: string) {
-
-
     }
 
     public SetActive(): P.Promise<boolean> {

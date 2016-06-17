@@ -1,5 +1,5 @@
 /* tslint:disable */
-/// <reference path="./index.ts" />
+/// <reference path="./index.gen.ts" />
 module frontend {
     export class ExistingChipmentPageController implements IPageController {
 

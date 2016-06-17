@@ -50,8 +50,5 @@
     "tslint": "^3.8.1",
     "typescript": "^1.8.10",
     "typescript-formatter": "^0.4.3"
-  },
-  "devDependencies": {
-    "grunt-mkdir": "^1.0.0"
   }
 }

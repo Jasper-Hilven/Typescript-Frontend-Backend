@@ -1,4 +1,4 @@
-/// <reference path="./index.ts"/>
+/// <reference path="./index.gen.ts"/>
 /* tslint:disable */
 declare var require;
 declare var process;

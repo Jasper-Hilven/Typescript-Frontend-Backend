@@ -1,5 +1,5 @@
 /* tslint:disable */
-/// <reference path="./index.ts" />
+/// <reference path="./index.gen.ts" />
 //type successFunction = ({[id:string]}:string)=>void;
 
 module frontend {
@@ -31,7 +31,7 @@ module frontend {
         formCreator.CreateTextElement(FillFormInControl.AuthorKey, "What is your name?", ""),
         formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "What is your e-mail address", ""),
         formCreator.CreateDatePickerElement(FillFormInControl.Deadline,"What is the deadline for the participants if they want to chip in?")];
-        
+
        //formCreator.CreateTextElement(FillFormInControl.ReminderFrequency, "How often do you want to send reminders?", "")];
 
       let form = formCreator.CreateForm(
