@@ -48,7 +48,7 @@ module frontend {
 
     private GetForm(formCreator: FormCreator) {
       let control = new FillFormInControl(this.navigator, this.backendProxy);
-      let form = control.GetForm(formCreator,(d)=>this.CreateNewChipment(d),()=>this.CancelCreateNewChipment());
+      let form = control.GetForm(formCreator, (d) => this.CreateNewChipment(d), () => this.CancelCreateNewChipment());
       form.Update();
       return form;
     }
@@ -63,15 +63,16 @@ module frontend {
       let description: string = chipmentData[FillFormInControl.DescriptionKey];
       let chipment = new commonend.Chipment(author, name, minPayment, maxPayment, currency, description, <any>[]);
       this.backendProxy.CreateChipment(this.backendProxy.GetRanddomId(), "superkey", chipment)
-        .then((c: any) =>
-        { console.log(c);
-         console.log("registered changes");
-         window.location.href = "#"+CreatedNewChipmentPage.GetPName()+ "/"+c.id+"/"+c.userKey+"/"+c.authorKey;});
+        .then((c: any) => {
+          console.log(c);
+          console.log("registered changes");
+          window.location.href = "#" + CreatedNewChipmentPage.GetPName() + "/" + c.id + "/" + c.userKey + "/" + c.authorKey;
+        });
     }
 
 
     CancelCreateNewChipment() {
-      window.location.href ="";
+      window.location.href = "";
     }
 
 

@@ -1,16 +1,17 @@
 /// <reference path="./index.gen.ts"/>
 module frontend {
-  export class HFormDatePickerElement implements IFormElement{
+  export class HFormDatePickerElement implements IFormElement {
 
     private form: IHForm;
     private datePicker: HDatePicker;
     public constructor(
       private hFactory: HFactory,
       private hDivLayout: DivLayout,
-      private name: string) {
+      private name: string,
+      private datePickerProvider: IDatePickerProvider) {
 
       let me = this;
-      this.datePicker = hFactory.GetDatePicker();
+      this.datePicker = hFactory.GetDatePicker(datePickerProvider);
       this.datePicker.AddListener(me);
     };
 
@@ -18,7 +19,7 @@ module frontend {
       return this.name;
     }
 
-    public GetDefaultValue():string {
+    public GetDefaultValue(): string {
       return this.datePicker.GetDate();
     }
     public SetStatus(status: HFormStatus) {

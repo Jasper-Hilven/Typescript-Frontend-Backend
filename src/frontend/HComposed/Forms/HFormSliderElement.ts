@@ -1,6 +1,6 @@
 /// <reference path="./index.gen.ts"/>
 module frontend {
-  export class HFormSliderElement implements IFormElement{
+  export class HFormSliderElement implements IFormElement {
 
     private form: IHForm;
     private slider: HRangeSlider;
@@ -8,8 +8,9 @@ module frontend {
       private hFactory: HFactory,
       private hDivLayout: DivLayout,
       private name: string,
+      sliderProvider: ISliderProvider,
       private sliderInfo: HRangeSliderInfo) {
-      this.slider = hFactory.GetRangeSlider(sliderInfo);
+      this.slider = hFactory.GetRangeSlider(sliderProvider, sliderInfo);
       let me = this;
       this.slider.AddListener(me);
     };

@@ -1,7 +1,6 @@
 /* tslint:disable */
 /// <reference path="./index.gen.ts"/>
-module backend
-{
+module backend {
   let server = new Server('dist/prod/public');
   server.Start();
 }

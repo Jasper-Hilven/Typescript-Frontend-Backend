@@ -2,9 +2,9 @@
 
 module generate {
   export interface IGenerate {
-    GetType: ()=>string;
-    GetAllSubTypes: ()=>Composed[];
-    GetTypescriptType:()=>string;
+    GetType: () => string;
+    GetAllSubTypes: () => Composed[];
+    GetTypescriptType: () => string;
   }
   export class Binding {
     public constructor(public name: string, public property: IGenerate, public securityLevels: [SecurityLevel]) {
@@ -12,32 +12,32 @@ module generate {
   }
   export class Composed implements IGenerate {
 
-   public constructor(
-     public typeName: string,
-     public isGlobal: boolean,
-     public subProperties: Binding[]) {
-   }
-    GetAllSubTypes():Composed[]{
-       let subs = this.subProperties.map((c:Binding)=>(c.property.GetAllSubTypes())).reduce((a,b)=>(a.concat(b)));
-       let uniques = <Composed[]> this.GetUniques(([<Composed>this]).concat(subs));
-       return uniques;
+    public constructor(
+      public typeName: string,
+      public isGlobal: boolean,
+      public subProperties: Binding[]) {
     }
-    static GetSType(){
-     return "composed";
+    GetAllSubTypes(): Composed[] {
+      let subs = this.subProperties.map((c: Binding) => (c.property.GetAllSubTypes())).reduce((a, b) => (a.concat(b)));
+      let uniques = <Composed[]>this.GetUniques(([<Composed>this]).concat(subs));
+      return uniques;
     }
-    public GetTypescriptType(){
-       return this.typeName;
+    static GetSType() {
+      return "composed";
     }
-    GetUniques(arr:Composed[]):Composed[]{
-    let names = arr.map(c => c.typeName);
-    let check = function(item, pos, self):boolean {
+    public GetTypescriptType() {
+      return this.typeName;
+    }
+    GetUniques(arr: Composed[]): Composed[] {
+      let names = arr.map(c => c.typeName);
+      let check = function(item, pos, self): boolean {
         return names.indexOf(item.typeName) == pos;
-    };
-     return arr.filter(check);
+      };
+      return arr.filter(check);
     }
 
-    public GetType(){
-     return Composed.GetSType();
+    public GetType() {
+      return Composed.GetSType();
     }
   }
   export enum Capability {
@@ -54,24 +54,24 @@ module generate {
 
   }
   export class SimpleProperty implements IGenerate {
-   public GetTypescriptType(){
-      return this.propertyType == PropertyType.PString? "string":
-        (this.propertyType == PropertyType.PBoolean? "boolean":"Number");
-   }
+    public GetTypescriptType() {
+      return this.propertyType == PropertyType.PString ? "string" :
+        (this.propertyType == PropertyType.PBoolean ? "boolean" : "Number");
+    }
 
-   GetAllSubTypes():[Composed]{
-     return <[Composed]> [];
-   }
+    GetAllSubTypes(): [Composed] {
+      return <[Composed]>[];
+    }
 
     public constructor(public propertyType: PropertyType) {
     }
 
-    public GetType():string{
-     return SimpleProperty.GetSType();
+    public GetType(): string {
+      return SimpleProperty.GetSType();
     }
 
-    static GetSType(){
-     return "simple";
+    static GetSType() {
+      return "simple";
     }
 
   }
@@ -80,19 +80,19 @@ module generate {
     public constructor(public elements: IGenerate) {
     }
 
-    public GetTypescriptType(){
-       return this.elements.GetTypescriptType() + "[]";
+    public GetTypescriptType() {
+      return this.elements.GetTypescriptType() + "[]";
     }
 
 
-    GetAllSubTypes():Composed[]{
+    GetAllSubTypes(): Composed[] {
       return this.elements.GetAllSubTypes();
     }
-    public GetType(){
-     return ListProperty.GetSType();
+    public GetType() {
+      return ListProperty.GetSType();
     }
-    static GetSType(){
-     return "list";
+    static GetSType() {
+      return "list";
     }
   }
 }

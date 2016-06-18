@@ -1,6 +1,6 @@
 /// <reference path="./index.gen.ts"/>
 module frontend {
-  export class HFormTextElement implements IFormElement{
+  export class HFormTextElement implements IFormElement {
 
     private form: IHForm;
     private textBox: HTextArea;

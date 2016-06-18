@@ -10,6 +10,8 @@ module frontend {
       private pages: [IPageController],
       private defaultPage: IPageController) {
       this.mainContent = document.getElementById("maincontent");
+      if(this.mainContent == null)
+        throw "has no mainContent";
       routeController.AddLocationChangedEventListener(this);
     }
     public Initialize() {
@@ -21,31 +23,31 @@ module frontend {
     }
 
     private LoadPageViaPath(path: string[]): P.Promise<any> {
-     console.log("changing with path",path);
-     var me = this;
-     let page = path.length > 0?
-        this.pages.filter((p:IPageController)=> p.GetName() === path[0]).concat([this.defaultPage])[0]:
+      console.log("changing with path", path);
+      var me = this;
+      let page = path.length > 0 ?
+        this.pages.filter((p: IPageController) => p.GetName() === path[0]).concat([this.defaultPage])[0] :
         this.defaultPage;
-        console.log("changing with page",page);
-      return page.Handle(path.slice(1)).then(()=>{
-       me.SetupPage(page);
-       });
+      console.log("changing with page", page);
+      return page.Handle(path.slice(1)).then(() => {
+        me.SetupPage(page);
+      });
     }
 
-      private RemovePageChild() {
-       console.log("removing",this.mainContent.children.length);
-       while (this.mainContent.children.length > 0) {
+    private RemovePageChild() {
+      console.log("removing", this.mainContent.children.length);
+      while (this.mainContent.children.length > 0) {
         this.mainContent.removeChild(this.mainContent.children[0]);
-       }
-       console.log("removed",this.mainContent.children.length);
       }
-      private SetupPage(page:IPageController){
-       if(page === this.currentPage)
-       return;
-       this.RemovePageChild();
-       this.currentPage = page;
-       this.mainContent.appendChild(page.GetElement().GetElement());
-      }
+      console.log("removed", this.mainContent.children.length);
+    }
+    private SetupPage(page: IPageController) {
+      if (page === this.currentPage)
+        return;
+      this.RemovePageChild();
+      this.currentPage = page;
+      this.mainContent.appendChild(page.GetElement().GetElement());
+    }
 
   }
 }

@@ -55,7 +55,7 @@ module commonend {
       this.logger.Info("Checking for chipment");
       this.logger.Info("Retrieved following data:");
       this.logger.Info(data);
-      if (!data) { this.logger.Info("Got undefined");return false; }
+      if (!data) { this.logger.Info("Got undefined"); return false; }
       let hasAuthor = this.IsUser(data.author);
       let hasName = this.IsStringNonEmpty(data.name);
       let currency = this.IsStringNonEmpty(data.currency);
@@ -73,12 +73,12 @@ module commonend {
       return data && this.IsNumber(data.amount) && this.IsUser(data.user);
     }
     IsUser(data: any) {
-      if(!data)
-      {this.logger.Info("user check has undefined data"); return false;}
-      if(!data.name)
-      {this.logger.Info("user check has undefined name"); return false;}
-      if(!data.email)
-      {this.logger.Info("user check has undefined email"); return false;}
+      if (!data)
+      { this.logger.Info("user check has undefined data"); return false; }
+      if (!data.name)
+      { this.logger.Info("user check has undefined name"); return false; }
+      if (!data.email)
+      { this.logger.Info("user check has undefined email"); return false; }
       return data && this.IsString(data.name) && this.IsString(data.email);
     }
     BuildUser(data: any) {

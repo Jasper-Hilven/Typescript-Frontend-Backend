@@ -20,25 +20,25 @@ module frontend {
     static AuthorEmail = "AuthorEmail";
     static Deadline = "Deadline";
 
-    GetForm(formCreator: FormCreator,successAction,failAction ) {
+    GetForm(formCreator: FormCreator, successAction, failAction) {
       let rows = [
         formCreator.CreateTextElement(FillFormInControl.NameKey, "What is the name of the chipment?", ""),
         formCreator.CreateTextElement(FillFormInControl.DescriptionKey, "Why are you creating this chipment?", ""),
         formCreator.CreateTextElement(FillFormInControl.Currency, "Which currency are you using?", "Euro"),
         formCreator.CreateTextElement(FillFormInControl.MinimumPayment, "What is the minimum contribution?", ""),
         formCreator.CreateTextElement(FillFormInControl.MaximumPayment, "What is the maximum contribution?", ""),
-        formCreator.CreateSliderElement("SliderPayment", "What is the contribution?", new HRangeSliderInfo(1,50,5,10,1)),
+        formCreator.CreateSliderElement("SliderPayment", "What is the contribution?", new HRangeSliderInfo(1, 50, 5, 10, 1)),
         formCreator.CreateTextElement(FillFormInControl.AuthorKey, "What is your name?", ""),
         formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "What is your e-mail address", ""),
-        formCreator.CreateDatePickerElement(FillFormInControl.Deadline,"What is the deadline for the participants if they want to chip in?")];
+        formCreator.CreateDatePickerElement(FillFormInControl.Deadline, "What is the deadline for the participants if they want to chip in?")];
 
-       //formCreator.CreateTextElement(FillFormInControl.ReminderFrequency, "How often do you want to send reminders?", "")];
+      //formCreator.CreateTextElement(FillFormInControl.ReminderFrequency, "How often do you want to send reminders?", "")];
 
       let form = formCreator.CreateForm(
-       rows,
-       this,
-       () => successAction(this.GetStoredForm().GetLatestValues()),
-       () => failAction(this.GetStoredForm().GetLatestValues()));
+        rows,
+        this,
+        () => successAction(this.GetStoredForm().GetLatestValues()),
+        () => failAction(this.GetStoredForm().GetLatestValues()));
       console.log("Created form", form);
       this.form = form;
       console.log("Stored form", this.form);

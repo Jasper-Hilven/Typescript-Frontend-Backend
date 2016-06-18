@@ -12,7 +12,7 @@
       return containerDiv;
     }
 
-    CreateJumbotron(title:string, leadText:string, thirdChild:IHElement) {
+    CreateJumbotron(title: string, leadText: string, thirdChild: IHElement) {
       let jumboDiv = this.hFactory.GetClassedDiv(["jumbotron"]);
       // JumboDiv.element.style.textAlign = "center"
       jumboDiv.element.style.borderBottom = "2px solid #e5e5e5"
@@ -22,7 +22,7 @@
       let leadTextElem = this.hFactory.GetText(leadText);
       let leadParam = this.hFactory.GetClassedParag(["lead"], leadTextElem);
       jumboDiv.AddElement(leadParam);
-      thirdChild = (thirdChild)? thirdChild : this.hFactory.GetText("");
+      thirdChild = (thirdChild) ? thirdChild : this.hFactory.GetText("");
       jumboDiv.AddElement(thirdChild);
       return jumboDiv;
     }
@@ -53,14 +53,14 @@
       return parentDiv;
     }
 
-    GetButton(text:string,action:any,btnstyle:string){
-     let ret = this.hFactory.GetButton(this.hFactory.GetText(text));
-     this.hFactory.AddClasses(ret,["btn","btn-"+btnstyle]);
-     this.hFactory.SetType(ret,"button");
-     ret.SetAction(action);
-     let style = ret.GetElement().style;
-     style.margin = "10px";
-     return ret;
+    GetButton(text: string, action: any, btnstyle: string) {
+      let ret = this.hFactory.GetButton(this.hFactory.GetText(text));
+      this.hFactory.AddClasses(ret, ["btn", "btn-" + btnstyle]);
+      this.hFactory.SetType(ret, "button");
+      ret.SetAction(action);
+      let style = ret.GetElement().style;
+      style.margin = "10px";
+      return ret;
     }
 
     GetFooter(text) {

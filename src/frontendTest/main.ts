@@ -1,3 +1,5 @@
+
+/// <reference path="./index.gen.ts"/>
 declare let it: any;
 declare let describe: any;
 declare let expect: any;
@@ -15,4 +17,8 @@ module frontendTest {
     expect("abc").toEqual("abc");
     expect("15").toEqual("15");
   });
+  it("Should be able to construct the frontend", function() {
+    //(new frontend.AppFactory()).BuildApp(new frontend.DummySliderProvider(), frontend.Dummy.DatePickerProvider);
+  });
+
 }

@@ -24,8 +24,8 @@ module frontend {
       this.container.AddElement(form);
       this.container.AddElement(footer);
     }
-    public static GetPName(){
-     return "change_chipment";
+    public static GetPName() {
+      return "change_chipment";
 
     }
     public GetName(): string {
@@ -47,7 +47,7 @@ module frontend {
 
     public GetForm(formCreator: FormCreator) {
       let control = new FillFormInControl(this.navigator, this.backendProxy);
-      let form = control.GetForm(formCreator,(d)=>{console.log("todo change chipment:"+d)},()=>{console.log("todo cancel change chipment:")});
+      let form = control.GetForm(formCreator, (d) => { console.log("todo change chipment:" + d) }, () => { console.log("todo cancel change chipment:") });
       form.Update();
       return form;
     }

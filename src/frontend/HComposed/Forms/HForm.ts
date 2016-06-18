@@ -40,7 +40,7 @@ module frontend {
       let disableButton = false;
       for (let rI in result) {
         let res = result[rI];
-        if(res.StatusType === HFormStatusType.Error)
+        if (res.StatusType === HFormStatusType.Error)
           disableButton = true;
         this.formElementKeyToValue[rI].SetStatus(res);
       }

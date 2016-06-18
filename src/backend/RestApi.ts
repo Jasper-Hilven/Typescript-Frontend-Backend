@@ -26,16 +26,16 @@ module backend {
         log.Debug("request body info");
         log.Debug(req.body.info);
         chipincore.CreateChipment(key, id, info)
-        .then(c=> res.json(c));
+          .then(c => res.json(c));
       });
 
       ////////GETAUTHOR//////////
       router.get('/chipment/author/id/:id/key/:key', function(req, res) {
-       log.Info("GetChipment as author");
+        log.Info("GetChipment as author");
         let key = req.params.key;
         let id = req.params.id;
         chipincore.GetChipmentAuthor(key, id)
-        .then(c => res.json(c));
+          .then(c => res.json(c));
       });
       ////////CHANGE AUTHOR//////////
       router.post('/chipment/author/change/id/:id/key/:key', function(req, res) {
@@ -44,7 +44,7 @@ module backend {
         let id = req.params.id;
         let info = req.body.info;
         chipincore.SetChipment(key, id, info)
-        .then(success => res.json(success));
+          .then(success => res.json(success));
       });
 
       ////////REMOVE AUTHOR//////////
@@ -53,12 +53,12 @@ module backend {
         let key = req.params.key;
         let id = req.params.id;
         let result = chipincore.RemoveChipment(key, id)
-        .then(success => res.json(success));
+          .then(success => res.json(success));
       });
       ////////CHIPIN API//////////
       ////////ADDCHIPIN//////////
       router.post('/chipment/user/id/:id/key/:key/createchipin/', function(req, res) {
-       log.Info("AddChipin as user");
+        log.Info("AddChipin as user");
         let key = req.params.key;
         let id = req.params.id;
         let info = req.body;
@@ -66,16 +66,16 @@ module backend {
       });
       ////////CHANGECHIPIN//////////
       router.post('/chipment/user/id/:id/key/:key/chipin/changeId/:chipinid', function(req, res) {
-      log.Info("ChangeChipin as user");
+        log.Info("ChangeChipin as user");
         let key = req.params.key;
         let id = req.params.id;
         let chipinid = req.params.chipinid;
         let info = req.body.info;
-        chipincore.ChangeChipin(key, id, chipinid, info).then(success =>res.json(success));
+        chipincore.ChangeChipin(key, id, chipinid, info).then(success => res.json(success));
       });
       ////////DELETECHIPIN//////////
       router.get('/chipment/user/id/:id/key/:key/chipin/removeId/:chipinid', function(req, res) {
-       log.Info("Delete chipin as user");
+        log.Info("Delete chipin as user");
         let key = req.params.key;
         let id = req.params.id;
         let chipinid = req.params.chipinid;

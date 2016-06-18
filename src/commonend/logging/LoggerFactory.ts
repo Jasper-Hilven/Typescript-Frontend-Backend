@@ -23,19 +23,19 @@ module commonend {
     }
 
     Warn(warning, name) {
-      this.consoleToLog.warn(name + ": ",warning);
+      this.consoleToLog.warn(name + ": ", warning);
     }
 
     Info(info, name) {
-      this.consoleToLog.info(name + ": ",info);
+      this.consoleToLog.info(name + ": ", info);
     }
 
     Debug(debugInfo, name) {
-      this.consoleToLog.info(name + ": ",debugInfo);
+      this.consoleToLog.info(name + ": ", debugInfo);
     }
 
     Error(errorInfo, name) {
-      this.consoleToLog.error(name + ": ",errorInfo);
+      this.consoleToLog.error(name + ": ", errorInfo);
     }
   }
 

@@ -17,14 +17,14 @@ module frontend {
     SendGetRequestP(url): P.Promise<any> {
       let a: P.Deferred<any> = P.defer<any>();
       this.SendGetRequest(url,
-       (v:any)=>{
-       console.log("resolving promise");
-       a.resolve(v);
-      },
-      (e:any)=>{
-       console.log("rejecting promise", e);
-      a.reject(e);
-     });
+        (v: any) => {
+          console.log("resolving promise");
+          a.resolve(v);
+        },
+        (e: any) => {
+          console.log("rejecting promise", e);
+          a.reject(e);
+        });
       console.log("returning promise...")
       return a.promise();
     }
@@ -43,19 +43,19 @@ module frontend {
       });
     }
     SendPostRequestP(url, body): P.Promise<any> {
-     let a: P.Deferred<any> = P.defer<any>();
-     this.SendPostRequest(url,body,
-      (v:any)=>{
-      console.log("resolving promise");
-      a.resolve(v);
-     },
-     (e:any)=>{
-      console.log("rejecting promise",e);
-     a.reject(e);
-    });
-     console.log("returning promise...")
-     return a.promise();
-   }
+      let a: P.Deferred<any> = P.defer<any>();
+      this.SendPostRequest(url, body,
+        (v: any) => {
+          console.log("resolving promise");
+          a.resolve(v);
+        },
+        (e: any) => {
+          console.log("rejecting promise", e);
+          a.reject(e);
+        });
+      console.log("returning promise...")
+      return a.promise();
+    }
 
     SendPostRequest(url, body, succesCallBack, failCallBack) {
       console.log(body);

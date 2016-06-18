@@ -14,13 +14,13 @@ module.exports = function (grunt) {
                     watch: { path: ['src/backend/**/*.ts','src/commonend/**/*.ts'], atBegin: true
                     }}},
             watchFrontendDev: {
-                src: ['src/frontend/main.ts'], dest: 'dist/dev/public/main.js',
+                src: ['src/frontend/main.noindex.ts'], dest: 'dist/dev/public/main.js',
                 options: {
                     module: 'commonjs',target: 'es5',sourceMap: false,declaration: false,
                     watch: {path: ['src/frontend/**/*.ts','src/commonend/**/*.ts'], atBegin: true }}
             },
             frontendProd: {
-                src: ['src/frontend/main.ts'], dest: 'dist/prod/public/main.pre.js',
+                src: ['src/frontend/main.noindex.ts'], dest: 'dist/prod/public/main.pre.js',
                 options: { module: 'commonjs', target: 'es5',
                   sourceMap: false, declaration: false}
             },
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
           prod: {src: ['dist']},
           prodMainPre:{src:['dist/prod/public/main.pre.js']}},
         karma: {
-          unit: { files: [{ src: ['dist/test/**/*test.js'], served: true }], background: false, singleRun: true, browsers: ['PhantomJS'],frameworks: ['jasmine']}},
+          unit: { files: [{ src: ['dist/test/**/*test.js'], served: true }], background: false, singleRun: true, browsers: ['PhantomJS'],frameworks: ['jasmine'],singleRun: false}},
         mkdir:{prod:{options:{create:['dist/prod/public/']}}},
         nodemon: {
           dev: {
@@ -90,7 +90,7 @@ module.exports = function (grunt) {
                   env: {PORT: '8030'},watch: ['dist/generate/'],delay: 0,legacyWatch: true
               }}
           },
-        'typescript-formatter': {all:{Path: 'src/frontend/main.ts'}}
+        'typescript-formatter': {files:'src/**/*.ts'}
       });
 
     grunt.loadTasks('gruntTasks');
