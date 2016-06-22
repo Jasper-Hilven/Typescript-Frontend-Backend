@@ -26,6 +26,10 @@ module frontend {
       let textElement = new HFormTextElement(this.hFactory, this.divFactory, name, defaultValue);
       return this.EncapsulateWarnAndTitle(label, textElement);
     }
+    CreateSelectElement(name: string, label: string, options: string[]): IFormElement {
+      let textElement = new HFormTextElement(this.hFactory, this.divFactory, name, defaultValue);
+      return this.EncapsulateWarnAndTitle(label, textElement);
+    }
 
     CreateSliderElement(name: string, label: string, sliderInfo: HRangeSliderInfo): IFormElement {
       let sliderElement = new HFormSliderElement(this.hFactory, this.divFactory, name, this.sliderProvider, sliderInfo);

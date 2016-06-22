@@ -25,9 +25,6 @@ module frontend {
       this.container.AddElement(navigator);
       this.container.AddElement(jumbo);
       this.container.AddElement(footer);
-      let datepicker = hFactory.GetDatePicker(datePickerProvider);
-      datepicker.SetAction(function() { console.log(datepicker.GetDate()); })
-      this.container.AddElement(datepicker);
     }
 
     public GetName() {

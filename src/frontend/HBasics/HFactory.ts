@@ -91,6 +91,11 @@ module frontend {
     GetRangeSlider(provider: ISliderProvider, info: HRangeSliderInfo) {
       return new HRangeSlider(provider, info.min, info.max, info.initMin, info.initMax, info.step);
     }
+
+GetSelectPicker(elements: string[]){
+     return new HSelectPicker(elements);
+}
+
     GetTable() {
       return new HTable();
     }

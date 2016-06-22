@@ -13,6 +13,7 @@
 /// <reference path="HParag.ts" />
 /// <reference path="HRadioButton.ts" />
 /// <reference path="HRangeSlider.ts" />
+/// <reference path="HSelectPicker.ts" />
 /// <reference path="HSpan.ts" />
 /// <reference path="HTabling.ts" />
 /// <reference path="HText.ts" />
