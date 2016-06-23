@@ -4,16 +4,13 @@ module frontend {
 
     private form: IHForm;
     private picker: HSelectPicker;
-    private visDiv: HDiv;
     public constructor(
       private hFactory: HFactory,
-      private hDivLayout: DivLayout,
       private name: string,
-      private defaultValue: string) {
-      let input = this.GetInputFromText(defaultValue);
-      this.visDiv = input;
+      private elements: string[]) {
+       this.picker = hFactory.GetSelectPicker(elements);
       let me = this;
-      this.textBox.GetElement().oninput = function(ev: Event) { me.ValueChanges(ev); };
+      this.picker.Register(function(ev: Event) { me.ValueChanges(ev); });
     };
 
     public GetName() {
@@ -21,33 +18,20 @@ module frontend {
     }
 
     public GetDefaultValue() {
-      return this.defaultValue;
+      return this.elements[0];
     }
-    public SetStatus(status: HFormStatus) {
-    };
 
     public SetForm(form: IHForm) {
       this.form = form;
     };
 
     public GetVisualization() {
-      return this.visDiv;
+      return this.picker;
     }
 
     public ValueChanges(ev: Event) {
-      let value = this.textBox.GetText();
-      console.log("user entered new value for: " + this.name + ": " + value);
+      let value = this.picker.GetSelectedElement();
       this.form.NotifyChanges(this.name, value);
     }
-
-    private GetInputFromText(defaultValue: string) {
-      this.textBox = this.hFactory.GetTextArea();
-      this.textBox.GetElement().style.width = "600px";
-      this.textBox.SetText(defaultValue);
-      let styled = this.hFactory.GetDivWithChild(this.textBox);
-      this.textBox.GetElement().style.margin = "2px";
-      return styled;
-    }
-
   }
 }
