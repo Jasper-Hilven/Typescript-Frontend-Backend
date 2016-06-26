@@ -27,7 +27,7 @@ module frontend {
       return this.EncapsulateWarnAndTitle(label, textElement);
     }
     CreateSelectElement(name: string, label: string, options: string[]): IFormElement {
-      let textElement = new HFormTextElement(this.hFactory, this.divFactory, name, defaultValue);
+      let textElement = new HFormSelectElement(this.hFactory,name, options);
       return this.EncapsulateWarnAndTitle(label, textElement);
     }
 

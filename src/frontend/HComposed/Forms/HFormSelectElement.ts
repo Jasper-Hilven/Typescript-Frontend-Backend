@@ -20,6 +20,9 @@ module frontend {
     public GetDefaultValue() {
       return this.elements[0];
     }
+    public SetStatus(){
+
+    }
 
     public SetForm(form: IHForm) {
       this.form = form;
@@ -30,8 +33,9 @@ module frontend {
     }
 
     public ValueChanges(ev: Event) {
-      let value = this.picker.GetSelectedElement();
-      this.form.NotifyChanges(this.name, value);
+     throw "notimpl";
+      //let value = this.picker.GetSelectedElement();
+      //this.form.NotifyChanges(this.name, value);
     }
   }
 }
