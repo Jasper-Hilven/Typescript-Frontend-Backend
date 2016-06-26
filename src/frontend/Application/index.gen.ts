@@ -2,7 +2,6 @@
 
 ////THISFOLDER-START
 /// <reference path="BackendProxy.ts" />
-/// <reference path="FillFormInControl.ts" />
 /// <reference path="PageSelector.ts" />
 /// <reference path="PayTogether.ts" />
 ////THISFOLDER-END

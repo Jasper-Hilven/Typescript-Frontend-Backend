@@ -56,5 +56,8 @@ module frontend {
       let datePickerElement = new HFormDatePickerElement(this.hFactory, this.divFactory, name, this.datePickerProvider);
       return this.EncapsulateWarnAndTitle(label, datePickerElement);
     }
+    public GetHFactory(){
+     return this.hFactory;
+    }
   }
 }

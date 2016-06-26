@@ -8,9 +8,8 @@
 /// <reference path="ExistingChipmentPageControllerAuthor.ts" />
 /// <reference path="IPageController.ts" />
 /// <reference path="MainPage.ts" />
-/// <reference path="NewChipmentPage.ts" />
 ////THISFOLDER-END
 
 ////SUBINDICES-START
-
+/// <reference path="NewChipment/index.gen.ts" />
 ////SUBINDICES-END

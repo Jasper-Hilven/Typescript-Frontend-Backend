@@ -35,8 +35,8 @@ module frontend {
     }
 
     public Notify(change) {
-      console.log("user entered new value for: " + this.name + ": " + change);
-      this.form.NotifyChanges(this.name, change);
+      console.log("user entered new value for: " + this.name + ": " + change[0] + ",");
+      this.form.NotifyChanges(this.name, change[0] + "," + change[1]);
     }
   }
 }

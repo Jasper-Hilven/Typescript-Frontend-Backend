@@ -14,8 +14,6 @@ module frontend {
     static NameKey = "Name";
     static DescriptionKey = "Description";
     static MinMaxPayment = "MinMaxPayment";
-    static MinPayment = "MinPayment";
-    static MaxPayment = "MaxPayment";
     static Currency = "Currency";
     static AuthorKey = "Author";
     static AuthorEmail = "AuthorEmail";
@@ -29,8 +27,10 @@ module frontend {
         let authMail = formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "What is your e-mail address?", "",true);
       let currency = formCreator.CreateSelectElement(FillFormInControl.Currency, "In Which Currency?", ["Euro","Dollar"]);
       let minmaxSlide = formCreator.CreateSliderElement(FillFormInControl.MinMaxPayment, "What is the contribution?", new HRangeSliderInfo(1, 50, 5, 10, 1));
+      let paymentText=  new frontend.PaymentText(formCreator.GetHFactory());
         let deadline = formCreator.CreateDatePickerElement(FillFormInControl.Deadline, "What is the participants deadline to contribute?");
-        let elements = [cName,authName,currency,whyCreate,authMail,minmaxSlide,deadline];
+
+        let elements = [cName,authName,currency,whyCreate,authMail,minmaxSlide,deadline,paymentText];
     ////Visualization
     let cNameVis= cName.GetVisualization();
     let whyCreateVis = whyCreate.GetVisualization();
@@ -39,15 +39,16 @@ module frontend {
     let minmaxSlideVis = minmaxSlide.GetVisualization();
     let currencyVis=currency.GetVisualization();
     let deadlineVis = deadline.GetVisualization();
-    let vElements = [cNameVis,whyCreateVis,authNameVis,minmaxSlideVis,currencyVis,deadlineVis];
+    let paymentTextVis = paymentText.GetVisualization();
+    let vElements = [cNameVis,whyCreateVis,authNameVis,minmaxSlideVis,currencyVis,deadlineVis,paymentTextVis];
       ////Hierarchy
         let info = formCreator.CreateLeftRightGroup(cNameVis,whyCreateVis);
         let author = formCreator.CreateLeftRightGroup(authNameVis,authMailVis);
-        let payment = formCreator.CreateLeftRightGroup(minmaxSlideVis,currencyVis);
+        let payment = formCreator.CreateElementList([formCreator.CreateLeftRightGroup(minmaxSlideVis,currencyVis),paymentTextVis]);
         let rootElement = formCreator.CreateElementList([info,author,payment,deadlineVis]);
        ///Style
         vElements.map(vE => formCreator.SetBorderAround(vE,"5"));
-        [info,author,payment,deadlineVis].map(vE => formCreator.SetBorderAround(vE,"10"))
+        [info,author,payment,deadlineVis].map(vE => formCreator.SetBorderAround(vE,"2"))
       let form = formCreator.CreateForm(
          rootElement,
         elements,
@@ -98,6 +99,7 @@ module frontend {
       this.HandleCurrency(currency, ret);
       this.HandlePayments(MinMaxPayment, ret);
       this.HandleNameInput(name, ret);
+      this.HandleCurrencyPaymentText(currency,MinMaxPayment,ret);
       return ret;
     }
 
@@ -120,6 +122,13 @@ module frontend {
       { ret[FillFormInControl.DescriptionKey] = new HFormStatus(HFormStatusType.Warning, "Discription should not be empty"); }
       else
       { ret[FillFormInControl.DescriptionKey] = new HFormStatus(HFormStatusType.OK, "Description is filled in"); }
+    }
+    HandleCurrencyPaymentText(currency, payment, ret){
+        let pays = payment.split(",");
+        let minPay = pays[0];
+        let maxPay = pays[1];
+
+        ret[PaymentText.Name] = new HFormStatus(HFormStatusType.OK,"Each contributor pays between " + minPay + " and "+ maxPay + " " + currency+ ".");
     }
 
     HandleNameInput(text, ret) {

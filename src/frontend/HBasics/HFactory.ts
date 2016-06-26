@@ -73,6 +73,9 @@ module frontend {
     GetH3(child: IHElement) {
       return new Hn(child, 3);
     }
+    GetH4(child: IHElement) {
+      return new Hn(child, 4);
+    }
     GetLi(child: IHElement) {
       return new HLi(child);
     }
