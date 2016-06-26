@@ -7,9 +7,9 @@ module frontend {
     checkFunction: ICheckFunction;
     formElementKeyToValue: { [id: string]: IFormElement; };
     action: HFormAction;
-    constructor(hFactory: HFactory, divLayout: DivLayout, rows: IFormElement[], checkFunction: ICheckFunction, triggerFunction, cancelFunction) {
-      this.elements = hFactory.GetDiv();
-      this.StyleForm(this.elements);
+    constructor(hFactory: HFactory, divLayout: DivLayout, rows: IFormElement[],rootElement:IHElement, checkFunction: ICheckFunction, triggerFunction, cancelFunction) {
+     this.elements = hFactory.GetDiv();
+      this.elements.AddElement(rootElement);
       this.receivedValue = {};
       this.formElementKeyToValue = {};
       this.checkFunction = checkFunction;
@@ -45,8 +45,6 @@ module frontend {
         this.formElementKeyToValue[rI].SetStatus(res);
       }
       this.action.SetDisabledOkButton(disableButton);
-    }
-    private StyleForm(form: HDiv) {
     }
 
   }

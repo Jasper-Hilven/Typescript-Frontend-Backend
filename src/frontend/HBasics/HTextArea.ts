@@ -15,6 +15,12 @@ module frontend {
     public GetText(): string {
       return this.element.value;
     }
+    public SetRows(rows){
+     this.element.rows = rows;
+    }
+    public SetCols(cols){
+     this.element.cols = cols;
+    }
 
   }
 }

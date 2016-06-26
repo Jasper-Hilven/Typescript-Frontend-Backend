@@ -21,7 +21,6 @@ module frontend {
       this.container.AddElement(navigator);
       this.container.AddElement(jumbo);
       let form = this.GetForm(formCreator);
-
       this.container.AddElement(form);
       this.container.AddElement(footer);
     }
@@ -57,9 +56,10 @@ module frontend {
       let chipmentData = data;
       let author = new commonend.User(chipmentData[FillFormInControl.AuthorKey], chipmentData[FillFormInControl.AuthorEmail]);
       let name = chipmentData[FillFormInControl.NameKey];
-      let minPayment: number = Number(chipmentData[FillFormInControl.MinimumPayment]);
-      let maxPayment: number = Number(chipmentData[FillFormInControl.MaximumPayment]);
-      let currency: string = chipmentData[FillFormInControl.Currency];
+      throw "minmaxpayment";
+      let minPayment = 1;
+      let maxPayment = 2;
+let currency: string = chipmentData[FillFormInControl.Currency];
       let description: string = chipmentData[FillFormInControl.DescriptionKey];
       let chipment = new commonend.Chipment(author, name, minPayment, maxPayment, currency, description, <any>[]);
       this.backendProxy.CreateChipment(this.backendProxy.GetRanddomId(), "superkey", chipment)

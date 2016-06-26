@@ -1,6 +1,6 @@
 module frontend {
   export class HSelectPicker implements IHElement {
-   htmlElement: HTMLElement;
+   htmlElement: HTMLSelectElement;
    listeners = [];
    constructor(elements: string[]){
      this.htmlElement = document.createElement("select");
@@ -10,7 +10,7 @@ module frontend {
        option.text= elements[eI];
        this.htmlElement.appendChild(option);
      }
-     this.htmlElement.onchange = this.OnChange;
+     this.htmlElement.onchange = this.OnChange(this);
    }
     GetElement():HTMLElement{
       return this.htmlElement;
@@ -18,11 +18,16 @@ module frontend {
     Register(func){
      this.listeners.push(func);
     }
-    OnChange(ev){
-      for(var i in this.listeners){
-       let listener = this.listeners[i];
-       listener(ev);
+    OnChange(me){
+     return (ev)=> {
+     console.log("SelectPicker got event");
+     var text = me.htmlElement.options[me.htmlElement.selectedIndex].text;
+     console.log(ev);
+      for(var i in me.listeners){
+       let listener = me.listeners[i];
+       listener(text);
       }
+     }
     }
   }
 }

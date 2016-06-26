@@ -9,8 +9,10 @@ module frontend {
       private hFactory: HFactory,
       private hDivLayout: DivLayout,
       private name: string,
-      private defaultValue: string) {
-      let input = this.GetInputFromText(defaultValue);
+      private defaultValue: string,
+     private singleLine: boolean) {
+      let input = this.GetInputFromText(singleLine,defaultValue);
+
       this.visDiv = input;
       let me = this;
       this.textBox.GetElement().oninput = function(ev: Event) { me.ValueChanges(ev); };
@@ -40,12 +42,13 @@ module frontend {
       this.form.NotifyChanges(this.name, value);
     }
 
-    private GetInputFromText(defaultValue: string) {
+    private GetInputFromText(singleLine: boolean,defaultValue: string) {
       this.textBox = this.hFactory.GetTextArea();
-      this.textBox.GetElement().style.width = "600px";
+      this.textBox.GetElement().style.width = "400px";
       this.textBox.SetText(defaultValue);
       let styled = this.hFactory.GetDivWithChild(this.textBox);
       this.textBox.GetElement().style.margin = "2px";
+      this.textBox.SetRows(singleLine? 1 : 2);
       return styled;
     }
 

@@ -10,7 +10,7 @@ module frontend {
       private elements: string[]) {
        this.picker = hFactory.GetSelectPicker(elements);
       let me = this;
-      this.picker.Register(function(ev: Event) { me.ValueChanges(ev); });
+      this.picker.Register(function(ev) { me.ValueChanges(ev); });
     };
 
     public GetName() {
@@ -20,8 +20,8 @@ module frontend {
     public GetDefaultValue() {
       return this.elements[0];
     }
-    public SetStatus(){
 
+    public SetStatus(){
     }
 
     public SetForm(form: IHForm) {
@@ -32,10 +32,8 @@ module frontend {
       return this.picker;
     }
 
-    public ValueChanges(ev: Event) {
-     throw "notimpl";
-      //let value = this.picker.GetSelectedElement();
-      //this.form.NotifyChanges(this.name, value);
+    private ValueChanges(newValue) {
+     this.form.NotifyChanges(this.name, newValue);
     }
   }
 }

@@ -13,29 +13,31 @@ module frontend {
     }
     static NameKey = "Name";
     static DescriptionKey = "Description";
-    static MinimumPayment = "MinimumPayment";
-    static MaximumPayment = "MaximumPayment";
+    static MinMaxPayment = "MinMaxPayment";
+    static MinPayment = "MinPayment";
+    static MaxPayment = "MaxPayment";
     static Currency = "Currency";
     static AuthorKey = "Author";
     static AuthorEmail = "AuthorEmail";
     static Deadline = "Deadline";
 
     GetForm(formCreator: FormCreator, successAction, failAction) {
-      let rows = [
-        formCreator.CreateTextElement(FillFormInControl.NameKey, "What is the name of the chipment?", ""),
-        formCreator.CreateTextElement(FillFormInControl.DescriptionKey, "Why are you creating this chipment?", ""),
-        formCreator.CreateTextElement(FillFormInControl.Currency, "Which currency are you using?", "Euro"),
-        formCreator.CreateTextElement(FillFormInControl.MinimumPayment, "What is the minimum contribution?", ""),
-        formCreator.CreateTextElement(FillFormInControl.MaximumPayment, "What is the maximum contribution?", ""),
-        formCreator.CreateSliderElement("SliderPayment", "What is the contribution?", new HRangeSliderInfo(1, 50, 5, 10, 1)),
-        formCreator.CreateTextElement(FillFormInControl.AuthorKey, "What is your name?", ""),
-        formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "What is your e-mail address", ""),
-        formCreator.CreateDatePickerElement(FillFormInControl.Deadline, "What is the deadline for the participants if they want to chip in?")];
 
-      //formCreator.CreateTextElement(FillFormInControl.ReminderFrequency, "How often do you want to send reminders?", "")];
+        let cName= formCreator.CreateTextElement(FillFormInControl.NameKey, "What is the name of the chipment?", "",true);
+        let whyCreate= formCreator.CreateTextElement(FillFormInControl.DescriptionKey, "Why are you creating this chipment?", "",false);
+        let authName = formCreator.CreateTextElement(FillFormInControl.AuthorKey, "What is your name?", "",true);
+        let authMail = formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "What is your e-mail address", "",true);
+      let currency = formCreator.CreateSelectElement(FillFormInControl.Currency, "Which currency are you using?", ["Euro","Dollar"]);
+        let minmaxSlide = formCreator.CreateSliderElement(FillFormInControl.MinMaxPayment, "What is the contribution?", new HRangeSliderInfo(1, 50, 5, 10, 1));
+        let deadline = formCreator.CreateDatePickerElement(FillFormInControl.Deadline, "What is the deadline for the participants if they want to chip in?");
+      let right = [currency,minmaxSlide,deadline];
+      let left = [cName,whyCreate,authName,authMail];
+      let elements = right.concat(left);
+      let rootElement = formCreator.CreateLeftRightSplitElement(left,right);
 
       let form = formCreator.CreateForm(
-        rows,
+         rootElement,
+        elements,
         this,
         () => successAction(this.GetStoredForm().GetLatestValues()),
         () => failAction(this.GetStoredForm().GetLatestValues()));
@@ -52,8 +54,10 @@ module frontend {
       let chipmentData = this.GetStoredForm().GetLatestValues();
       let author = new commonend.User(chipmentData[FillFormInControl.AuthorKey], chipmentData[FillFormInControl.AuthorEmail]);
       let name = chipmentData[FillFormInControl.NameKey];
-      let minPayment: number = Number(chipmentData[FillFormInControl.MinimumPayment]);
-      let maxPayment: number = Number(chipmentData[FillFormInControl.MaximumPayment]);
+      throw "minmaxpayment";
+      let minPayment = 1;
+      let maxPayment = 2;
+
       let currency: string = chipmentData[FillFormInControl.Currency];
       let description: string = chipmentData[FillFormInControl.DescriptionKey];
       let chipment = new commonend.Chipment(author, name, minPayment, maxPayment, currency, description, <any>[]);
@@ -72,17 +76,15 @@ module frontend {
       let authorText = input[FillFormInControl.AuthorKey];
       let descriptionText = input[FillFormInControl.DescriptionKey];
       let currency = input[FillFormInControl.Currency];
-      let minimumPayment = input[FillFormInControl.MinimumPayment];
-      let maximumPayment = input[FillFormInControl.MaximumPayment];
+      let MinMaxPayment = input[FillFormInControl.MinMaxPayment];
       let name = input[FillFormInControl.NameKey];
       let email = input[FillFormInControl.AuthorEmail];
-      // Public StatusType: HFormStatusType, public Message: string
       let ret: { [id: string]: HFormStatus; } = {};
       this.HandleAuthorInput(authorText, ret);
       this.HandleAuthorEmail(email, ret);
       this.HandleDescriptionInput(descriptionText, ret);
       this.HandleCurrency(currency, ret);
-      this.HandlePayments(minimumPayment, maximumPayment, ret);
+      this.HandlePayments(MinMaxPayment, ret);
       this.HandleNameInput(name, ret);
       return ret;
     }
@@ -126,39 +128,10 @@ module frontend {
 
     }
 
-    HandlePayments(minimumPayment: string, maximumPayment: string, ret) {
-      let minPayNumb = Number(minimumPayment);
-      let maxPayNumb = Number(maximumPayment);
-      let valid = new HFormStatus(HFormStatusType.OK, "This is a valid amount.");
-      let invalid = new HFormStatus(HFormStatusType.Error, "A valid amount must be provided.");
-      let invalidEmpty = new HFormStatus(HFormStatusType.Error, "The amount cannot be empty.");
-      let invalidPasMax = new HFormStatus(HFormStatusType.Error, "The minimum amount can not be smaller than the maximum amount.");
-      let invalidSeparator = new HFormStatus(HFormStatusType.Error, "Use a '.' as separator instead of ','")
-      ret[FillFormInControl.MinimumPayment] = valid;
-      ret[FillFormInControl.MaximumPayment] = valid;
-      let minNumberinValid = isNaN(minPayNumb);
-      let maxNumberinValid = isNaN(maxPayNumb);
-      let allNumberValid = (!minNumberinValid) && (!maxNumberinValid);
-      if (minNumberinValid)
-      { ret[FillFormInControl.MinimumPayment] = invalid; }
-      if (maxNumberinValid)
-      { ret[FillFormInControl.MaximumPayment] = invalid; }
-      if (allNumberValid && minPayNumb > maxPayNumb) {
-        ret[FillFormInControl.MinimumPayment] = invalidPasMax;
-        ret[FillFormInControl.MaximumPayment] = invalidPasMax;
-      }
-      let trimmedMinPayment = minimumPayment.trim();
-      let trimmedMaxPayment = maximumPayment.trim();
-      if (trimmedMinPayment.length == 0) {
-        ret[FillFormInControl.MinimumPayment] = invalidEmpty;
-      }
-      if (trimmedMaxPayment.length == 0)
-      { ret[FillFormInControl.MaximumPayment] = invalidEmpty; }
-      if (trimmedMinPayment.indexOf(",") >= 0)
-      { ret[FillFormInControl.MinimumPayment] = invalidSeparator; }
-      if (trimmedMaxPayment.indexOf(",") >= 0)
-      { ret[FillFormInControl.MaximumPayment] = invalidSeparator; }
-    }
+    HandlePayments(MinMaxPayment: string, ret) {
+      let validMax = new HFormStatus(HFormStatusType.OK, ""+MinMaxPayment);
+      ret[FillFormInControl.MinMaxPayment] = validMax;
+     }
 
   }
 }

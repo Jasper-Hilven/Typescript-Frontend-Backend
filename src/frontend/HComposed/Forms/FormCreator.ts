@@ -11,8 +11,19 @@ module frontend {
       private sliderProvider: ISliderProvider) {
     }
 
-    CreateForm(rows: IFormElement[], checkFunction: ICheckFunction, triggerFunction, cancelFunction): HForm {
-      let form = new HForm(this.hFactory, this.divFactory, rows, checkFunction, triggerFunction, cancelFunction);
+    public CreateLeftRightSplitElement(left: IFormElement[], right: IFormElement[]): IHElement {
+       var leftDiv = this.CreateElementList(left);
+       var rightDiv = this.CreateElementList(right);
+       return this.divFactory.GetLeftRightFlexDiv(leftDiv,rightDiv);
+     }
+     public CreateElementList(elements: IFormElement[]): IHElement {
+        var div = this.hFactory.GetDiv();
+        elements.map(e => div.AddElement(e.GetVisualization()));
+        return div;
+      }
+
+    CreateForm(rootElement: IHElement,elements: IFormElement[], checkFunction: ICheckFunction, triggerFunction, cancelFunction): HForm {
+      let form = new HForm(this.hFactory, this.divFactory, elements,rootElement, checkFunction, triggerFunction, cancelFunction);
       return form;
     }
 
@@ -22,13 +33,13 @@ module frontend {
       return titleElement;
     }
 
-    CreateTextElement(name: string, label: string, defaultValue: string): IFormElement {
-      let textElement = new HFormTextElement(this.hFactory, this.divFactory, name, defaultValue);
+    CreateTextElement(name: string, label: string, defaultValue: string,small: boolean): IFormElement {
+      let textElement = new HFormTextElement(this.hFactory, this.divFactory, name, defaultValue,small);
       return this.EncapsulateWarnAndTitle(label, textElement);
     }
     CreateSelectElement(name: string, label: string, options: string[]): IFormElement {
-      let textElement = new HFormSelectElement(this.hFactory,name, options);
-      return this.EncapsulateWarnAndTitle(label, textElement);
+      let selectElement = new HFormSelectElement(this.hFactory,name, options);
+      return this.EncapsulateWarnAndTitle(label, selectElement);
     }
 
     CreateSliderElement(name: string, label: string, sliderInfo: HRangeSliderInfo): IFormElement {
