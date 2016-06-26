@@ -45,10 +45,11 @@ module frontend {
         let info = formCreator.CreateLeftRightGroup(cNameVis,whyCreateVis);
         let author = formCreator.CreateLeftRightGroup(authNameVis,authMailVis);
         let payment = formCreator.CreateElementList([formCreator.CreateLeftRightGroup(minmaxSlideVis,currencyVis),paymentTextVis]);
-        let rootElement = formCreator.CreateElementList([info,author,payment,deadlineVis]);
+        let outerElements = [info,author,payment,deadlineVis];
+        let rootElement = formCreator.CreateElementList(outerElements);
        ///Style
-        vElements.map(vE => formCreator.SetBorderAround(vE,"5"));
-        [info,author,payment,deadlineVis].map(vE => formCreator.SetBorderAround(vE,"2"))
+        outerElements.map(vE => formCreator.SetBorderAround(vE,"20"));
+
       let form = formCreator.CreateForm(
          rootElement,
         elements,

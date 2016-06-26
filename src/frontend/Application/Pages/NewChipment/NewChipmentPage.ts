@@ -56,10 +56,10 @@ module frontend {
       let chipmentData = data;
       let author = new commonend.User(chipmentData[FillFormInControl.AuthorKey], chipmentData[FillFormInControl.AuthorEmail]);
       let name = chipmentData[FillFormInControl.NameKey];
-      throw "minmaxpayment";
-      let minPayment = 1;
-      let maxPayment = 2;
-let currency: string = chipmentData[FillFormInControl.Currency];
+      let MinMaxPayment = chipmentData[FillFormInControl.MinMaxPayment].split(",");
+      let minPayment = +(MinMaxPayment[0]);
+      let maxPayment = +(MinMaxPayment[1]);
+      let currency: string = chipmentData[FillFormInControl.Currency];
       let description: string = chipmentData[FillFormInControl.DescriptionKey];
       let chipment = new commonend.Chipment(author, name, minPayment, maxPayment, currency, description, <any>[]);
       this.backendProxy.CreateChipment(this.backendProxy.GetRanddomId(), "superkey", chipment)

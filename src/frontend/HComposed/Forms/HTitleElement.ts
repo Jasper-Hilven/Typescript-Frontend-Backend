@@ -10,6 +10,7 @@ module frontend {
     ) {
       let titleElem = this.GetLabelFromText(title);
       this.titleAndDecoDiv = hDivLayout.GetUpDownFlexDiv(titleElem, decoratedElement.GetVisualization());
+      this.titleAndDecoDiv.GetElement().style.width = "450px";
     }
     public SetStatus(status: HFormStatus) {
       this.decoratedElement.SetStatus(status);

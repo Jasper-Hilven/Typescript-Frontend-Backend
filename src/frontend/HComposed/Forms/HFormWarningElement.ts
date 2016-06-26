@@ -27,7 +27,6 @@ module frontend {
       let warningClasses = (status.StatusType === HFormStatusType.Warning ? "alert-warning" : "alert-danger");
       this.hFactory.AddClasses(text, ["alert", warningClasses]);
       let styledText = this.hFactory.GetDivWithChild(text);
-      styledText.GetElement().style.margin = "10px";
       return styledText;
     }
 

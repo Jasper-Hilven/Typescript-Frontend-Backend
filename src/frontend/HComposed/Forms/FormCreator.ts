@@ -11,8 +11,13 @@ module frontend {
       private sliderProvider: ISliderProvider) {
     }
     public SetBorderAround(elem: IHElement,size){
-      elem.GetElement().style.margin = size + "px";
+      elem.GetElement().style.margin = size + "px auto";
     }
+
+    public SetWidth(elem: IHElement,size){
+      elem.GetElement().style.width = size + "px";
+    }
+
     public CreateLeftRightSplitElement(left: IHElement[], right: IHElement[]): IHElement {
        var leftDiv = this.CreateElementList(left);
        var rightDiv = this.CreateElementList(right);
@@ -23,7 +28,7 @@ module frontend {
      }
      public CreateElementList(elements: IHElement[]): HDiv {
         var div = this.hFactory.GetDiv();
-        elements.map(e => div.AddElement(e));
+        elements.map(e => {div.AddElement(e);});
         return div;
       }
 

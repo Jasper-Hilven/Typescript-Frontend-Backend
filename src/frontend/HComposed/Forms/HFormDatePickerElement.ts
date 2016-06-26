@@ -4,6 +4,7 @@ module frontend {
 
     private form: IHForm;
     private datePicker: HDatePicker;
+    private visDiv: HDiv;
     public constructor(
       private hFactory: HFactory,
       private hDivLayout: DivLayout,
@@ -11,8 +12,11 @@ module frontend {
       private datePickerProvider: IDatePickerProvider) {
 
       let me = this;
+
       this.datePicker = hFactory.GetDatePicker(datePickerProvider);
       this.datePicker.AddListener(me);
+      this.visDiv = hFactory.GetDiv();
+      this.visDiv.AddElement(this.datePicker);
     };
 
     public GetName() {
@@ -30,7 +34,7 @@ module frontend {
     };
 
     public GetVisualization() {
-      return this.datePicker;
+      return this.visDiv;
     }
 
     public Notify(change) {
