@@ -10,6 +10,7 @@ module frontend {
     private datePicker: any;
     listeners: any[];
     constructor(private datePickerProvider: IDatePickerProvider) {
+
       this.element = document.createElement("div");
       this.element.classList.add("input-group");
       this.element.classList.add("date");
@@ -30,6 +31,7 @@ module frontend {
       this.element.onchange = function(c) {
         me.Changed(c);
       }
+      this.element.style.width = "160px";
     }
     public GetElement() {
       return this.element;

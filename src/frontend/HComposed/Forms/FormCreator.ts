@@ -10,15 +10,20 @@ module frontend {
       private datePickerProvider: IDatePickerProvider,
       private sliderProvider: ISliderProvider) {
     }
-
-    public CreateLeftRightSplitElement(left: IFormElement[], right: IFormElement[]): IHElement {
+    public SetBorderAround(elem: IHElement,size){
+      elem.GetElement().style.margin = size + "px";
+    }
+    public CreateLeftRightSplitElement(left: IHElement[], right: IHElement[]): IHElement {
        var leftDiv = this.CreateElementList(left);
        var rightDiv = this.CreateElementList(right);
        return this.divFactory.GetLeftRightFlexDiv(leftDiv,rightDiv);
      }
-     public CreateElementList(elements: IFormElement[]): IHElement {
+     public CreateLeftRightGroup(left:IHElement,right:IHElement){
+      return this.CreateLeftRightSplitElement([left],[right]);
+     }
+     public CreateElementList(elements: IHElement[]): HDiv {
         var div = this.hFactory.GetDiv();
-        elements.map(e => div.AddElement(e.GetVisualization()));
+        elements.map(e => div.AddElement(e));
         return div;
       }
 

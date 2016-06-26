@@ -14,7 +14,7 @@ module frontend {
       this.element.id = "ex2";
       this.element.setAttribute("data-slider-id", 'ex1Slider');
       this.element.setAttribute("type", "text");
-      this.element.width = "500px";
+      this.element.width = "200px";
       this.parentElement = document.createElement("div");
       this.parentElement.style.width = "100%";
       this.parentElement.style.height = "100%";

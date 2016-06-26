@@ -15,7 +15,6 @@ module frontend {
       this.checkFunction = checkFunction;
       for (let rowI in rows) {
         let formElement = rows[rowI];
-        this.elements.AddElement(formElement.GetVisualization());
         this.formElementKeyToValue[formElement.GetName()] = formElement;
         formElement.SetForm(this);
         this.receivedValue[formElement.GetName()] = formElement.GetDefaultValue();

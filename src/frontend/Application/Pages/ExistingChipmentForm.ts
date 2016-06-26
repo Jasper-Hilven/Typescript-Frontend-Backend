@@ -10,9 +10,9 @@ module frontend {
         public static FormIdAmount = "amount";
         public GetExistingChipmentForm(minValue: number, maxValue: number, authorName: string, triggerFunction: any, cancelFunction: any): HForm {
             let elements = this.GetElements(authorName);
+            let rootElement = this.formCreator.CreateElementList(elements.map(e => e.GetVisualization()));
             let checkFunction = new ExistingChipmentFormCheckFunction(minValue, maxValue);
-            return this.formCreator.CreateForm(elements, checkFunction, triggerFunction, cancelFunction);
-
+            return this.formCreator.CreateForm(rootElement,elements, checkFunction, triggerFunction, cancelFunction);
         }
         private GetElements(authorName: string): HFormTextElement[] {
             return [];

@@ -11,6 +11,7 @@ module frontend {
       sliderProvider: ISliderProvider,
       private sliderInfo: HRangeSliderInfo) {
       this.slider = hFactory.GetRangeSlider(sliderProvider, sliderInfo);
+      this.slider.GetElement().style.margin = "6px";
       let me = this;
       this.slider.AddListener(me);
     };

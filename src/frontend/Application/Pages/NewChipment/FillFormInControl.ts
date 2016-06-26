@@ -22,19 +22,32 @@ module frontend {
     static Deadline = "Deadline";
 
     GetForm(formCreator: FormCreator, successAction, failAction) {
-
+     ///Elements
         let cName= formCreator.CreateTextElement(FillFormInControl.NameKey, "What is the name of the chipment?", "",true);
-        let whyCreate= formCreator.CreateTextElement(FillFormInControl.DescriptionKey, "Why are you creating this chipment?", "",false);
+        let whyCreate= formCreator.CreateTextElement(FillFormInControl.DescriptionKey, "Why are you creating this chipment?", "",true);
         let authName = formCreator.CreateTextElement(FillFormInControl.AuthorKey, "What is your name?", "",true);
-        let authMail = formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "What is your e-mail address", "",true);
-      let currency = formCreator.CreateSelectElement(FillFormInControl.Currency, "Which currency are you using?", ["Euro","Dollar"]);
-        let minmaxSlide = formCreator.CreateSliderElement(FillFormInControl.MinMaxPayment, "What is the contribution?", new HRangeSliderInfo(1, 50, 5, 10, 1));
-        let deadline = formCreator.CreateDatePickerElement(FillFormInControl.Deadline, "What is the deadline for the participants if they want to chip in?");
-      let right = [currency,minmaxSlide,deadline];
-      let left = [cName,whyCreate,authName,authMail];
-      let elements = right.concat(left);
-      let rootElement = formCreator.CreateLeftRightSplitElement(left,right);
-
+        let authMail = formCreator.CreateTextElement(FillFormInControl.AuthorEmail, "What is your e-mail address?", "",true);
+      let currency = formCreator.CreateSelectElement(FillFormInControl.Currency, "In Which Currency?", ["Euro","Dollar"]);
+      let minmaxSlide = formCreator.CreateSliderElement(FillFormInControl.MinMaxPayment, "What is the contribution?", new HRangeSliderInfo(1, 50, 5, 10, 1));
+        let deadline = formCreator.CreateDatePickerElement(FillFormInControl.Deadline, "What is the participants deadline to contribute?");
+        let elements = [cName,authName,currency,whyCreate,authMail,minmaxSlide,deadline];
+    ////Visualization
+    let cNameVis= cName.GetVisualization();
+    let whyCreateVis = whyCreate.GetVisualization();
+    let authNameVis = authName.GetVisualization();
+    let authMailVis = authMail.GetVisualization();
+    let minmaxSlideVis = minmaxSlide.GetVisualization();
+    let currencyVis=currency.GetVisualization();
+    let deadlineVis = deadline.GetVisualization();
+    let vElements = [cNameVis,whyCreateVis,authNameVis,minmaxSlideVis,currencyVis,deadlineVis];
+      ////Hierarchy
+        let info = formCreator.CreateLeftRightGroup(cNameVis,whyCreateVis);
+        let author = formCreator.CreateLeftRightGroup(authNameVis,authMailVis);
+        let payment = formCreator.CreateLeftRightGroup(minmaxSlideVis,currencyVis);
+        let rootElement = formCreator.CreateElementList([info,author,payment,deadlineVis]);
+       ///Style
+        vElements.map(vE => formCreator.SetBorderAround(vE,"5"));
+        [info,author,payment,deadlineVis].map(vE => formCreator.SetBorderAround(vE,"10"))
       let form = formCreator.CreateForm(
          rootElement,
         elements,
@@ -54,10 +67,9 @@ module frontend {
       let chipmentData = this.GetStoredForm().GetLatestValues();
       let author = new commonend.User(chipmentData[FillFormInControl.AuthorKey], chipmentData[FillFormInControl.AuthorEmail]);
       let name = chipmentData[FillFormInControl.NameKey];
-      throw "minmaxpayment";
-      let minPayment = 1;
-      let maxPayment = 2;
-
+      let minmaxpayment = chipmentData[FillFormInControl.MinMaxPayment].split(",");
+      let minPayment = +(minmaxpayment[0]);
+      let maxPayment = +(minmaxpayment[1]);
       let currency: string = chipmentData[FillFormInControl.Currency];
       let description: string = chipmentData[FillFormInControl.DescriptionKey];
       let chipment = new commonend.Chipment(author, name, minPayment, maxPayment, currency, description, <any>[]);
