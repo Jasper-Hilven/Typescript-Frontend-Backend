@@ -2,7 +2,6 @@
 
 ////THISFOLDER-START
 /// <reference path="AboutPage.ts" />
-/// <reference path="CreatedNewChipmentPage.ts" />
 /// <reference path="ExistingChipmentForm.ts" />
 /// <reference path="ExistingChipmentPageController.ts" />
 /// <reference path="ExistingChipmentPageControllerAuthor.ts" />
@@ -11,5 +10,6 @@
 ////THISFOLDER-END
 
 ////SUBINDICES-START
+/// <reference path="CreatedNewChipment/index.gen.ts" />
 /// <reference path="NewChipment/index.gen.ts" />
 ////SUBINDICES-END
