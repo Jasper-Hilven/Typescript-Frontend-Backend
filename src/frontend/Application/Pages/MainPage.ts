@@ -9,8 +9,8 @@ module frontend {
       private divLayout: DivLayout,
       private hFactory: HFactory,
       private datePickerProvider: IDatePickerProvider,
-      private navigator: Navigator,
-      private footer: IHElement,
+      private navigator: ()=>Navigator,
+      private footer: ()=>IHElement,
       private myApp: PayTogether,
       private proxy: BackendProxy,
       private title: string) {
@@ -22,9 +22,9 @@ module frontend {
       let createNewChipmentButton = this.hFactory.GetParag(this.divLayout.GetButton(newChipment, newChipmentAction, "success"));
       let me = this;
       let jumbo = this.divLayout.CreateJumbotron(this.myApp.GetSlogan(), this.myApp.GetExplanation(), createNewChipmentButton);
-      this.container.AddElement(navigator);
+      this.container.AddElement(navigator());
       this.container.AddElement(jumbo);
-      this.container.AddElement(footer);
+      this.container.AddElement(footer());
     }
 
     public GetName() {

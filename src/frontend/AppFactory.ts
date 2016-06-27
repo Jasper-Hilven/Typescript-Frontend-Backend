@@ -31,13 +31,13 @@ module frontend {
       let footerText = "copyright, 2016 PayTogether, Inc.";
       let createFooter = () => divLayout.GetFooter(footerText);
       let pages = <[IPageController]>[];
-      let mainPage = new MainPage(divLayout, hFactory, datePickerProvider, createNavigator(), createFooter(), myAppInfo, backendProxy, title);
+      let mainPage = new MainPage(divLayout, hFactory, datePickerProvider, createNavigator, createFooter, myAppInfo, backendProxy, title);
       pages.push(mainPage);
-      pages.push(new NewChipmentPage(divLayout, hFactory, createNavigator(), createFooter(), formCreator, backendProxy, title));
+      pages.push(new NewChipmentPage(divLayout, hFactory, createNavigator, createFooter, formCreator, backendProxy, title));
       pages.push(new ExistingChipmentPageController(
         divLayout, hFactory, createNavigator, createFooter, backendProxy, formCreator, title));
-      pages.push(new AboutPage(divLayout, hFactory, createNavigator(), createFooter(), title));
-      pages.push(new CreatedNewChipmentPage(divLayout, hFactory, createNavigator(), createFooter(), backendProxy, title));
+      pages.push(new AboutPage(divLayout, hFactory, createNavigator, createFooter, title));
+      pages.push(new CreatedNewChipmentPage(divLayout, hFactory, createNavigator, createFooter, backendProxy, title));
       let application = new PageSelector(routeController, pages, mainPage);
       appLogger.SetLevel(commonend.LogLevel.Info);
       appLogger.Info("Application constructed");

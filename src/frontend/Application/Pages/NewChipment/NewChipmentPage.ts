@@ -8,8 +8,8 @@ module frontend {
     public constructor(
       private divLayout: DivLayout,
       private hFactory: HFactory,
-      private navigator: Navigator,
-      private footer: IHElement,
+      private navigator: ()=>Navigator,
+      private footer: ()=>IHElement,
       private formCreator: FormCreator,
       private backendProxy: BackendProxy,
       private title: string) {
@@ -18,11 +18,11 @@ module frontend {
       let createChipment = "Create a new chipment";
       let fillInChipment = "Fill in this form to create a new chipment.";
       let jumbo = this.divLayout.CreateJumbotron(createChipment, fillInChipment, hFactory.GetText(""));
-      this.container.AddElement(navigator);
+      this.container.AddElement(navigator());
       this.container.AddElement(jumbo);
       let form = this.GetForm(formCreator);
       this.container.AddElement(form);
-      this.container.AddElement(footer);
+      this.container.AddElement(footer());
     }
 
     public GetName(): string {
@@ -46,7 +46,7 @@ module frontend {
     }
 
     private GetForm(formCreator: FormCreator) {
-      let control = new FillFormInControl(this.navigator, this.backendProxy);
+      let control = new FillFormInControl(this.navigator(), this.backendProxy);
       let form = control.GetForm(formCreator, (d) => this.CreateNewChipment(d), () => this.CancelCreateNewChipment());
       form.Update();
       return form;
@@ -66,7 +66,7 @@ module frontend {
         .then((c: any) => {
           console.log(c);
           console.log("registered changes");
-          window.location.href = "#" + CreatedNewChipmentPage.GetPName() + "/" + c.id + "/" + c.userKey + "/" + c.authorKey;
+          window.location.href = "#" + CreatedNewChipmentPage.GetPName() + "/" + c.id + "/" + c.userKey + "/" + c.authorKey+ "/" + encodeURIComponent(author.email);
         });
     }
 
