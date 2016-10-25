@@ -21,3 +21,6 @@ This has the advantage that there are no commits which contain format changes (w
 
 ### Poor man's dependency injection
 In a very simple small project, not using inversion of control is definitely acceptable.
+
+### Code generation
+Code generation for things like http API's is cool and also a time-saver.
