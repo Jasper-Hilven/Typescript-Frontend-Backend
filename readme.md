@@ -1,4 +1,4 @@
-# Backend and Frontend written in Typescript
+# Startup Prototype: Backend and Frontend written in Typescript
 This is a three month experiment with the following properties:
 
 ### Source divided in Frontend, Commonend and backend
